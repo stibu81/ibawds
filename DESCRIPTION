@@ -1,0 +1,14 @@
+Package: ibawds
+Type: Package
+Title: Functions for the Data Science Course at IBAW
+Version: 0.0.0.9000
+Author: Stefan Lanz
+Maintainer: Stefan Lanz <slanz1137@gmail.com>
+Description: This package contains useful functionality for the
+  Data Science Course at IBAW.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Depends: dslabs
