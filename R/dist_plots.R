@@ -13,19 +13,37 @@
 #'  function should be marked with a red dot.
 #' @param var character giving the name of the quantile
 #'  variable. This is only used to label the axes.
+#' @param title character giving the title of the plot
+#'
+#' @return
+#' a \code{ggplot} object that can be modified by adding
+#'  more layers.
+#'
+#' @examples
+#' # plot density of the normal distribution
+#' density_plot(dnorm, c(-5, 7),
+#'              mean = 1, sd = 2,
+#'              to = 3)
+#'
+#' # plot distribution function of the Poisson distribution
+#' distribution_plot(ppois, c(0, 12),
+#'                   lambda = 4,
+#'                   points = c(2, 6, 10),
+#'                   var = "y")
 #'
 #' @export
 
 distribution_plot <- function(fun, range, ...,
                               points = NULL,
-                              var = "x") {
+                              var = "x",
+                              title = "Verteilungsfunktion") {
 
   pfun <- function(x) fun(x, ...)
 
   plot <- ggplot(data.frame(x = range), aes_(x = ~x)) +
             stat_function(fun = pfun, size = 0.8) +
             scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
-            labs(title = "Verteilungsfunktion",
+            labs(title = title,
                  x = var,
                  y = paste0("F(", var, ")"))
 
@@ -54,7 +72,8 @@ distribution_plot <- function(fun, range, ...,
 density_plot <- function(fun, range, ...,
                          from = NULL, to = NULL,
                          points = NULL,
-                         var = "x") {
+                         var = "x",
+                         title = "Dichte") {
 
   dfun <- function(x) fun(x, ...)
 
@@ -68,7 +87,7 @@ density_plot <- function(fun, range, ...,
   plot <- ggplot(data.frame(x = range), aes_(x = ~x)) +
             stat_function(fun = dfun, size = 0.8) +
             scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
-            labs(title = "Dichte",
+            labs(title = title,
                  x = var,
                  y = paste0("f(", var, ")"))
 

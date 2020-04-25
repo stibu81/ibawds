@@ -5,9 +5,25 @@
 \alias{density_plot}
 \title{Plot Density and Distribution Function With Markings}
 \usage{
-distribution_plot(fun, range, ..., points = NULL, var = "x")
+distribution_plot(
+  fun,
+  range,
+  ...,
+  points = NULL,
+  var = "x",
+  title = "Verteilungsfunktion"
+)
 
-density_plot(fun, range, ..., from = NULL, to = NULL, points = NULL, var = "x")
+density_plot(
+  fun,
+  range,
+  ...,
+  from = NULL,
+  to = NULL,
+  points = NULL,
+  var = "x",
+  title = "Dichte"
+)
 }
 \arguments{
 \item{fun}{a density or distribution function that takes
@@ -24,14 +40,33 @@ function should be marked with a red dot.}
 \item{var}{character giving the name of the quantile
 variable. This is only used to label the axes.}
 
+\item{title}{character giving the title of the plot}
+
 \item{from, to}{numeric values giving start and end of a
 range where the area under the density will be shaded.
 If only one of the two values is given, the shading
 will start a negative infiniy or go until positiv infinity,
 respectively.}
 }
+\value{
+a \code{ggplot} object that can be modified by adding
+more layers.
+}
 \description{
 Create plots of the density and distribution functions
 of a probability distribution. It is possible to
 mark points and shade the area under the curve.
+}
+\examples{
+# plot density of the normal distribution
+density_plot(dnorm, c(-5, 7),
+             mean = 1, sd = 2,
+             to = 3)
+
+# plot distribution function of the Poisson distribution
+distribution_plot(ppois, c(0, 12),
+                  lambda = 4,
+                  points = c(2, 6, 10),
+                  var = "y")
+
 }
