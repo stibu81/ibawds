@@ -2,5 +2,6 @@
 
 export(density_plot)
 export(distribution_plot)
+export(rescale)
 import(dslabs)
 import(ggplot2)
