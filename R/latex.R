@@ -18,6 +18,8 @@ define_latex_stats <- function() {
       # original \P stands for pilcrow
       "\\renewcommand{\\P}{\\mbox{P}}",
       "\\newcommand{\\Var}{\\mbox{Var}}",
+      "\\newcommand{\\Cov}{\\mbox{Cov}}",
+      "\\newcommand{\\Cor}{\\mbox{Cor}}",
       "\\newcommand{\\SD}{\\mbox{SD}}",
       "\\newcommand{\\SE}{\\mbox{SE}}",
       "\\newcommand{\\Xb}{\\bar{X}}",
