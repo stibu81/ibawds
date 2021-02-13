@@ -4,9 +4,18 @@
 
 install_ibawds <- function() {
 
-  required_packages <- c("tidyverse", "dslabs", "rmarkdown", "caret",
-                         "reshape2", "lubridate", "WriteXLS", "ggrepel",
-                         "writexl")
+  if (!interactive()) {
+    warning("This function is intended for interactive use only.")
+    return(invisible(FALSE))
+  }
+
+  # extract all dependencies of ibawds from DESCRIPTION
+  required_packages <- system.file("DESCRIPTION", package = "ibawds") %>%
+    read.dcf() %>%
+    magrittr::extract(, c("Depends", "Imports", "Suggests")) %>%
+    stringr::str_split(",") %>%
+    unlist() %>%
+    stringr::str_trim()
   is_installed <- check_installed(required_packages)
 
   success <- FALSE
@@ -16,8 +25,13 @@ install_ibawds <- function() {
   } else {
     to_install <- required_packages[!is_installed]
     message("Some required packages are missing.")
-    message("Installing ", paste(to_install, collapse = ", "), ".")
-    utils::install.packages(to_install)
+    message("The following packages will be installed: ", paste(to_install, collapse = ", "), ".")
+    ans <- utils::menu(c("Yes", "No"), title = "Do you want to continue?")
+    if (ans == 1) {
+      utils::install.packages(to_install)
+    } else {
+      return(invisible(FALSE))
+    }
 
     # check success of installation
     is_installed2 <- check_installed(required_packages)

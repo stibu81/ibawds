@@ -6,7 +6,7 @@
 \alias{ibawds-package}
 \title{Functionality for Data Science at IBAW}
 \description{
-This package contains useful functionality for the
-  Data Science Course at IBAW.
+A collection of useful functions for the Data Science
+  Course at IBAW in Lucerne.
 }
 \keyword{internal}
