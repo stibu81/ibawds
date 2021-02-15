@@ -1,5 +1,10 @@
 #' Install the R-Packages Required for the Course
 #'
+#' A number of R-packages are used in the courses and
+#' the video lectures. They are also dependencies of
+#' this package. Use `install_ibawds()` to install the
+#' packages that are not yet installed.
+#'
 #' @export
 
 install_ibawds <- function() {

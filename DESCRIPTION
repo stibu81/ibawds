@@ -34,4 +34,4 @@ Suggests:
   Lahman,
   pdftools,
   HistData,
-  titanic
+  titanic,
