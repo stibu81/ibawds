@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions for the Data Science Course at IBAW
-Version: 0.0.0.9003
+Version: 0.1.0
 Author: Stefan Lanz
 Maintainer: Stefan Lanz <slanz1137@gmail.com>
 Description: A collection of useful functions for the Data Science
