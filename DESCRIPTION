@@ -17,7 +17,6 @@ Depends:
 Imports:
   stats,
   utils,
-  datasets,
   ggplot2,
   stringr,
   magrittr
