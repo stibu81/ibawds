@@ -1,19 +1,20 @@
 Package: ibawds
 Type: Package
 Title: Functions for the Data Science Course at IBAW
-Version: 0.1.0
+Version: 0.1.1
 Author: Stefan Lanz
 Maintainer: Stefan Lanz <slanz1137@gmail.com>
-Description: A collection of useful functions for the Data Science
+Description: A collection of useful functions and datasets for the Data Science
   Course at IBAW in Lucerne.
 License: MIT + file LICENSE
+URL: https://github.com/stibu81/ibawds
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: 
-    dslabs,
-    R (>= 3.6.0)
+  R (>= 3.6.0),
+  dslabs
 Imports:
   stats,
   utils,
