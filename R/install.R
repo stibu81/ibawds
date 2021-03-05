@@ -33,9 +33,11 @@ install_ibawds <- function(just_print = FALSE) {
     magrittr::extract(, c("Depends", "Imports", "Suggests")) %>%
     stringr::str_split(",") %>%
     unlist() %>%
+    # remove version numbers
+    stringr::str_remove("\\(.*\\)") %>%
     stringr::str_trim() %>%
-    # remove the entry for R
-    stringr::str_subset("^R \\(", negate = TRUE)
+    # remove the entries for R, testthat and usethis
+    setdiff(c("R", "testthat", "usethis"))
   is_installed <- check_installed(required_packages)
 
   success <- FALSE
@@ -45,7 +47,7 @@ install_ibawds <- function(just_print = FALSE) {
   } else {
     to_install <- required_packages[!is_installed]
     message("Some required packages are missing.")
-    message("The following packages will be installed: ", paste(to_install, collapse = ", "), ".")
+    message("The following package(s) will be installed: ", paste(to_install, collapse = ", "), ".")
     if (just_print) return(invisible(FALSE))
     ans <- utils::menu(c("Yes", "No"), title = "Do you want to continue?")
     if (ans == 1) {
@@ -57,7 +59,7 @@ install_ibawds <- function(just_print = FALSE) {
     # check success of installation
     is_installed2 <- check_installed(required_packages)
     if (all(is_installed2)) {
-      message("Packages wer installed successfully")
+      message("Packages were installed successfully")
       success <- TRUE
     } else {
       failed <- required_packages[!is_installed2]
