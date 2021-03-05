@@ -49,8 +49,7 @@ will start a negative infiniy or go until positiv infinity,
 respectively.}
 }
 \value{
-a \code{ggplot} object that can be modified by adding
-more layers.
+a \code{ggplot} object
 }
 \description{
 Create plots of the density and distribution functions

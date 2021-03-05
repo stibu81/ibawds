@@ -6,14 +6,28 @@
 \usage{
 define_latex_stats()
 }
+\value{
+The function returns \code{NULL} invisibly. The command definitions
+are output as a side effect.
+}
 \description{
-Use this function to add the definitions for various useful
-equation symbols for statistics to a RMarkdown document.
+Add the definitions for various useful LaTeX
+equation symbols for statistics to a RMarkdown document..
 }
 \details{
-Run this function from within a code chunk with options
-\code{results = "asis"} and \code{echo = FALSE}.
+Run this function from within a code chunk in a RMarkdown document
+with options \code{results = "asis"} and \code{echo = FALSE} (see "Examples").
+It only works for pdf output.
 
-It adds the following commands: \verb{\\E}, \verb{\\P}, \verb{\\Var},
-\verb{\\SD}, \verb{\\SE}, \verb{\\Xb}, \verb{\\Yb}
+It defines the following macros: \verb{\\E}, \verb{\\P}, \verb{\\Var}, \verb{\\Cov}, \verb{\\Cor},
+\verb{\\SD}, \verb{\\SE}, \verb{\\Xb}, \verb{\\Yb}.
+}
+\examples{
+\dontrun{
+# add this code chunk to a RMarkdown document
+```{r results = "asis", echo = FALSE}
+  define_latex_stats()
+```
+}
+
 }

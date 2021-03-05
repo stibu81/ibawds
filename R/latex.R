@@ -1,14 +1,26 @@
 #' Define LaTeX commands for statistical symbols
 #'
-#' Use this function to add the definitions for various useful
-#' equation symbols for statistics to a RMarkdown document.
+#' Add the definitions for various useful LaTeX
+#' equation symbols for statistics to a RMarkdown document..
 #'
 #' @details
-#' Run this function from within a code chunk with options
-#' `results = "asis"` and `echo = FALSE`.
+#' Run this function from within a code chunk in a RMarkdown document
+#' with options `results = "asis"` and `echo = FALSE` (see "Examples").
+#' It only works for pdf output.
 #'
-#' It adds the following commands: `\E`, `\P`, `\Var`,
-#' `\SD`, `\SE`, `\Xb`, `\Yb`
+#' It defines the following macros: `\E`, `\P`, `\Var`, `\Cov`, `\Cor`,
+#' `\SD`, `\SE`, `\Xb`, `\Yb`.
+#'
+#' @return
+#' The function returns `NULL` invisibly. The command definitions
+#' are output as a side effect.
+#'
+#' @examples \dontrun{
+#' # add this code chunk to a RMarkdown document
+#' ```{r results = "asis", echo = FALSE}
+#'   define_latex_stats()
+#' ```
+#' }
 #'
 #' @export
 

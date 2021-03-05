@@ -14,6 +14,10 @@ rescale(x, mu = 0, sigma = 1)
 \item{sigma}{numeric value giving the desired standard
 deviation}
 }
+\value{
+a numeric vector with the same length as \code{x} with mean \code{mu} and
+standard deviation \code{sgima}.
+}
 \description{
 Rescale Mean And/Or Standard Deviation of a Vector
 }

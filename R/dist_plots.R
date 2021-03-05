@@ -16,8 +16,7 @@
 #' @param title character giving the title of the plot
 #'
 #' @return
-#' a \code{ggplot} object that can be modified by adding
-#'  more layers.
+#' a \code{ggplot} object
 #'
 #' @examples
 #' # plot density of the normal distribution
