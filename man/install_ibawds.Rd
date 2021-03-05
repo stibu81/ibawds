@@ -7,12 +7,13 @@
 install_ibawds(just_print = FALSE)
 }
 \arguments{
-\item{just_print}{logical. If \code{TRUE} the function will just print a
+\item{just_print}{logical. If \code{TRUE}, the function will just print a
 message with the packages that need to be installed (if any) and stops
 without installing them.}
 }
 \value{
-Invisible logical indicating whether packag installations was successfull.
+Invisible logical indicating whether package installation was successfull.
+\code{TRUE} is returned also when all required packages were already installed.
 }
 \description{
 A number of R-packages are used in the courses and

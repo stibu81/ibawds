@@ -5,7 +5,7 @@
 #' this package. Use `install_ibawds()` to install the
 #' packages that are not yet installed.
 #'
-#' @param just_print logical. If `TRUE` the function will just print a
+#' @param just_print logical. If `TRUE`, the function will just print a
 #'  message with the packages that need to be installed (if any) and stops
 #'  without installing them.
 #'
@@ -16,7 +16,8 @@
 #' aborted, no packages are installed.
 #'
 #' @return
-#' Invisible logical indicating whether packag installations was successfull.
+#' Invisible logical indicating whether package installation was successfull.
+#' `TRUE` is returned also when all required packages were already installed.
 #'
 #' @export
 

@@ -16,7 +16,7 @@ deviation}
 }
 \value{
 a numeric vector with the same length as \code{x} with mean \code{mu} and
-standard deviation \code{sgima}.
+standard deviation \code{sigma}.
 }
 \description{
 Rescale Mean And/Or Standard Deviation of a Vector

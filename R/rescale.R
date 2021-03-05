@@ -13,7 +13,7 @@
 #'
 #' @return
 #' a numeric vector with the same length as `x` with mean `mu` and
-#' standard deviation `sgima`.
+#' standard deviation `sigma`.
 #'
 #' @examples
 #' x <- runif(1000, 5, 8)
