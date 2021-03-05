@@ -5,9 +5,22 @@
 #' this package. Use `install_ibawds()` to install the
 #' packages that are not yet installed.
 #'
+#' @param just_print logical. If `TRUE` the function will just print a
+#'  message with the packages that need to be installed (if any) and stops
+#'  without installing them.
+#'
+#' @details
+#' This function checks whether all the packages that `ibawds` depends on,
+#' imports or suggests are installed. A message informs the user about missing
+#' packages and asks, whether they should be installed. If the process is
+#' aborted, no packages are installed.
+#'
+#' @return
+#' Invisible logical indicating whether packag installations was successfull.
+#'
 #' @export
 
-install_ibawds <- function() {
+install_ibawds <- function(just_print = FALSE) {
 
   if (!interactive()) {
     warning("This function is intended for interactive use only.")
@@ -20,7 +33,9 @@ install_ibawds <- function() {
     magrittr::extract(, c("Depends", "Imports", "Suggests")) %>%
     stringr::str_split(",") %>%
     unlist() %>%
-    stringr::str_trim()
+    stringr::str_trim() %>%
+    # remove the entry for R
+    stringr::str_subset("^R \\(", negate = TRUE)
   is_installed <- check_installed(required_packages)
 
   success <- FALSE
@@ -31,6 +46,7 @@ install_ibawds <- function() {
     to_install <- required_packages[!is_installed]
     message("Some required packages are missing.")
     message("The following packages will be installed: ", paste(to_install, collapse = ", "), ".")
+    if (just_print) return(invisible(FALSE))
     ans <- utils::menu(c("Yes", "No"), title = "Do you want to continue?")
     if (ans == 1) {
       utils::install.packages(to_install)
