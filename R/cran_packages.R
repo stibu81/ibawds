@@ -49,3 +49,31 @@ n_available_packages <- function(date) {
     stringr::str_extract("(?<=features )\\d+(?= available)") %>%
     as.integer()
 }
+
+
+#' History of the Number of Available CRAN Packages
+#'
+#' Get a data frame containing the number of packages available for historic
+#' dates back to 21 June 2001.
+#'
+#' @details
+#' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
+#' is obtained from the package `Ecdat` using the function [`Ecdat::CRANpackages`].
+#' This data was collected by John Fox and Spencer Graves. Intervals between
+#' data points are irregularly spaced.
+#'
+#' Newer data was obtained using the function [`n_available_packages`] which
+#' extracts the information from CRAN snapshots on MRAN. One data point per
+#' quarter is available starting on 2014-10-01.
+#'
+#' @return
+#' a tibble with columns `date` and `n_packages`
+#'
+#' @export
+
+get_cran_history <- function() {
+
+  Ecdat::CRANpackages %>%
+    dplyr::select(date = "Date", n_packages = "Packages") %>%
+    dplyr::bind_rows(cran_history)
+}

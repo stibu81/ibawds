@@ -18,9 +18,12 @@ Depends:
 Imports:
   stats,
   utils,
+  methods,
   ggplot2,
+  dplyr,
   stringr,
-  magrittr
+  magrittr,
+  Ecdat
 Suggests:
     tidyverse,
     rmarkdown,
