@@ -34,8 +34,9 @@ install_ibawds <- function(just_print = FALSE) {
     magrittr::extract(, c("Depends", "Imports", "Suggests")) %>%
     stringr::str_split(",") %>%
     unlist() %>%
-    # remove version numbers
-    stringr::str_remove("\\(.*\\)") %>%
+    # remove version numbers. Use dotall = TRUE because the condition for the
+    # package version sometimes contains a line break (e.g., "(>=\n2.1.0)").
+    stringr::str_remove(stringr::regex("\\(.*\\)", dotall = TRUE)) %>%
     stringr::str_trim() %>%
     # remove the entries for R, testthat and usethis
     setdiff(c("R", "testthat", "usethis"))
