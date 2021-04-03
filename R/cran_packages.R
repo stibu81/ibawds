@@ -2,7 +2,7 @@
 #'
 #' MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
 #' This function returns the number of available packages according to the
-#' snapshot of <https://cran.r-project.org> on MRAN.
+#' snapshot of <https://cran.r-project.org> on [MRAN](https://mran.microsoft.com).
 #'
 #' @param date the date of the snapshot to be used. It can be a `Date` object
 #'  or a characer in the format `%Y-%m-%d`.
@@ -13,6 +13,8 @@
 #'
 #' @return
 #' the nummber of available packages as an integer
+#'
+#' @seealso [`get_cran_history()`]
 #'
 #' @export
 
@@ -58,16 +60,22 @@ n_available_packages <- function(date) {
 #'
 #' @details
 #' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
-#' is obtained from the package `Ecdat` using the function [`Ecdat::CRANpackages`].
+#' is obtained from [`Ecdat::CRANpackages`].
 #' This data was collected by John Fox and Spencer Graves. Intervals between
 #' data points are irregularly spaced.
 #'
-#' Newer data was obtained using the function [`n_available_packages`] which
+#' Newer data was obtained using the function [`n_available_packages()`] which
 #' extracts the information from CRAN snapshots on MRAN. One data point per
 #' quarter is available starting on 2014-10-01.
 #'
 #' @return
 #' a tibble with columns `date` and `n_packages`
+#'
+#' @examples
+#' library(ggplot2)
+#' cran_history <- get_cran_history()
+#' ggplot(cran_history, aes(x = date, y = n_packages)) +
+#'   geom_point()
 #'
 #' @export
 

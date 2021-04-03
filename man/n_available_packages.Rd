@@ -16,9 +16,12 @@ the nummber of available packages as an integer
 \description{
 MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
 This function returns the number of available packages according to the
-snapshot of \url{https://cran.r-project.org} on MRAN.
+snapshot of \url{https://cran.r-project.org} on \href{https://mran.microsoft.com}{MRAN}.
 }
 \details{
 Data for a few selected dates before September 17 2014 can be obtained
 from the dataset \code{\link[Ecdat:CRANpackages]{Ecdat::CRANpackages}}.
+}
+\seealso{
+\code{\link[=get_cran_history]{get_cran_history()}}
 }

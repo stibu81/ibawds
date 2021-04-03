@@ -15,11 +15,18 @@ dates back to 21 June 2001.
 }
 \details{
 Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
-is obtained from the package \code{Ecdat} using the function \code{\link[Ecdat:CRANpackages]{Ecdat::CRANpackages}}.
+is obtained from \code{\link[Ecdat:CRANpackages]{Ecdat::CRANpackages}}.
 This data was collected by John Fox and Spencer Graves. Intervals between
 data points are irregularly spaced.
 
-Newer data was obtained using the function \code{\link{n_available_packages}} which
+Newer data was obtained using the function \code{\link[=n_available_packages]{n_available_packages()}} which
 extracts the information from CRAN snapshots on MRAN. One data point per
 quarter is available starting on 2014-10-01.
+}
+\examples{
+library(ggplot2)
+cran_history <- get_cran_history()
+ggplot(cran_history, aes(x = date, y = n_packages)) +
+  geom_point()
+
 }
