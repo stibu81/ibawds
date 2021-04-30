@@ -48,3 +48,55 @@ rescale <- function(x, mu = mean(x), sigma = sd(x)) {
   mu + sigma / stats::sd(x) * (x - mean(x))
 }
 
+
+#' Create a Random Vector With Fixed Correlation With Another Vector
+#'
+#' `rand_with_cor()` creates a vector of random number that has
+#' correlation `rho` with a given vector `y`.
+#' Also mean and standard deviation of the random vector
+#' can be fixed by the user. By default, they will be equal to the mean
+#' and standard deviation of `y`, respectively.
+#'
+#' @param y a numeric vector
+#' @param rho numeric value between -1 and 1 giving the desired correlation.
+#' @inheritParams rescale
+#'
+#' @return
+#' a vector of the same length as `y` that has correlation `rho` with `y`.
+#'
+#' @source
+#' This solution is based on an
+#' [answer](https://stats.stackexchange.com/a/313138/64220) by
+#' [whuber](https://stats.stackexchange.com/users/919/whuber)
+#' on [Cross Validated](https://stats.stackexchange.com).
+#'
+#' @examples
+#' x <- runif(1000, 5, 8)
+#'
+#' # create a random vector with positive correlation
+#' y1 <- rand_with_cor(x, 0.8)
+#' all.equal(cor(x, y1), 0.8)
+#'
+#' # create a random vector with negative correlation
+#' # and fixed mean and standard deviation
+#' y2 <- rand_with_cor(x, -0.3, 2, 3)
+#' all.equal(cor(x, y2), -0.3)
+#' all.equal(mean(y2), 2)
+#' all.equal(sd(y2), 3)
+#'
+#' @export
+
+rand_with_cor <- function(y, rho, mu = mean(y), sigma = sd(y)) {
+
+  if (abs(rho) > 1) {
+    stop("rho must lie between -1 and 1.")
+  }
+
+  x <- stats::rnorm(length(y))
+  y.perp <- stats::residuals(stats::lm(x ~ y))
+
+  # x such that cor(x, y) = rho
+  x <- rho * sd(y.perp) * y + y.perp * sd(y) * sqrt(1 - rho^2)
+
+  rescale(x, mu = mu, sigma = sigma)
+}
