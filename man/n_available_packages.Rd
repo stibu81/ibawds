@@ -8,10 +8,10 @@ n_available_packages(date)
 }
 \arguments{
 \item{date}{the date of the snapshot to be used. It can be a \code{Date} object
-or a characer in the format \verb{\%Y-\%m-\%d}.}
+or a character in the format \verb{\%Y-\%m-\%d}.}
 }
 \value{
-the nummber of available packages as an integer
+the number of available packages as an integer
 }
 \description{
 MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.

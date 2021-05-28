@@ -40,6 +40,9 @@ These functions create two tables that can be used for the grading
 of the student's papers.
 }
 \details{
+The tables are created using \code{\link[knitr:kable]{knitr::kable()}} and \code{\link{kableExtra}} is
+used for additional styling.
+
 \code{create_minreq_table()} creates a table that checks that the minimal requirements
 are satisfied:
 \itemize{

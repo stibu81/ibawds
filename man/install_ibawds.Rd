@@ -12,7 +12,7 @@ message with the packages that need to be installed (if any) and stops
 without installing them.}
 }
 \value{
-Invisible logical indicating whether package installation was successfull.
+Invisible logical indicating whether package installation was successful.
 \code{TRUE} is returned also when all required packages were already installed.
 }
 \description{

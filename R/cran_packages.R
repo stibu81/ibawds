@@ -5,14 +5,14 @@
 #' snapshot of <https://cran.r-project.org> on [MRAN](https://mran.microsoft.com).
 #'
 #' @param date the date of the snapshot to be used. It can be a `Date` object
-#'  or a characer in the format `%Y-%m-%d`.
+#'  or a character in the format `%Y-%m-%d`.
 #'
 #' @details
 #' Data for a few selected dates before September 17 2014 can be obtained
 #' from the dataset [`Ecdat::CRANpackages`].
 #'
 #' @return
-#' the nummber of available packages as an integer
+#' the number of available packages as an integer
 #'
 #' @seealso [`get_cran_history()`]
 #'

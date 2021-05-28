@@ -16,7 +16,7 @@
 #' aborted, no packages are installed.
 #'
 #' @return
-#' Invisible logical indicating whether package installation was successfull.
+#' Invisible logical indicating whether package installation was successful.
 #' `TRUE` is returned also when all required packages were already installed.
 #'
 #' @export

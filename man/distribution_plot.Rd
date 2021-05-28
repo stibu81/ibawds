@@ -45,7 +45,7 @@ variable. This is only used to label the axes.}
 \item{from, to}{numeric values giving start and end of a
 range where the area under the density will be shaded.
 If only one of the two values is given, the shading
-will start a negative infiniy or go until positiv infinity,
+will start a negative infinity or go until positive infinity,
 respectively.}
 }
 \value{

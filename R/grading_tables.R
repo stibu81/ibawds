@@ -16,6 +16,9 @@
 #'  statistic computations
 #'
 #' @details
+#' The tables are created using [`knitr::kable()`] and [`kableExtra`] is
+#' used for additional styling.
+#'
 #' `create_minreq_table()` creates a table that checks that the minimal requirements
 #' are satisfied:
 #' * the paper must be reproducible
