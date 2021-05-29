@@ -82,6 +82,7 @@ n_available_packages <- function(date) {
 get_cran_history <- function() {
 
   Ecdat::CRANpackages %>%
+    dplyr::as_tibble() %>%
     dplyr::select(date = "Date", n_packages = "Packages") %>%
     dplyr::bind_rows(cran_history)
 }
