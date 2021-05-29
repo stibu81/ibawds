@@ -1,5 +1,7 @@
 test_that("test n_available_packages()", {
-  expect_equal(n_available_packages("2020-01-01"), 15368)
+  # don't test an actual call to MRAN because this failes on win-builder
+  # and (presumable) on CRAN
+  # expect_equal(n_available_packages("2020-01-01"), 15368)
   expect_error(n_available_packages(10), "is not a valid date")
   expect_error(n_available_packages("2013-07-02"),
                "MRAN has no data for dates before 2014-09-17")
