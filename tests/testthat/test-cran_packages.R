@@ -11,7 +11,7 @@ test_that("test n_available_packages()", {
 
 test_that("test get_cran_history()", {
   expect_s3_class(get_cran_history(), "tbl_df")
-  expect_lte(nrow(get_cran_history()), 56)
+  expect_gte(nrow(get_cran_history()), 57)
   expect_named(get_cran_history(), c("date", "n_packages"))
   expect_s3_class(get_cran_history()$date, "Date")
   expect_type(get_cran_history()$n_packages, "integer")
