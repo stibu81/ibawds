@@ -22,7 +22,7 @@
 #' `create_minreq_table()` creates a table that checks that the minimal requirements
 #' are satisfied:
 #' * the paper must be reproducible
-#' * there must be at least on table and two kinds of plots
+#' * there must be at least one table and two kinds of plots
 #' * there must be at least 5 plots and tables
 #' * there must be at least two statistical computations
 #'

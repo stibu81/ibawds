@@ -47,7 +47,7 @@ used for additional styling.
 are satisfied:
 \itemize{
 \item the paper must be reproducible
-\item there must be at least on table and two kinds of plots
+\item there must be at least one table and two kinds of plots
 \item there must be at least 5 plots and tables
 \item there must be at least two statistical computations
 }
