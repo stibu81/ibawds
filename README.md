@@ -7,6 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ibawds)](https://CRAN.R-project.org/package=ibawds)
+[![R-CMD-check](https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg)](https://github.com/stibu81/ibawds/actions)
 <!-- badges: end -->
 
 ibawds provides useful functions and datasets for the [Data Science
