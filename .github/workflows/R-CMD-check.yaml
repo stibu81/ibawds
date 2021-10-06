@@ -3,6 +3,7 @@
 on:
   push:
     branches: [main, master]
+    paths: [R/**, tests/**]
   pull_request:
     branches: [main, master]
 
