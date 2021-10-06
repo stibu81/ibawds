@@ -38,8 +38,8 @@ install_ibawds <- function(just_print = FALSE) {
     # package version sometimes contains a line break (e.g., "(>=\n2.1.0)").
     stringr::str_remove(stringr::regex("\\(.*\\)", dotall = TRUE)) %>%
     stringr::str_trim() %>%
-    # remove the entries for R, testthat and usethis
-    setdiff(c("R", "testthat", "usethis"))
+    # remove the entries for R and packages that are not relevant for the students
+    setdiff(c("R", "testthat", "usethis", "vdiffr"))
   is_installed <- check_installed(required_packages)
 
   success <- FALSE

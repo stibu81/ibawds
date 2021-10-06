@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 0.2.0.9004
+Version: 0.2.0.9005
 Author: Stefan Lanz
 Maintainer: Stefan Lanz <slanz1137@gmail.com>
 Description: A collection of useful functions and datasets for the Data Science
@@ -48,5 +48,6 @@ Suggests:
     BiocManager,
     waldo,
     usethis,
+    vdiffr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
