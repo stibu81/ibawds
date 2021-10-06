@@ -9,13 +9,13 @@ mrt1_ref <- tibble(
                   "$\\geq 2$ stat. Auswertungen"),
   Beurteilung = c("OK", "3 Tabellen", "2 Arten Plots", "8 Bilder/Tabellen",
                   "2 stat. Auswertungen"),
-  Erfüllt = "Ja"
+  "Erf\u00fcllt" = "Ja"
 )
 mrt2_ref <- mrt1_ref %>%
   mutate(
     Beurteilung = c("NOK", "2 Tabellen", "3 Arten Plots", "3 Bilder/Tabellen",
                     "0 stat. Auswertungen"),
-    Erfüllt = c("Nein", "Ja", "Ja", "Nein", "Nein")
+    "Erf\u00fcllt" = c("Nein", "Ja", "Ja", "Nein", "Nein")
 )
 
 grt1_ref <- tibble(
