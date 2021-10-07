@@ -4,16 +4,10 @@
 \alias{install_ibawds}
 \title{Install the R-Packages Required for the Course}
 \usage{
-install_ibawds(just_print = FALSE)
-}
-\arguments{
-\item{just_print}{logical. If \code{TRUE}, the function will just print a
-message with the packages that need to be installed (if any) and stops
-without installing them.}
+install_ibawds()
 }
 \value{
-Invisible logical indicating whether package installation was successful.
-\code{TRUE} is returned also when all required packages were already installed.
+nothing or \code{NULL} invisibly
 }
 \description{
 A number of R-packages are used in the courses and
@@ -23,7 +17,7 @@ packages that are not yet installed.
 }
 \details{
 This function checks whether all the packages that \code{ibawds} depends on,
-imports or suggests are installed. A message informs the user about missing
-packages and asks, whether they should be installed. If the process is
-aborted, no packages are installed.
+imports or suggests are installed. In interactive sessions, it either
+informs the user that all packages are installed or asks to install
+missing packages. The function relies on \code{\link[rlang:is_installed]{rlang::check_installed()}}.
 }

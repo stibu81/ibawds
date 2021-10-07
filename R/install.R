@@ -5,31 +5,35 @@
 #' this package. Use `install_ibawds()` to install the
 #' packages that are not yet installed.
 #'
-#' @param just_print logical. If `TRUE`, the function will just print a
-#'  message with the packages that need to be installed (if any) and stops
-#'  without installing them.
-#'
 #' @details
 #' This function checks whether all the packages that `ibawds` depends on,
-#' imports or suggests are installed. A message informs the user about missing
-#' packages and asks, whether they should be installed. If the process is
-#' aborted, no packages are installed.
+#' imports or suggests are installed. In interactive sessions, it either
+#' informs the user that all packages are installed or asks to install
+#' missing packages. The function relies on [rlang::check_installed()].
 #'
 #' @return
-#' Invisible logical indicating whether package installation was successful.
-#' `TRUE` is returned also when all required packages were already installed.
+#' nothing or `NULL` invisibly
 #'
 #' @export
 
-install_ibawds <- function(just_print = FALSE) {
-
-  if (!interactive()) {
-    warning("This function is intended for interactive use only.")
-    return(invisible(FALSE))
-  }
+install_ibawds <- function() {
 
   # extract all dependencies of ibawds from DESCRIPTION
-  required_packages <- system.file("DESCRIPTION", package = "ibawds") %>%
+  required_packages <- get_required_packages()
+
+  # if all packages are installed, inform the user and exit
+  # otherwise, ask to install the missing packages
+  if (rlang::is_installed(required_packages)) {
+    message("All the required packages are installed.")
+  } else {
+    rlang::check_installed(required_packages)
+  }
+}
+
+
+get_required_packages <- function() {
+
+  system.file("DESCRIPTION", package = "ibawds") %>%
     read.dcf() %>%
     magrittr::extract(, c("Depends", "Imports", "Suggests")) %>%
     stringr::str_split(",") %>%
@@ -40,46 +44,5 @@ install_ibawds <- function(just_print = FALSE) {
     stringr::str_trim() %>%
     # remove the entries for R and packages that are not relevant for the students
     setdiff(c("R", "testthat", "usethis", "vdiffr", "covr"))
-  is_installed <- check_installed(required_packages)
 
-  success <- FALSE
-  if (all(is_installed)) {
-    message("All required packages are installed.")
-    success <- TRUE
-  } else {
-    to_install <- required_packages[!is_installed]
-    message("Some required packages are missing.")
-    message("The following package(s) will be installed: ", paste(to_install, collapse = ", "), ".")
-    if (just_print) return(invisible(FALSE))
-    ans <- utils::menu(c("Yes", "No"), title = "Do you want to continue?")
-    if (ans == 1) {
-      utils::install.packages(to_install)
-    } else {
-      return(invisible(FALSE))
-    }
-
-    # check success of installation
-    is_installed2 <- check_installed(required_packages)
-    if (all(is_installed2)) {
-      message("Packages were installed successfully")
-      success <- TRUE
-    } else {
-      failed <- required_packages[!is_installed2]
-      message("The installation of the following packages failed: ",
-              paste(failed, collapse = ", "), ".")
-    }
-  }
-
-  invisible(success)
-}
-
-
-# check whether a package is installed
-check_installed <- function(pkgs) {
-
-  paths <- suppressWarnings(find.package(pkgs))
-
-  vapply(pkgs,
-         function(pkg) any(stringr::str_detect(paths, pkg)),
-         logical(1))
 }
