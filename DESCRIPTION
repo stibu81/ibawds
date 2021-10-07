@@ -49,5 +49,6 @@ Suggests:
     waldo,
     usethis,
     vdiffr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    covr
 Config/testthat/edition: 3

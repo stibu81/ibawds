@@ -39,7 +39,7 @@ install_ibawds <- function(just_print = FALSE) {
     stringr::str_remove(stringr::regex("\\(.*\\)", dotall = TRUE)) %>%
     stringr::str_trim() %>%
     # remove the entries for R and packages that are not relevant for the students
-    setdiff(c("R", "testthat", "usethis", "vdiffr"))
+    setdiff(c("R", "testthat", "usethis", "vdiffr", "covr"))
   is_installed <- check_installed(required_packages)
 
   success <- FALSE
