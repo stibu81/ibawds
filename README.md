@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ibawds
+# ibawds <img src="man/figures/ibawds_logo.png" align="right" height="175" />
 
 <!-- badges: start -->
 
