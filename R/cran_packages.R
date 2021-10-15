@@ -29,8 +29,8 @@ n_available_packages <- function(date) {
   # MRAN goes back to 2014-09-17
   if (date < as.Date("2014-09-17")) {
     stop("MRAN has no data for dates before 2014-09-17.\n",
-         "Data on some dates prior to that date can ",
-         "be obtained from Ecdat::CRANpackages.")
+         "Data for some older dates can be ",
+         "obtained from Ecdat::CRANpackages.")
   }
   if (date > Sys.Date()) {
     stop("MRAN has no data for dates in the future.")
@@ -42,8 +42,13 @@ n_available_packages <- function(date) {
   tryCatch(
     page <- readLines(url, n = 20),
     error = function(e) {
-      stop("Obtaining data from MRAN failed with error ",
-           e$message)
+      stop(
+        simpleError(
+          paste("Obtaining data from MRAN failed with error:",
+                conditionMessage(e)),
+          call = sys.call(-4)
+        )
+      )
     })
 
   page %>%
