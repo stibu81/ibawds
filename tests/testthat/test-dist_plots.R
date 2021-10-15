@@ -5,7 +5,7 @@ test_that("test density_plot()", {
     density_plot(dnorm, c(-5, 7), mean = 1, sd = 2, to = 3)
   )
   expect_doppelganger("density_plot chi2",
-    density_plot(dchisq, c(-1, 10), df = 3, from = 2, to = 7, points = c(1, 6))
+    density_plot(dchisq, c(-1, 10), df = 3, from = 2, points = c(1, 6))
   )
   expect_doppelganger("density_plot weibull",
     density_plot(dweibull, c(-2, 7), shape = 1, from = 1, to = 3.2,

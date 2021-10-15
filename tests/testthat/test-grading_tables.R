@@ -50,3 +50,13 @@ test_that("test create_grading_table", {
 })
 
 
+test_that("test invalid inputs", {
+  expect_error(create_grading_table(1, 1, 1, 1, -1),
+               "invalid points")
+  expect_error(create_grading_table(1, 1, 6, 1, 1),
+               "invalid points")
+  expect_error(create_minreq_table(TRUE, 1, 1, 1, -1),
+               "invalid input")
+  expect_error(create_minreq_table(TRUE, 1, -1, 1, 1),
+               "invalid input")
+})

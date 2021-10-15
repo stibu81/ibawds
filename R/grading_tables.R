@@ -50,6 +50,11 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
   yes_no <- function(l) c("Nein", "Ja")[l + 1]
   nok_ok <- function(l) c("NOK", "OK")[l + 1]
 
+  # don't accept negative points
+  if (any(c(n_tab, n_plot_kinds, n_plots, n_stat) < 0)) {
+    stop("invalid input: positive numbers expected.")
+  }
+
   # vector of minimal requirements
   min_req <- c(1, 1, 2, 5, 2)
   # titles of the requirements
