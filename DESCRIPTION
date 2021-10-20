@@ -7,7 +7,8 @@ Maintainer: Stefan Lanz <slanz1137@gmail.com>
 Description: A collection of useful functions and datasets for the Data Science
   Course at IBAW in Lucerne.
 License: MIT + file LICENSE
-URL: https://github.com/stibu81/ibawds
+URL: https://github.com/stibu81/ibawds,
+    https://stibu81.github.io/ibawds
 Encoding: UTF-8
 LazyData: true
 Language: en-GB
