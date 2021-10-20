@@ -7,6 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ibawds)](https://CRAN.R-project.org/package=ibawds)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue)](https://r-pkg.org/pkg/ibawds)
 [![R-CMD-check](https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg)](https://github.com/stibu81/ibawds/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -40,8 +42,9 @@ devtools::install_github("stibu81/ibawds")
 ### Install R
 
 Windows and Mac Users can download the installer for their operating
-system from \[<https://cran.r-project.org/>\]. For Windows, installation
-should be possible also for non-admin users.
+system from <https://cran.r-project.org/>. For Windows, installation
+should be possible also for non-admin users. Mac users may also need to
+install [XQuartz](https://www.xquartz.org/).
 
 Linux users find instructions for installation under Debian,
 Fedora/Redhat, and Ubuntu under the same link. Note that the official
@@ -55,15 +58,18 @@ We will use RStudio as our
 [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment)
 in the course. You can download it from this
 [link](https://www.rstudio.com/products/rstudio/download/#download).
-Usually, it is easiest to use the appropriate installer for your
-operating system, however, if you don’t have admin access on your
-computer, you should instead download the appropriate zip-file /
-tarball.
+Usually, it is easiest to use the installer for your operating system.
+However, if you don’t have admin access on your computer, you should
+instead download the appropriate zip-file / tarball. Under Windows,
+extract the zip-file to a folder where you have write access. The
+executable file is located under `bin/rstudio.exe`.
 
 When you run RStudio for the first time, you have to select the R
-version that you want to use.
+version that you want to use. Usually, the dialogue box should list
+available R versions for you to choose. If not, click on “Browse…” and
+navigate to the folder where you installed R.
 
-### Installing R Packages
+### Install R Packages
 
 We will use a variety of R Packages during the course. To set them up,
 first install ibawds with
