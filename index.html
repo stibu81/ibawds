@@ -91,18 +91,18 @@
 <div id="install-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#install-r" class="anchor"></a>Install R</h3>
-<p>Windows and Mac Users can download the installer for their operating system from <br><span class="math display"> &lt; <em>h</em><em>t</em><em>t</em><em>p</em><em>s</em> : //<em>c</em><em>r</em><em>a</em><em>n</em>.<em>r</em> − <em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em>.<em>o</em><em>r</em><em>g</em>/&gt;</span><br>. For Windows, installation should be possible also for non-admin users.</p>
+<p>Windows and Mac Users can download the installer for their operating system from <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. For Windows, installation should be possible also for non-admin users. Mac users may also need to install <a href="https://www.xquartz.org/">XQuartz</a>.</p>
 <p>Linux users find instructions for installation under Debian, Fedora/Redhat, and Ubuntu under the same link. Note that the official package sources may contain an outdated version of R, but usually the current version can be installed from some other source. Make sure that you install version 4.0 or newer.</p>
 </div>
 <div id="install-rstudio" class="section level3">
 <h3 class="hasAnchor">
 <a href="#install-rstudio" class="anchor"></a>Install RStudio</h3>
-<p>We will use RStudio as our <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> in the course. You can download it from this <a href="https://www.rstudio.com/products/rstudio/download/#download">link</a>. Usually, it is easiest to use the appropriate installer for your operating system, however, if you don’t have admin access on your computer, you should instead download the appropriate zip-file / tarball.</p>
-<p>When you run RStudio for the first time, you have to select the R version that you want to use.</p>
+<p>We will use RStudio as our <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> in the course. You can download it from this <a href="https://www.rstudio.com/products/rstudio/download/#download">link</a>. Usually, it is easiest to use the installer for your operating system. However, if you don’t have admin access on your computer, you should instead download the appropriate zip-file / tarball. Under Windows, extract the zip-file to a folder where you have write access. The executable file is located under <code>bin/rstudio.exe</code>.</p>
+<p>When you run RStudio for the first time, you have to select the R version that you want to use. Usually, the dialogue box should list available R versions for you to choose. If not, click on “Browse…” and navigate to the folder where you installed R.</p>
 </div>
-<div id="installing-r-packages" class="section level3">
+<div id="install-r-packages" class="section level3">
 <h3 class="hasAnchor">
-<a href="#installing-r-packages" class="anchor"></a>Installing R Packages</h3>
+<a href="#install-r-packages" class="anchor"></a>Install R Packages</h3>
 <p>We will use a variety of R Packages during the course. To set them up, first install ibawds with</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ibawds"</span><span class="op">)</span></code></pre></div>
@@ -144,6 +144,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=ibawds"><img src="https://www.r-pkg.org/badges/version/ibawds" alt="CRAN status"></a></li>
+<li><a href="https://r-pkg.org/pkg/ibawds"><img src="https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 <li><a href="https://github.com/stibu81/ibawds/actions"><img src="https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://app.codecov.io/gh/stibu81/ibawds?branch=master"><img src="https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
