@@ -23,6 +23,7 @@ test_that("tests with invalid input", {
   expect_error(n_available_packages(Sys.Date()),
                "Obtaining data from MRAN failed")
   options(opts)
+  expect_error(get_mran_page(Sys.Date(), ""), "invalid value for type")
 })
 
 test_that("test get_cran_history()", {
