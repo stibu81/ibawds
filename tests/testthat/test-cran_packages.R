@@ -5,11 +5,18 @@ test_that("test n_available_packages() with valid input", {
              max(get_cran_history()$n_packages))
 })
 
-test_that("test n_available_packages() with invalid input", {
-  expect_error(n_available_packages(10), "is not a valid date")
+test_that("test available_r_version() with valid input", {
+  skip_on_cran()
+  expect_equal(available_r_version("2020-01-01"), "3.6.2")
+  expect_true(available_r_version(Sys.Date()) >= "4.1.2")
+})
+
+test_that("tests with invalid input", {
+  expect_error(available_r_version(10), "is not a valid date")
+  expect_error(n_available_packages("abc"), "is not a valid date")
   expect_error(n_available_packages("2013-07-02"),
                "MRAN has no data for dates before 2014-09-17")
-  expect_error(n_available_packages(Sys.Date() + 10),
+  expect_error(available_r_version(Sys.Date() + 10),
                "MRAN has no data for dates in the future.")
   # setting these options causes file() to fail on URLs
   opts <- options(url.method = "none", encoding = "none")

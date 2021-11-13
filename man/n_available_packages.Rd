@@ -2,25 +2,35 @@
 % Please edit documentation in R/cran_packages.R
 \name{n_available_packages}
 \alias{n_available_packages}
-\title{Number of Available R Packages from MRAN}
+\alias{available_r_version}
+\title{Number of Available R Packages and R Versions from MRAN}
 \usage{
-n_available_packages(date)
+n_available_packages(date = Sys.Date())
+
+available_r_version(date = Sys.Date())
 }
 \arguments{
 \item{date}{the date of the snapshot to be used. It can be a \code{Date} object
 or a character in the format \verb{\%Y-\%m-\%d}.}
 }
 \value{
-the number of available packages as an integer
+the number of available packages as an integer or the R version number as
+a character
 }
 \description{
 MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
-This function returns the number of available packages according to the
-snapshot of \url{https://cran.r-project.org} on \href{https://mran.microsoft.com}{MRAN}.
+These functions return the number of available packages and the available
+R version according to the snapshot of \url{https://cran.r-project.org} on
+\href{https://mran.microsoft.com}{MRAN}.
 }
 \details{
-Data for a few selected dates before September 17 2014 can be obtained
-from the dataset \code{\link[Ecdat:CRANpackages]{Ecdat::CRANpackages}}.
+MRAN has data starting from September 17 2014. Data for a few selected dates
+before September 17 2014 can be obtained from the dataset
+\code{\link[Ecdat:CRANpackages]{Ecdat::CRANpackages}}. A more complete dataset ranging from 2001 until
+today can be obtained with \code{\link[=get_cran_history]{get_cran_history()}}.
+
+Note that for some dates there is no snapshot on MRAN. The function will
+return an error in those cases.
 }
 \seealso{
 \code{\link[=get_cran_history]{get_cran_history()}}

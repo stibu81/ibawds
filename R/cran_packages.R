@@ -1,26 +1,51 @@
-#' Number of Available R Packages from MRAN
+#' Number of Available R Packages and R Versions from MRAN
 #'
 #' MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
-#' This function returns the number of available packages according to the
-#' snapshot of <https://cran.r-project.org> on [MRAN](https://mran.microsoft.com).
+#' These functions return the number of available packages and the available
+#' R version according to the snapshot of <https://cran.r-project.org> on
+#' [MRAN](https://mran.microsoft.com).
 #'
 #' @param date the date of the snapshot to be used. It can be a `Date` object
 #'  or a character in the format `%Y-%m-%d`.
 #'
 #' @details
-#' Data for a few selected dates before September 17 2014 can be obtained
-#' from the dataset [`Ecdat::CRANpackages`].
+#' MRAN has data starting from September 17 2014. Data for a few selected dates
+#' before September 17 2014 can be obtained from the dataset
+#' [`Ecdat::CRANpackages`]. A more complete dataset ranging from 2001 until
+#' today can be obtained with [`get_cran_history()`].
+#'
+#' Note that for some dates there is no snapshot on MRAN. The function will
+#' return an error in those cases.
 #'
 #' @return
-#' the number of available packages as an integer
+#' the number of available packages as an integer or the R version number as
+#' a character
 #'
 #' @seealso [`get_cran_history()`]
 #'
 #' @export
 
-n_available_packages <- function(date) {
+n_available_packages <- function(date = Sys.Date()) {
+  get_mran_page(date, "packages") %>%
+    stringr::str_subset("repository features \\d+ available packages") %>%
+    stringr::str_extract("(?<=features )\\d+(?= available)") %>%
+    as.integer()
+}
 
-  if (is.character(date)) date <- as.Date(date)
+
+#' @rdname n_available_packages
+#' @export
+
+available_r_version <- function(date = Sys.Date()) {
+  get_mran_page(date, "main") %>%
+    stringr::str_subset("R-[0-9.]+\\.tar\\.gz") %>%
+    stringr::str_extract("(?<=R-)[0-9.]+(?=\\.tar\\.gz)")
+}
+
+# helper function to download a page from MRAN
+get_mran_page <- function(date, type) {
+
+  if (is.character(date)) date <- try(as.Date(date), silent = TRUE)
 
   if (!methods::is(date, "Date")) {
     stop(deparse(substitute(date)), " is not a valid date.")
@@ -36,11 +61,17 @@ n_available_packages <- function(date) {
     stop("MRAN has no data for dates in the future.")
   }
 
-  # download the page and extract the number of packages
-  url <- paste0("https://cran.microsoft.com/snapshot/",
-                date, "/web/packages/")
+  # determine the url and download
+  url <- if (type == "packages") {
+    paste0("https://cran.microsoft.com/snapshot/", date, "/web/packages/")
+  } else if (type == "main") {
+    paste0("https://cran.microsoft.com/snapshot/", date, "/banner.shtml")
+  } else {
+    stop("invalid value for type")
+  }
+
   tryCatch(
-    page <- readLines(url, n = 20),
+    page <- readLines(url, n = 40),
     error = function(e) {
       stop(
         simpleError(
@@ -51,10 +82,7 @@ n_available_packages <- function(date) {
       )
     })
 
-  page %>%
-    stringr::str_subset("repository features \\d+ available packages") %>%
-    stringr::str_extract("(?<=features )\\d+(?= available)") %>%
-    as.integer()
+  page
 }
 
 
