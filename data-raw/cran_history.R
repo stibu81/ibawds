@@ -13,14 +13,17 @@ dates <- seq(start_date, lubridate::today(), by = "3 months") %>%
   as.Date()
 
 if (length(dates) == 0) {
-  stop("There is no new data to download.")
+  stop("There is no new data to download.", call. = FALSE)
 }
 
 cran_history_new <- tibble(
   date = dates,
-  n_packages = vapply(dates, n_available_packages, integer(1))
+  n_packages = vapply(dates, n_available_packages, integer(1)),
+  version = vapply(dates, available_r_version, character(1)),
+  source = "MRAN"
 )
 
 cran_history <- bind_rows(cran_history, cran_history_new)
 
 usethis::use_data(cran_history, internal = TRUE, overwrite = TRUE)
+

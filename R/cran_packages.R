@@ -116,6 +116,8 @@ get_cran_history <- function() {
 
   Ecdat::CRANpackages %>%
     dplyr::as_tibble() %>%
-    dplyr::select(date = "Date", n_packages = "Packages") %>%
+    dplyr::select(date = "Date", n_packages = "Packages",
+                  version = "Version", source = "Source") %>%
+    dplyr::mutate(source = stringr::str_trim(.data$source)) %>%
     dplyr::bind_rows(cran_history)
 }
