@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-11-14T19:19Z
+last_built: 2021-12-10T11:10Z
 urls:
   reference: https://stibu81.github.io/ibawds/reference
   article: https://stibu81.github.io/ibawds/articles

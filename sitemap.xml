@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://stibu81.github.io/ibawds/404.html</loc>
+  </url>
+  <url>
+    <loc>https://stibu81.github.io/ibawds/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://stibu81.github.io/ibawds/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://stibu81.github.io/ibawds/authors.html</loc>
+  </url>
+  <url>
     <loc>https://stibu81.github.io/ibawds/index.html</loc>
   </url>
   <url>
@@ -22,6 +34,9 @@
     <loc>https://stibu81.github.io/ibawds/reference/ibawds-package.html</loc>
   </url>
   <url>
+    <loc>https://stibu81.github.io/ibawds/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://stibu81.github.io/ibawds/reference/install_ibawds.html</loc>
   </url>
   <url>
@@ -38,5 +53,8 @@
   </url>
   <url>
     <loc>https://stibu81.github.io/ibawds/reference/seatbelts.html</loc>
+  </url>
+  <url>
+    <loc>https://stibu81.github.io/ibawds/reference/set_slide_options.html</loc>
   </url>
 </urlset>

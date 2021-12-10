@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,25 +34,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ibawds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9009</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/stibu81/ibawds/">
+  <a href="https://github.com/stibu81/ibawds/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -67,48 +63,47 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ibawds-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ibawds-" class="anchor"></a>ibawds <img src="reference/figures/ibawds_logo.png" align="right" height="175">
+<div class="section level1">
+<div class="page-header"><h1 id="ibawds-">ibawds <img src="reference/figures/ibawds_logo.png" align="right" height="175"><a class="anchor" aria-label="anchor" href="#ibawds-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>ibawds provides useful functions and datasets for the <a href="https://ibaw.ch/bildungsangebote/informatik/data-science/">Data Science course at IBAW</a> in Lucerne.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of ibawds from <a href="https://cran.r-project.org/package=ibawds">CRAN</a> with:</p>
+<p>ibawds provides useful functions and datasets for the <a href="https://ibaw.ch/bildungsangebote/informatik/data-science/" class="external-link">Data Science course at IBAW</a> in Lucerne.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of ibawds from <a href="https://cran.r-project.org/package=ibawds" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ibawds"</span><span class="op">)</span></code></pre></div>
-<p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ibawds"</span><span class="op">)</span></code></pre></div>
+<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"stibu81/ibawds"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="setting-up-for-the-course" class="section level2">
-<h2 class="hasAnchor">
-<a href="#setting-up-for-the-course" class="anchor"></a>Setting up for the course</h2>
-<div id="install-r" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-r" class="anchor"></a>Install R</h3>
-<p>Windows and Mac Users can download the installer for their operating system from <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. For Windows, installation should be possible also for non-admin users. Mac users may also need to install <a href="https://www.xquartz.org/">XQuartz</a>.</p>
+<div class="section level2">
+<h2 id="setting-up-for-the-course">Setting up for the course<a class="anchor" aria-label="anchor" href="#setting-up-for-the-course"></a>
+</h2>
+<div class="section level3">
+<h3 id="install-r">Install R<a class="anchor" aria-label="anchor" href="#install-r"></a>
+</h3>
+<p>Windows and Mac Users can download the installer for their operating system from <a href="https://cran.r-project.org/" class="external-link uri">https://cran.r-project.org/</a>. For Windows, installation should be possible also for non-admin users. Mac users may also need to install <a href="https://www.xquartz.org/" class="external-link">XQuartz</a>.</p>
 <p>Linux users find instructions for installation under Debian, Fedora/Redhat, and Ubuntu under the same link. Note that the official package sources may contain an outdated version of R, but usually the current version can be installed from some other source. Make sure that you install version 4.0 or newer.</p>
 </div>
-<div id="install-rstudio" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-rstudio" class="anchor"></a>Install RStudio</h3>
-<p>We will use RStudio as our <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> in the course. You can download it from this <a href="https://www.rstudio.com/products/rstudio/download/#download">link</a>. Usually, it is easiest to use the installer for your operating system. However, if you don’t have admin access on your computer, you should instead download the appropriate zip-file / tarball. Under Windows, extract the zip-file to a folder where you have write access. The executable file is located under <code>bin/rstudio.exe</code>.</p>
+<div class="section level3">
+<h3 id="install-rstudio">Install RStudio<a class="anchor" aria-label="anchor" href="#install-rstudio"></a>
+</h3>
+<p>We will use RStudio as our <a href="https://en.wikipedia.org/wiki/Integrated_development_environment" class="external-link">IDE</a> in the course. You can download it from this <a href="https://www.rstudio.com/products/rstudio/download/#download" class="external-link">link</a>. Usually, it is easiest to use the installer for your operating system. However, if you don’t have admin access on your computer, you should instead download the appropriate zip-file / tarball. Under Windows, extract the zip-file to a folder where you have write access. The executable file is located under <code>bin/rstudio.exe</code>.</p>
 <p>When you run RStudio for the first time, you have to select the R version that you want to use. Usually, the dialogue box should list available R versions for you to choose. If not, click on “Browse…” and navigate to the folder where you installed R.</p>
 </div>
-<div id="install-r-packages" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-r-packages" class="anchor"></a>Install R Packages</h3>
+<div class="section level3">
+<h3 id="install-r-packages">Install R Packages<a class="anchor" aria-label="anchor" href="#install-r-packages"></a>
+</h3>
 <p>We will use a variety of R Packages during the course. To set them up, first install ibawds with</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ibawds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ibawds"</span><span class="op">)</span></code></pre></div>
 <p>and then run the following to install additional packages:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stibu81.github.io/ibawds">ibawds</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stibu81.github.io/ibawds">ibawds</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/install_ibawds.html">install_ibawds</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>You will be asked to install missing packages. Confirm to install them. Note that this may take more than 30 minutes depending on your system and configuration.</p>
 </div>
@@ -118,50 +113,60 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ibawds">https://​cloud.r-project.org/​package=ibawds</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/stibu81/ibawds/">https://​github.com/​stibu81/​ibawds/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/stibu81/ibawds/issues">https://​github.com/​stibu81/​ibawds/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=ibawds" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/stibu81/ibawds/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/stibu81/ibawds/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing ibawds</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Stefan Lanz <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=ibawds"><img src="https://www.r-pkg.org/badges/version/ibawds" alt="CRAN status"></a></li>
-<li><a href="https://r-pkg.org/pkg/ibawds"><img src="https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
-<li><a href="https://github.com/stibu81/ibawds/actions"><img src="https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://app.codecov.io/gh/stibu81/ibawds?branch=master"><img src="https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=ibawds" class="external-link"><img src="https://www.r-pkg.org/badges/version/ibawds" alt="CRAN status"></a></li>
+<li><a href="https://r-pkg.org/pkg/ibawds" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://github.com/stibu81/ibawds/actions" class="external-link"><img src="https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://app.codecov.io/gh/stibu81/ibawds?branch=master" class="external-link"><img src="https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Stefan Lanz.</p>
+  <p></p>
+<p>Developed by Stefan Lanz.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -169,6 +174,8 @@
 
   
 
+
+  
 
   </body>
 </html>
