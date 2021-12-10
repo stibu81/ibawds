@@ -1,7 +1,9 @@
 library(ggplot2)
 
 test_that("test define_latex_stats()", {
-  expect_output(out <-define_latex_stats(), "\\\\newcommand\\{")
+  expect_output(
+    expect_invisible(out <-define_latex_stats(), "\\\\newcommand\\{")
+  )
   expect_null(out)
 })
 
@@ -14,7 +16,8 @@ test_that("test set_slide_options() with default values", {
     theme_set(ref_opts$ggplot)
     options(ref_opts$base)
   })
-  expect_equal(set_slide_options(), ref_opts)
+  expect_invisible(set_slide_options()) %>%
+    expect_equal(ref_opts)
   expect_equal(theme_get()$text$size, 22)
   expect_equal(as.numeric(theme_get()$plot.margin), rep(10, 4))
   expect_equal(options("pillar.print_max", "pillar.print_min"),

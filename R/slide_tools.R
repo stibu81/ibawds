@@ -64,9 +64,10 @@ define_latex_stats <- function() {
 #' have to delete the knitr cache in order for the changes to apply.
 #'
 #' @return
-#' a list with to elements containing the old values of the options for the
-#' ggplot theme and the base R options, respectively. These can be used to
-#' reset the ggplot theme and the base R options to their previous values.
+#' a named list (invisibly) with to elements containing the old values of the
+#' options for the ggplot theme and the base R options, respectively. These can
+#' be used to reset the ggplot theme and the base R options to their previous
+#' values.
 #'
 #' @export
 
@@ -82,5 +83,5 @@ set_slide_options <- function(ggplot_text_size = 22,
   base_opts <- options(pillar.print_max = tibble_print_max,
                        pillar.print_min = tibble_print_min)
 
-  list(ggplot = ggplot_opts, base = base_opts)
+  invisible(list(ggplot = ggplot_opts, base = base_opts))
 }

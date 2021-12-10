@@ -25,9 +25,10 @@ to \code{Inf} to always print all rows.}
 than \code{tibble_print_max} rows.}
 }
 \value{
-a list with to elements containing the old values of the options for the
-ggplot theme and the base R options, respectively. These can be used to
-reset the ggplot theme and the base R options to their previous values.
+a named list (invisibly) with to elements containing the old values of the
+options for the ggplot theme and the base R options, respectively. These can
+be used to reset the ggplot theme and the base R options to their previous
+values.
 }
 \description{
 Set options for ggplot plots and tibble outputs for IBAW slides.
