@@ -32,6 +32,7 @@ Imports:
 Suggests:
     tidyverse,
     rmarkdown,
+    knitr,
     caret,
     reshape2,
     lubridate,
