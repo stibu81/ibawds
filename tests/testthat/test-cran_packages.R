@@ -1,5 +1,6 @@
 test_that("test n_available_packages() with valid input", {
   skip_on_cran()
+  skip_on_ci()
   expect_equal(n_available_packages("2020-01-01"), 15368)
   expect_gte(n_available_packages(Sys.Date()),
              max(get_cran_history()$n_packages))
@@ -7,6 +8,7 @@ test_that("test n_available_packages() with valid input", {
 
 test_that("test available_r_version() with valid input", {
   skip_on_cran()
+  skip_on_ci()
   expect_equal(available_r_version("2020-01-01"), "3.6.2")
   expect_true(available_r_version(Sys.Date()) >= max(get_cran_history()$version))
 })

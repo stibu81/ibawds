@@ -34,6 +34,7 @@ test_that("check that define_latex_stats() defines all the expected commands", {
 
   # check rendering  a document
   skip_on_ci()
+  skip_on_cran()
   rmd_file <- tempfile(fileext = ".Rmd")
   pdf_file <- str_replace(rmd_file, "Rmd", "pdf")
   on.exit(unlink(c(rmd_file, pdf_file)))
