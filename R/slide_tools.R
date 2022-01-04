@@ -1,7 +1,7 @@
 #' Define LaTeX commands for statistical symbols
 #'
 #' Add the definitions for various useful LaTeX
-#' equation symbols for statistics to a RMarkdown document..
+#' equation symbols for statistics to an RMarkdown document.
 #'
 #' @details
 #' Run this function from within a code chunk in a RMarkdown document
