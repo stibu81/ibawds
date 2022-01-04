@@ -68,9 +68,12 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
     res = c(repro, n_tab, n_plot_kinds, n_tab + n_plots, n_stat),
     Beurteilung = c(nok_ok(.data$res[1]),
                     paste(.data$res[-1], req_titles[-1])),
-    "Erf\u00fcllt" = yes_no(.data$res >= min_req)
+    # setting the name with umlaut here leadds to a CRAN warning on Windows
+    # => use no umlaut here, rename below
+    Erfullt = yes_no(.data$res >= min_req)
   ) %>%
   dplyr::select(-"res") %>%
+  magrittr::set_names(c("Anforderung", "Beurteilung", "Erf\u00fcllt")) %>%
   kableExtra::kable(format = "html") %>%
   kableExtra::kable_styling()
 }
