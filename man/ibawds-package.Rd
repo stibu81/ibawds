@@ -11,7 +11,7 @@ A collection of useful functions and datasets for the Data Science Course at IBA
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://stibu81.github.io/ibawds}
+  \item \url{https://stibu81.github.io/ibawds/}
   \item Report bugs at \url{https://github.com/stibu81/ibawds/issues}
 }
 
