@@ -5,15 +5,21 @@
 #' packages from the `tidyverse`, it is convenient to have all data in columns.
 #' `mtcars2` is a variant of `mtcars` that contains car models in a column
 #' instead of storing them as row names.
+#' `mtcars_na` is the same dataset as `mtcars2`, but some of the columns
+#' contain missing values.
 #'
 #' @format A data frame with 32 rows and 12 variables. The format is identical
-#'  to [`mtcars`] and details can be found in its documentation. The only difference
-#'  is that the car model names are stored in the column `model` instead of
-#'  row names.
+#'  to [`mtcars`] and details can be found in its documentation. The only
+#'  difference is that the car model names are stored in the column `model`
+#'  instead of the row names.
 #'
 #' @keywords datasets
 
 "mtcars2"
+
+#' @rdname mtcars2
+
+"mtcars2_na"
 
 
 #' Summarised Data on Restaurant Bills

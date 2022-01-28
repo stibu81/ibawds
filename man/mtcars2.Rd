@@ -3,15 +3,20 @@
 \docType{data}
 \name{mtcars2}
 \alias{mtcars2}
+\alias{mtcars2_na}
 \title{Dataset mtcars without row names}
 \format{
 A data frame with 32 rows and 12 variables. The format is identical
-to \code{\link{mtcars}} and details can be found in its documentation. The only difference
-is that the car model names are stored in the column \code{model} instead of
-row names.
+to \code{\link{mtcars}} and details can be found in its documentation. The only
+difference is that the car model names are stored in the column \code{model}
+instead of the row names.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 32 rows and 12 columns.
 }
 \usage{
 mtcars2
+
+mtcars2_na
 }
 \description{
 In the \code{\link{mtcars}} dataset, the names of the car models are
@@ -19,5 +24,7 @@ stored as row names. However, when working with \code{ggplot2} and other
 packages from the \code{tidyverse}, it is convenient to have all data in columns.
 \code{mtcars2} is a variant of \code{mtcars} that contains car models in a column
 instead of storing them as row names.
+\code{mtcars_na} is the same dataset as \code{mtcars2}, but some of the columns
+contain missing values.
 }
 \keyword{datasets}
