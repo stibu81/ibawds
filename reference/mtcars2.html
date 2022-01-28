@@ -3,7 +3,9 @@
 stored as row names. However, when working with ggplot2 and other
 packages from the tidyverse, it is convenient to have all data in columns.
 mtcars2 is a variant of mtcars that contains car models in a column
-instead of storing them as row names."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+instead of storing them as row names.
+mtcars_na is the same dataset as mtcars2, but some of the columns
+contain missing values."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -21,7 +23,7 @@ instead of storing them as row names."><!-- mathjax --><script src="https://cdnj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ibawds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -54,19 +56,24 @@ instead of storing them as row names."><!-- mathjax --><script src="https://cdnj
 stored as row names. However, when working with <code>ggplot2</code> and other
 packages from the <code>tidyverse</code>, it is convenient to have all data in columns.
 <code>mtcars2</code> is a variant of <code>mtcars</code> that contains car models in a column
-instead of storing them as row names.</p>
+instead of storing them as row names.
+<code>mtcars_na</code> is the same dataset as <code>mtcars2</code>, but some of the columns
+contain missing values.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="va">mtcars2</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="va">mtcars2</span>
+
+<span class="va">mtcars2_na</span></code></pre></div>
     </div>
 
     <div id="format">
     <h2>Format</h2>
     <p>A data frame with 32 rows and 12 variables. The format is identical
-to <code><a href="https://rdrr.io/r/datasets/mtcars.html" class="external-link">mtcars</a></code> and details can be found in its documentation. The only difference
-is that the car model names are stored in the column <code>model</code> instead of
-row names.</p>
+to <code><a href="https://rdrr.io/r/datasets/mtcars.html" class="external-link">mtcars</a></code> and details can be found in its documentation. The only
+difference is that the car model names are stored in the column <code>model</code>
+instead of the row names.</p>
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 32 rows and 12 columns.</p>
     </div>
 
   </div>
