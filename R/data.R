@@ -18,6 +18,7 @@
 "mtcars2"
 
 #' @rdname mtcars2
+#' @format
 
 "mtcars2_na"
 
@@ -34,6 +35,8 @@
 #'   \item{smoker}{whether there were smokers in the party}
 #'   \item{mean_bill}{mean of all the bills in dollars}
 #' }
+#'
+#' @keywords datasets
 
 "bills"
 
@@ -53,5 +56,31 @@
 #'     (front seat), "Rücksitz" (rear seat).}
 #'   \item{victims}{number of persons that were killed or seriously injured.}
 #' }
+#'
+#' @keywords datasets
 
 "seatbelts"
+
+#' Galton's data on the heights of fathers and their children
+#'
+#' Two tables of father's heights with heights of one of their sons
+#' (`galton_sons`) or daughters (`galton_daughters`), respectively. All heights
+#' are given in centimetres. It is created from [`HistData::GaltonFamilies`] by
+#' randomly selecting one son or daughter per family. Since some families consist
+#' of only sons or only daughters, not all families are contained in both tables.
+#'
+#' @format Two data frames with 179 (`galton_sons`) or 176 (`galton_daughters`),
+#'  respectively, and 2 variables:
+#' \describe{
+#'   \item{father}{size of the father in cm.}
+#'   \item{son/daughter}{size of the son or daughter, respectively, in cm.}
+#' }
+
+#' @keywords datasets
+
+"galton_sons"
+
+#' @rdname galton_sons
+#' @format
+
+"galton_daughters"
