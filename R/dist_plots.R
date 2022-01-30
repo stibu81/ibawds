@@ -107,7 +107,7 @@ density_plot <- function(fun, range, ...,
 
   # add points, if requested
   if (!is.null(points)) {
-     for (px in points) {
+    for (px in points) {
       py <- dfun(px)
       plot <- plot +
         ggplot2::annotate("line",
