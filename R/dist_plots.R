@@ -39,20 +39,24 @@ distribution_plot <- function(fun, range, ...,
 
   pfun <- function(x) fun(x, ...)
 
-  plot <- ggplot(data.frame(x = range), aes_(x = ~x)) +
-            stat_function(fun = pfun, size = 0.8) +
-            scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
-            labs(title = title,
-                 x = var,
-                 y = paste0("F(", var, ")"))
+  plot <- data.frame(x = range) %>%
+    ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
+    ggplot2::stat_function(fun = pfun, size = 0.8) +
+    ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
+    ggplot2::labs(title = title,
+                  x = var,
+                  y = paste0("F(", var, ")"))
 
   if (!is.null(points)) {
     for (px in points) {
       py <- pfun(px)
       plot <- plot +
-        annotate("line", x = c(min(range), px, px), y = c(py, py, 0),
-                 alpha = 0.6, linetype = "dashed", colour = "red", size = 0.7) +
-        annotate("point", x = px, y = py, colour = "red", size = 3)
+        ggplot2::annotate("line",
+                          x = c(min(range), px, px), y = c(py, py, 0),
+                          alpha = 0.6, linetype = "dashed",
+                          colour = "red", size = 0.7) +
+        ggplot2::annotate("point", x = px, y = py,
+                          colour = "red", size = 3)
     }
   }
 
@@ -83,12 +87,13 @@ density_plot <- function(fun, range, ...,
     if (is.null(to)) to <- max(range)
   }
 
-  plot <- ggplot(data.frame(x = range), aes_(x = ~x)) +
-            stat_function(fun = dfun, size = 0.8) +
-            scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
-            labs(title = title,
-                 x = var,
-                 y = paste0("f(", var, ")"))
+  plot <- data.frame(x = range) %>%
+    ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
+    ggplot2::stat_function(fun = dfun, size = 0.8) +
+    ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1)) +
+    ggplot2::labs(title = title,
+                  x = var,
+                  y = paste0("f(", var, ")"))
 
   # add area, if requestd
   if (draw_area) {
@@ -96,8 +101,8 @@ density_plot <- function(fun, range, ...,
     n_points <- max((to - from)/diff(range) * 200, 2)
     x_area <- seq(from, to, length.out = 50)
     plot <- plot +
-              annotate("area", x = x_area, y = dfun(x_area),
-                       fill = "red", alpha = 0.3)
+      ggplot2::annotate("area", x = x_area, y = dfun(x_area),
+                        fill = "red", alpha = 0.3)
   }
 
   # add points, if requested
@@ -105,9 +110,12 @@ density_plot <- function(fun, range, ...,
      for (px in points) {
       py <- dfun(px)
       plot <- plot +
-        annotate("line", x = c(min(range), px, px), y = c(py, py, 0),
-                 alpha = 0.6, linetype = "dashed", colour = "red", size = 0.7) +
-        annotate("point", x = px, y = py, colour = "red", size = 3)
+        ggplot2::annotate("line",
+                          x = c(min(range), px, px), y = c(py, py, 0),
+                          alpha = 0.6, linetype = "dashed",
+                          colour = "red", size = 0.7) +
+        ggplot2::annotate("point", x = px, y = py,
+                          colour = "red", size = 3)
     }
   }
 

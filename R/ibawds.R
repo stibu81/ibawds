@@ -1,8 +1,9 @@
 #' Functionality for Data Science at IBAW
 #'
-#' @import ggplot2 dslabs
+#' @import dslabs
 #' @importFrom magrittr %>%
 #' @importFrom stats sd
+#' @importFrom rlang .data
 #' @keywords internal
 
 "_PACKAGE"
