@@ -23,7 +23,8 @@ install_ibawds <- function() {
 
   # if all packages are installed, inform the user and exit
   # otherwise, ask to install the missing packages
-  if (rlang::is_installed(required_packages)) {
+  # suppress messages that may be created when is_installed() loads packages
+  if (suppressMessages(rlang::is_installed(required_packages))) {
     message("All the required packages are installed.")
   } else {
     rlang::check_installed(required_packages)
