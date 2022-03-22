@@ -47,3 +47,46 @@ get_required_packages <- function() {
     setdiff(c("R", "testthat", "usethis", "vdiffr", "covr"))
 
 }
+
+
+#' Downgrade Packages to the Previous Version
+#'
+#' Downgrade packages to the previous version available on CRAN.
+#' This is useful in order to prepare the system for a demonstration of
+#' package updates.
+#'
+#' @param pkg character with the names of the packages to be downgraded.
+#'
+#' @details
+#' Downgrading is only possible for packages that are currently installed. For
+#' packages that are not installed, a warning is issued.
+#'
+#' The function uses [remotes::install_version()] to install a version
+#' of a package that is older than the currently installed version.
+#'
+#' @return
+#' A character vector with the names of the downgraded packages, invisibly.
+#'
+#' @export
+
+downgrade_packages <- function(pkg) {
+
+  vapply(pkg, downgrade_package, character(1)) %>%
+    stats::na.omit() %>%
+    as.vector() %>%
+    invisible()
+}
+
+downgrade_package <- function(pkg) {
+
+  if (!suppressMessages(rlang::is_installed(pkg))) {
+    warning(pkg, " is not installed and cannot be downgraded.", call. = FALSE)
+    return(NA_character_)
+  }
+
+  version <- as.character(utils::packageVersion(pkg))
+  message("downgrading ", pkg, " from version ", version, " ...")
+  remotes::install_version(pkg, version = paste("<", version))
+
+  pkg
+}

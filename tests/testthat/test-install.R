@@ -19,3 +19,12 @@ test_that("test install_ibawds()", {
               "not all the required packages are installed.")
   expect_message(install_ibawds(), "All the required packages are installed.")
 })
+
+# downgrade_packages() is only tested for a package that does not exist.
+test_that("test downgrade_packages()", {
+  expect_warning(
+    expect_equal(downgrade_packages("thispackagedoesnotexistoncran"),
+                 character(0)),
+    "thispackagedoesnotexistoncran is not installed and cannot be downgraded."
+  )
+})
