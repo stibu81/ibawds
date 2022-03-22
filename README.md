@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg)](h
 
 ibawds provides useful functions and datasets for the [Data Science
 course at
-IBAW](https://ibaw.ch/bildungsangebote/informatik/data-science/) in
+IBAW](https://ibaw.ch/bildungsangebote/it/data-science-ndk-hf/) in
 Lucerne.
 
 ## Installation
