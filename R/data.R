@@ -86,6 +86,39 @@
 "galton_daughters"
 
 
+#' Dentition of Mammals
+#'
+#' [Dental formulas](https://en.wikipedia.org/wiki/Dentition#Dental_formula)
+#' for various mammals. The dental formula describes the number of incisors,
+#' canines, premolars and molars per quadrant. Upper and lower teeth may
+#' differ and are therefore shown separately. The total number of teeth
+#' is twice the number given.
+#'
+#' @format Data frame with 66 rows and 9 variables:
+#' \describe{
+#'   \item{name}{name of the mammal}
+#'   \item{I}{number of top incisors}
+#'   \item{i}{number of bottom incisors}
+#'   \item{C}{number of top canines}
+#'   \item{c}{number of bottom canines}
+#'   \item{P}{number of top premolars}
+#'   \item{p}{number of bottom premolars}
+#'   \item{M}{number of top molars}
+#'   \item{m}{number of bottom molars}
+#' }
+#'
+#' @source
+#' Hartigan, J. A. (1975). *Clustering Algorithms*, John Wiley, New York.
+#'
+#' Table 9.1, page 170.
+#'
+#' HARTIGAN Clustering Algorithm Datasets:
+#' <https://people.sc.fsu.edu/~jburkardt/datasets/hartigan/file19.txt>
+#'
+#' @keywords datasets
+
+"dentition"
+
 #' Get Files for File Reading Exercise
 #'
 #' Copy the files for an exercise for reading files to a directory.
