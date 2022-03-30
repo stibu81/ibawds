@@ -1,12 +1,25 @@
 library(ibawds)
 library(dplyr)
+library(Ecdat)
+
+# set initialise to TRUE in order to create the data set from scratch
+initialise <- FALSE
+
+if (initialise) {
+  # data until 2014-04-13 comes from Ecdat. This data is licenced under GPL-3.
+  cran_history <- Ecdat::CRANpackages %>%
+    dplyr::as_tibble() %>%
+    dplyr::select(date = "Date", n_packages = "Packages",
+                  version = "Version", source = "Source") %>%
+    dplyr::mutate(source = stringr::str_trim(.data$source))
+} else {
+  cran_history <- ibawds::cran_history
+}
 
 # get number of available CRAN packages from MRAN for every quarter
 # since 2014-10-01. Do not redownload the quarters that are already
 # available in the package
 start_date <- as.Date("2014-10-01")
-cran_history <- get_cran_history() %>%
-  filter(date >= start_date)
 dates <- seq(start_date, lubridate::today(), by = "3 months") %>%
   as.character %>%
   setdiff(as.character(cran_history$date)) %>%
@@ -25,5 +38,5 @@ cran_history_new <- tibble(
 
 cran_history <- bind_rows(cran_history, cran_history_new)
 
-usethis::use_data(cran_history, internal = TRUE, overwrite = TRUE)
+usethis::use_data(cran_history, overwrite = TRUE)
 

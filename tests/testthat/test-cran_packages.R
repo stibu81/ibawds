@@ -3,14 +3,14 @@ test_that("test n_available_packages() with valid input", {
   skip_on_ci()
   expect_equal(n_available_packages("2020-01-01"), 15368)
   expect_gte(n_available_packages(Sys.Date()),
-             max(get_cran_history()$n_packages))
+             max(cran_history$n_packages))
 })
 
 test_that("test available_r_version() with valid input", {
   skip_on_cran()
   skip_on_ci()
   expect_equal(available_r_version("2020-01-01"), "3.6.2")
-  expect_true(available_r_version(Sys.Date()) >= max(get_cran_history()$version))
+  expect_true(available_r_version(Sys.Date()) >= max(cran_history$version))
 })
 
 test_that("tests with invalid input", {
@@ -28,14 +28,4 @@ test_that("tests with invalid input", {
                "Obtaining data from MRAN failed")
   options(opts)
   expect_error(get_mran_page(Sys.Date(), ""), "invalid value for type")
-})
-
-test_that("test get_cran_history()", {
-  expect_s3_class(get_cran_history(), "tbl_df")
-  expect_gte(nrow(get_cran_history()), 57)
-  expect_named(get_cran_history(), c("date", "n_packages", "version", "source"))
-  expect_s3_class(get_cran_history()$date, "Date")
-  expect_type(get_cran_history()$n_packages, "integer")
-  expect_type(get_cran_history()$version, "character")
-  expect_type(get_cran_history()$source, "character")
 })

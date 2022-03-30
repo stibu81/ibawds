@@ -119,6 +119,43 @@
 
 "dentition"
 
+#' History of the Number of Available CRAN Packages
+#'
+#' Table with the number of packages available on CRAN and the current R version
+#' for historic dates back to 21 June 2001.
+#'
+#' @format Data frame with `r nrow(cran_history)` rows and 4 variables:
+#' \describe{
+#'   \item{date}{calendar date}
+#'   \item{n_packages}{number of packages on CRAN at this date}
+#'   \item{version}{the current R version at this date}
+#'   \item{source}{source of the data}
+#' }
+#'
+#' @details
+#' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
+#' is obtained from
+#' [`CRANpackages`](https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages)
+#' from the package [`Ecdat`](https://cran.r-project.org/web/packages/Ecdat/index.html).
+#' This data was collected by John Fox and Spencer Graves.
+#' Intervals between data points are irregularly spaced. These data are
+#' marked with `John Fox` or `Spencer Graves` in the column `source`.
+#' They are licenced under GPL-2/GPL-3.
+#'
+#' Newer data was obtained using the functions [`n_available_packages()`] and
+#' [`available_r_version()`] which extract the information from CRAN snapshots
+#' on MRAN. One data point per quarter is available starting on 2014-10-01.
+#' These data are marked with `MRAN` in the column `source`.
+#'
+#' @examples
+#' library(ggplot2)
+#' ggplot(cran_history, aes(x = date, y = n_packages)) +
+#'   geom_point()
+#'
+#' @keywords datasets
+
+"cran_history"
+
 #' Get Files for File Reading Exercise
 #'
 #' Copy the files for an exercise for reading files to a directory.
