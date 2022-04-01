@@ -19,7 +19,7 @@ mark points and shade the area under the curve."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ibawds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9009</span>
       </span>
     </div>
 
@@ -60,7 +60,8 @@ mark points and shade the area under the curve.</p>
   <span class="va">...</span>,
   points <span class="op">=</span> <span class="cn">NULL</span>,
   var <span class="op">=</span> <span class="st">"x"</span>,
-  title <span class="op">=</span> <span class="st">"Verteilungsfunktion"</span>
+  title <span class="op">=</span> <span class="st">"Verteilungsfunktion"</span>,
+  is_discrete <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span>
 
 <span class="fu">density_plot</span><span class="op">(</span>
@@ -71,7 +72,8 @@ mark points and shade the area under the curve.</p>
   to <span class="op">=</span> <span class="cn">NULL</span>,
   points <span class="op">=</span> <span class="cn">NULL</span>,
   var <span class="op">=</span> <span class="st">"x"</span>,
-  title <span class="op">=</span> <span class="st">"Dichte"</span>
+  title <span class="op">=</span> <span class="st">"Dichte"</span>,
+  is_discrete <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -87,17 +89,24 @@ range of quantiles to be plotted.</p></dd>
 <dd><p>further arguments that are passed to <code>fun()</code>.</p></dd>
 <dt>points</dt>
 <dd><p>numeric vector giving quantiles where the
-function should be marked with a red dot.</p></dd>
+function should be marked with a red dot (continuous) or a red bar
+(discrete).</p></dd>
 <dt>var</dt>
 <dd><p>character giving the name of the quantile
 variable. This is only used to label the axes.</p></dd>
 <dt>title</dt>
 <dd><p>character giving the title of the plot</p></dd>
+<dt>is_discrete</dt>
+<dd><p>logical indicating whether this is a discrete distribution.
+For discrete distributions, a bar plot is created. If omitted, the function
+tries to automatically determine, whether the distributions is discrete.
+In case this should fail, set this argument explicitly.</p></dd>
 <dt>from, to</dt>
 <dd><p>numeric values giving start and end of a
-range where the area under the density will be shaded.
+range where the area under the density will be shaded (continuous)
+or the bars will be drawn in red (discrete).
 If only one of the two values is given, the shading
-will start a negative infinity or go until positive infinity,
+will start at negative infinity or go until positive infinity,
 respectively.</p></dd>
 </dl></div>
     <div id="value">
