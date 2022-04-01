@@ -11,7 +11,8 @@ distribution_plot(
   ...,
   points = NULL,
   var = "x",
-  title = "Verteilungsfunktion"
+  title = "Verteilungsfunktion",
+  is_discrete = NULL
 )
 
 density_plot(
@@ -22,7 +23,8 @@ density_plot(
   to = NULL,
   points = NULL,
   var = "x",
-  title = "Dichte"
+  title = "Dichte",
+  is_discrete = NULL
 )
 }
 \arguments{
@@ -35,17 +37,24 @@ range of quantiles to be plotted.}
 \item{...}{further arguments that are passed to \code{fun()}.}
 
 \item{points}{numeric vector giving quantiles where the
-function should be marked with a red dot.}
+function should be marked with a red dot (continuous) or a red bar
+(discrete).}
 
 \item{var}{character giving the name of the quantile
 variable. This is only used to label the axes.}
 
 \item{title}{character giving the title of the plot}
 
+\item{is_discrete}{logical indicating whether this is a discrete distribution.
+For discrete distributions, a bar plot is created. If omitted, the function
+tries to automatically determine, whether the distributions is discrete.
+In case this should fail, set this argument explicitly.}
+
 \item{from, to}{numeric values giving start and end of a
-range where the area under the density will be shaded.
+range where the area under the density will be shaded (continuous)
+or the bars will be drawn in red (discrete).
 If only one of the two values is given, the shading
-will start a negative infinity or go until positive infinity,
+will start at negative infinity or go until positive infinity,
 respectively.}
 }
 \value{
