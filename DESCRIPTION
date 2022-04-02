@@ -27,12 +27,12 @@ Imports:
   scales,
   dplyr,
   stringr,
-  magrittr,
-  kableExtra
+  magrittr
 Suggests:
     tidyverse,
     rmarkdown,
     knitr,
+    kableExtra,
     caret,
     reshape2,
     lubridate,

@@ -16,7 +16,7 @@
 #'  statistic computations
 #'
 #' @details
-#' The tables are created using [`knitr::kable()`] and [`kableExtra`] is
+#' The tables are created using [`knitr::kable()`] and [`kableExtra::kableExtra`] is
 #' used for additional styling.
 #'
 #' `create_minreq_table()` creates a table that checks that the minimal requirements
@@ -46,6 +46,8 @@
 #' @export
 
 create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
+
+  rlang::check_installed("kableExtra")
 
   yes_no <- function(l) c("Nein", "Ja")[l + 1]
   nok_ok <- function(l) c("NOK", "OK")[l + 1]
@@ -83,6 +85,8 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
 #' @export
 
 create_grading_table <- function(p_text, p_tab, p_plot, p_code, p_stat) {
+
+  rlang::check_installed("kableExtra")
 
   points <- c(p_text, p_tab, p_plot, p_code, p_stat)
   max <- c(5, 5, 5, 5, 5)
