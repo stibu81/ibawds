@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 0.3.2.9009
+Version: 0.3.2.9010
 Author: Stefan Lanz
 Maintainer: Stefan Lanz <slanz1137@gmail.com>
 Description: A collection of useful functions and datasets for the Data Science
@@ -40,6 +40,7 @@ Suggests:
     patchwork,
     ggrepel,
     GGally,
+    ggvoronoi,
     writexl,
     cowplot,
     DT,
