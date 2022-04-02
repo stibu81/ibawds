@@ -20,8 +20,10 @@
 #'  the areas for the clusters. Set to 0 to show no lines at all.
 #'
 #' @examples
+#' \donttest{
 #' cluster <- kmeans(iris[, 1:4], centers = 3)
 #' voronoi_diagram(cluster, "Sepal.Length", "Sepal.Width", iris)
+#' }
 #'
 #' @export
 
