@@ -27,7 +27,7 @@ R version according to the snapshot of \url{https://cran.r-project.org} on
 MRAN has data starting from September 17 2014. Data for a few selected dates
 before September 17 2014 can be obtained from the dataset
 \href{https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages}{\code{CRANpackages}}
-from the package \href{https://cran.r-project.org/web/packages/Ecdat/index.html}{\code{Ecdat}}.
+from the package \href{https://cran.r-project.org/package=Ecdat}{\code{Ecdat}}.
 A more complete dataset ranging from 2001 until
 today is included in the package as \code{\link{cran_history}}.
 

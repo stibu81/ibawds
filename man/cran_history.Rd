@@ -24,7 +24,7 @@ for historic dates back to 21 June 2001.
 Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
 is obtained from
 \href{https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages}{\code{CRANpackages}}
-from the package \href{https://cran.r-project.org/web/packages/Ecdat/index.html}{\code{Ecdat}}.
+from the package \href{https://cran.r-project.org/package=Ecdat}{\code{Ecdat}}.
 This data was collected by John Fox and Spencer Graves.
 Intervals between data points are irregularly spaced. These data are
 marked with \verb{John Fox} or \verb{Spencer Graves} in the column \code{source}.

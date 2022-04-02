@@ -136,7 +136,7 @@
 #' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
 #' is obtained from
 #' [`CRANpackages`](https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages)
-#' from the package [`Ecdat`](https://cran.r-project.org/web/packages/Ecdat/index.html).
+#' from the package [`Ecdat`](https://cran.r-project.org/package=Ecdat).
 #' This data was collected by John Fox and Spencer Graves.
 #' Intervals between data points are irregularly spaced. These data are
 #' marked with `John Fox` or `Spencer Graves` in the column `source`.

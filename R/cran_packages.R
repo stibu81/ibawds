@@ -12,7 +12,7 @@
 #' MRAN has data starting from September 17 2014. Data for a few selected dates
 #' before September 17 2014 can be obtained from the dataset
 #' [`CRANpackages`](https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages)
-#' from the package [`Ecdat`](https://cran.r-project.org/web/packages/Ecdat/index.html).
+#' from the package [`Ecdat`](https://cran.r-project.org/package=Ecdat).
 #' A more complete dataset ranging from 2001 until
 #' today is included in the package as [`cran_history`].
 #'
