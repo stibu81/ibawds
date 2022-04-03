@@ -9,6 +9,9 @@ test_that("test voronoi_diagram()", {
     "voronoi default",
     voronoi_diagram(clust, "Sepal.Width", "Sepal.Length")
   )
+  # the tests below fail on windows due to differences in the svg files
+  # that are not visible in the image
+  skip_on_os("windows")
   expect_doppelganger(
     "voronoi with data",
     voronoi_diagram(clust, "Petal.Width", "Sepal.Length", data = iris)
