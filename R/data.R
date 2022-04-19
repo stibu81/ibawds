@@ -108,29 +108,70 @@
 #' }
 #'
 #' @source
+#' The data have been downloaded from
+#' <https://people.sc.fsu.edu/~jburkardt/datasets/hartigan/file19.txt>
+#'
+#' They come from the following textbook:
+#'
 #' Hartigan, J. A. (1975). *Clustering Algorithms*, John Wiley, New York.
 #'
 #' Table 9.1, page 170.
 #'
-#' HARTIGAN Clustering Algorithm Datasets:
-#' <https://people.sc.fsu.edu/~jburkardt/datasets/hartigan/file19.txt>
-#'
 #' @keywords datasets
 
 "dentition"
+
+
+#' Protein Consumption in European Countries
+#'
+#' Protein Consumption from various sources in European countries in
+#' unspecified units. The exact year of data collection is not known but the
+#' oldest known publication of the data is from 1973.
+#'
+#' @format Data frame with 25 rows and 10 variables:
+#' \describe{
+#'   \item{country}{name of the country}
+#'   \item{red_meat}{red meat}
+#'   \item{white_meat}{white meat}
+#'   \item{eggs}{eggs}
+#'   \item{milk}{milk}
+#'   \item{fish}{fish}
+#'   \item{cereals}{cereals}
+#'   \item{starch}{starchy foods}
+#'   \item{nuts}{pulses, nuts, oil-seeds}
+#'   \item{fruit_veg}{fruits, vegetables}
+#' }
+#'
+#' @source
+#' The data have been downloaded from
+#' <https://raw.githubusercontent.com/jgscott/STA380/master/data/protein.csv>
+#'
+#' They come from the following book:
+#'
+#' Hand, D. J. et al. (1994). *A Handbook of Small Data Sets*,
+#' Chapman and Hall, London.
+#'
+#' Chapter 360, p. 297.
+#'
+#' In the book, it is stated that the data have first been published in
+#'
+#' Weber, A. (1973).
+#' *Agrarpolitik im Spannungsfeld der internationalen Ernährungspolitik*,
+#' Institut für Agrarpolitik und Marktlehre, Kiel.
+#'
+#' @keywords datasets
+
+"protein"
+
 
 #' History of the Number of Available CRAN Packages
 #'
 #' Table with the number of packages available on CRAN and the current R version
 #' for historic dates back to 21 June 2001.
 #'
-#' @format Data frame with `r nrow(cran_history)` rows and 4 variables:
-#' \describe{
-#'   \item{date}{calendar date}
-#'   \item{n_packages}{number of packages on CRAN at this date}
-#'   \item{version}{the current R version at this date}
-#'   \item{source}{source of the data}
-#' }
+#' @format Data frame with 25 rows and 10 variables. The first column (`Country`)
+#'  indicates the name of the country, the other columns indicate protein
+#'  consumption from nine sources sources in unknown units.
 #'
 #' @details
 #' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13

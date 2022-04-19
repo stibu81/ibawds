@@ -19,12 +19,14 @@ Data frame with 66 rows and 9 variables:
 }
 }
 \source{
+The data have been downloaded from
+\url{https://people.sc.fsu.edu/~jburkardt/datasets/hartigan/file19.txt}
+
+They come from the following textbook:
+
 Hartigan, J. A. (1975). \emph{Clustering Algorithms}, John Wiley, New York.
 
 Table 9.1, page 170.
-
-HARTIGAN Clustering Algorithm Datasets:
-\url{https://people.sc.fsu.edu/~jburkardt/datasets/hartigan/file19.txt}
 }
 \usage{
 dentition

@@ -5,13 +5,9 @@
 \alias{cran_history}
 \title{History of the Number of Available CRAN Packages}
 \format{
-Data frame with 59 rows and 4 variables:
-\describe{
-\item{date}{calendar date}
-\item{n_packages}{number of packages on CRAN at this date}
-\item{version}{the current R version at this date}
-\item{source}{source of the data}
-}
+Data frame with 25 rows and 10 variables. The first column (\code{Country})
+indicates the name of the country, the other columns indicate protein
+consumption from nine sources sources in unknown units.
 }
 \usage{
 cran_history
