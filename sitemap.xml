@@ -58,6 +58,9 @@
     <loc>https://stibu81.github.io/ibawds/reference/n_available_packages.html</loc>
   </url>
   <url>
+    <loc>https://stibu81.github.io/ibawds/reference/protein.html</loc>
+  </url>
+  <url>
     <loc>https://stibu81.github.io/ibawds/reference/rand_with_cor.html</loc>
   </url>
   <url>
@@ -71,5 +74,8 @@
   </url>
   <url>
     <loc>https://stibu81.github.io/ibawds/reference/voronoi_diagram.html</loc>
+  </url>
+  <url>
+    <loc>https://stibu81.github.io/ibawds/reference/wine_quality.html</loc>
   </url>
 </urlset>
