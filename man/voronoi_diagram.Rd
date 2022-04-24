@@ -42,10 +42,20 @@ the areas for the clusters. Set to 0 to show no lines at all.}
 \description{
 Create a Voronoi diagram for a given clustering object.
 }
+\details{
+The function uses the \code{deldir} package to create the polygons for the
+Voronoi diagram. The code has been inspired by \code{ggvoronoi}, which can
+handle more complex situations.
+}
 \examples{
 \donttest{
 cluster <- kmeans(iris[, 1:4], centers = 3)
 voronoi_diagram(cluster, "Sepal.Length", "Sepal.Width", iris)
 }
 
+}
+\references{
+Garrett et al., \emph{ggvoronoi: Voronoi Diagrams and Heatmaps with ggplot2},
+Journal of Open Source Software 3(32) (2018) 1096,
+\url{https://doi.org/10.21105/joss.01096}
 }

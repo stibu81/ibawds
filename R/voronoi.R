@@ -19,21 +19,31 @@
 #' @param linewidth numeric indicating the width of the lines that separate
 #'  the areas for the clusters. Set to 0 to show no lines at all.
 #'
+#' @details
+#' The function uses the `deldir` package to create the polygons for the
+#' Voronoi diagram. The code has been inspired by `ggvoronoi`, which can
+#' handle more complex situations.
+#'
 #' @examples
 #' \donttest{
 #' cluster <- kmeans(iris[, 1:4], centers = 3)
 #' voronoi_diagram(cluster, "Sepal.Length", "Sepal.Width", iris)
 #' }
 #'
+#' @references
+#' Garrett et al., *ggvoronoi: Voronoi Diagrams and Heatmaps with ggplot2*,
+#' Journal of Open Source Software 3(32) (2018) 1096,
+#' <https://doi.org/10.21105/joss.01096>
+#'
 #' @export
 
 voronoi_diagram <- function(cluster, x, y, data = NULL,
-                         show_data = !is.null(data),
-                         legend = TRUE,
-                         point_size = 2,
-                         linewidth = 0.7) {
+                            show_data = !is.null(data),
+                            legend = TRUE,
+                            point_size = 2,
+                            linewidth = 0.7) {
 
-  rlang::check_installed("ggvoronoi")
+  rlang::check_installed("deldir")
 
   # check that cluster contains the required fields
   if (any(!c("cluster", "centers") %in% names(cluster))) {
@@ -53,8 +63,9 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
          deparse(substitute(cluster)), ".")
   }
 
-  # if data is provided, use it to create an outline for the diagram
-  outline <- if (!is.null(data)) {
+  # if data is provided, use it to create an bounding box for the diagram
+  # deldir requires the edges to be given in order c(xmin, xmax, ymin, ymax)
+  bbox <- if (!is.null(data)) {
     if (!x %in% names(data)) {
       stop("variable ", deparse(substitute(x)), " does not exist in ",
            deparse(substitute(data)), ".")
@@ -74,21 +85,27 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
       r + c(-1, 1) * 0.05 * diff(r)
     }
 
-    # geom_voronoi() does not accept a tibble
-    data.frame(
-      x = varrange(data[[x]])[c(1, 1, 2, 2)],
-      y = varrange(data[[y]])[c(1, 2, 2, 1)]
-    )
+    c(varrange(data[[x]]), varrange(data[[y]]))
   }
+
+  # compute the polygons for the Voronoi diagram
+  polys <- deldir::deldir(centers[[x]], centers[[y]], rw = bbox) %>%
+    deldir::tile.list() %>%
+    lapply(function(tile) {
+      dplyr::as_tibble(tile[c("x", "y")])
+    }) %>%
+    dplyr::bind_rows(.id = ".cluster") %>%
+    dplyr::rename(!!x := .data$x, !!y := .data$y) %>%
+    dplyr::mutate(.cluster = stringr::str_remove(.data$.cluster, "^pt."))
 
   # create the Voronoi diagram without data points
   plot <- centers %>%
     ggplot2::ggplot(ggplot2::aes_string(x, y,
                                         fill = ".cluster",
                                         colour = ".cluster")) +
-    ggvoronoi::geom_voronoi(colour = "black", alpha = 0.8,
-                            lwd = linewidth,
-                            outline = outline) +
+    ggplot2::geom_polygon(data = polys,
+                          colour = "black", alpha = 0.8,
+                          lwd = linewidth) +
     ggplot2::geom_point(shape = 18, size = 3 * point_size) +
     ggplot2::scale_fill_brewer(palette = "Pastel1", guide = "none") +
     ggplot2::scale_colour_brewer(palette = "Set1",
