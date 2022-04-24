@@ -164,6 +164,42 @@
 "protein"
 
 
+#' Wine Quality
+#'
+#' Physicochemical data and quality ratings for red and white Portuguese
+#' [Vinho Verde](https://en.wikipedia.org/wiki/Vinho_Verde) wines.
+#'
+#' @format a tibble with 6497 rows and 13 variables:
+#' \describe{
+#'   \item{colour}{colour of the wine; "red" (1'599) or "white" (4'898)}
+#'   \item{fixed_acidity}{tartaric acid per volume in \eqn{g/dm^3}}
+#'   \item{volatile_acidity}{acetic acid per volume in \eqn{g/dm^3}}
+#'   \item{citric_acid}{citric acid per volume in \eqn{g/dm^3}}
+#'   \item{residual_sugar}{residual sugar per volume in \eqn{g/dm^3}}
+#'   \item{chlorides}{sodium chloride per volume in \eqn{g/dm^3}}
+#'   \item{free_sulfur_dioxide}{free sulphur dioxide  per volume in \eqn{mg/dm^3}}
+#'   \item{total_sulfur_dioxide}{total sulphur dioxide per volume in \eqn{mg/dm^3}}
+#'   \item{density}{density in \eqn{g/dm^3}}
+#'   \item{pH}{pH value}
+#'   \item{sulphates}{potassium sulphate per volume in \eqn{g/dm^3}}
+#'   \item{alcohol}{alcohol content per volume in %}
+#'   \item{quality}{quality score between 0 (worst) and 10 (best) determined
+#'    by sensory analysis.}
+#' }
+#'
+#' @source
+#' The data is available on the
+#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/ml/datasets/wine+quality).
+#'
+#' P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis,
+#' *Modeling wine preferences by data mining from physicochemical properties*,
+#' Decision Support Systems 47(4) (2009), 547-553.
+#'
+#' @keywords datasets
+
+"wine_quality"
+
+
 #' History of the Number of Available CRAN Packages
 #'
 #' Table with the number of packages available on CRAN and the current R version
