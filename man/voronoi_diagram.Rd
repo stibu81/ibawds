@@ -57,5 +57,5 @@ voronoi_diagram(cluster, "Sepal.Length", "Sepal.Width", iris)
 \references{
 Garrett et al., \emph{ggvoronoi: Voronoi Diagrams and Heatmaps with ggplot2},
 Journal of Open Source Software 3(32) (2018) 1096,
-\url{https://doi.org/10.21105/joss.01096}
+\doi{10.21105/joss.01096}
 }

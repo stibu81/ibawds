@@ -33,7 +33,7 @@
 #' @references
 #' Garrett et al., *ggvoronoi: Voronoi Diagrams and Heatmaps with ggplot2*,
 #' Journal of Open Source Software 3(32) (2018) 1096,
-#' <https://doi.org/10.21105/joss.01096>
+#' \doi{10.21105/joss.01096}
 #'
 #' @export
 
