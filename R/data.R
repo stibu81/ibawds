@@ -234,6 +234,32 @@
 "breast_cancer"
 
 
+#' Noisy Data From a 10th Order Polygon
+#'
+#' Training and test data create from a 10th order polynomial with added noise.
+#' The polynomial is given by
+#' \deqn{f(x) = 2 x - 10 x^5 + 15 x^{10}}{f(x) = 2 x - 10 x^5 + 15 x^10}
+#' The noise follows a standard normal distribution. The data can be used to
+#' demonstrate overfitting. It is inspired by section II. B. in
+#' [A high-bias, low-variance introduction to Machine Learning for physicists](https://arxiv.org/abs/1803.08823)
+#'
+#' @format a list of two tibbles with two columns each. \eqn{x} stands for the
+#'  independent, \eqn{y} for the dependent variable. The training data
+#'  (`noisy_data$train`) contains 1000 rows, the test data (`noisy_data$test`)
+#'  20 rows.
+#'
+#' @references
+#' P. Mehta et al.,
+#' *A high-bias, low-variance introduction to Machine Learning for physicists*
+#' Phys. Rep. 810 (2019), 1-124.
+#' [arXiv:1803.08823](https://arxiv.org/abs/1803.08823)
+#' \doi{10.1016/j.physrep.2019.03.001}
+#'
+#' @keywords datasets
+
+"noisy_data"
+
+
 #' History of the Number of Available CRAN Packages
 #'
 #' Table with the number of packages available on CRAN and the current R version
