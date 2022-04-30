@@ -24,3 +24,21 @@ test_that("check output control for find_similar_colour()", {
   expect_silent(find_similar_colour("green3", verbose = FALSE))
 })
 
+
+test_that("check messages for find_similar_colour()", {
+  expect_error(find_similar_colour(TRUE), "invalid input for colour")
+  expect_error(find_similar_colour(c(1, 2)),
+               "if colour is a numeric vector, it must have length 3")
+  expect_error(find_similar_colour(c(1, 2, 256)),
+               "if colour is a numeric vector, all values must be between 0 and 255")
+  expect_error(find_similar_colour(c(1, -2, 120)),
+               "if colour is a numeric vector, all values must be between 0 and 255")
+  expect_error(find_similar_colour(matrix(c(1, 2), ncol = 1)),
+               "if colour is a numeric matrix, it must have dimensions c\\(3, 1\\)")
+  expect_error(find_similar_colour(matrix(c(1, 2, 3), ncol = 3)),
+               "if colour is a numeric matrix, it must have dimensions c\\(3, 1\\)")
+  expect_error(find_similar_colour(matrix(c(1, 2, 256), ncol = 1)),
+               "if colour is a numeric matrix, all values must be between 0 and 255")
+  expect_error(find_similar_colour(matrix(c(1, -2, 120), ncol = 1)),
+               "if colour is a numeric matrix, all values must be between 0 and 255")
+})
