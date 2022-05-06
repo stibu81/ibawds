@@ -1,6 +1,5 @@
 library(ibawds)
 library(dplyr)
-library(Ecdat)
 
 # set initialise to TRUE in order to create the data set from scratch
 initialise <- FALSE
