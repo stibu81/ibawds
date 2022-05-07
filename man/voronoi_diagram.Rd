@@ -10,6 +10,7 @@ voronoi_diagram(
   y,
   data = NULL,
   show_data = !is.null(data),
+  colour_data = TRUE,
   legend = TRUE,
   point_size = 2,
   linewidth = 0.7
@@ -30,6 +31,9 @@ data points are plotted unless this is suppressed by specifying
 
 \item{show_data}{should the data points be plotted? This is \code{TRUE} by default
 if \code{data} is given.}
+
+\item{colour_data}{should the data points be coloured according to the
+assigned cluster?}
 
 \item{legend}{should a colour legend for the clusters be plotted?}
 

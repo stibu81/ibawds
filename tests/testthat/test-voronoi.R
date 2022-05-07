@@ -16,7 +16,12 @@ test_that("test voronoi_diagram()", {
   expect_doppelganger(
     "voronoi suppress data",
     voronoi_diagram(clust, "Petal.Width", "Petal.Length",
-                 data = iris, show_data = FALSE)
+                    data = iris, show_data = FALSE)
+  )
+  expect_doppelganger(
+    "voronoi uncoloured data",
+    voronoi_diagram(clust, "Petal.Width", "Petal.Length",
+                    data = iris, colour_data = FALSE)
   )
   expect_doppelganger(
     "voronoi with options",

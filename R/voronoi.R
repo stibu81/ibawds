@@ -13,6 +13,8 @@
 #'  `show_data = FALSE`.
 #' @param show_data should the data points be plotted? This is `TRUE` by default
 #'  if `data` is given.
+#' @param colour_data should the data points be coloured according to the
+#'   assigned cluster?
 #' @param legend should a colour legend for the clusters be plotted?
 #' @param point_size numeric indicating the size of the data points and the
 #'  cluster centres.
@@ -39,6 +41,7 @@
 
 voronoi_diagram <- function(cluster, x, y, data = NULL,
                             show_data = !is.null(data),
+                            colour_data = TRUE,
                             legend = TRUE,
                             point_size = 2,
                             linewidth = 0.7) {
@@ -116,9 +119,14 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 
   # add the data points
   if (!is.null(data) && show_data) {
-    plot <- plot +
-      ggplot2::geom_point(data = data, size = point_size)
+    plot <- if (colour_data) {
+      plot + ggplot2::geom_point(data = data, size = point_size)
+    } else {
+      plot + ggplot2::geom_point(data = data, size = point_size,
+                                 colour = "black")
+    }
   }
 
   plot
 }
+
