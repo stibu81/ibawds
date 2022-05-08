@@ -130,3 +130,118 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
   plot
 }
 
+
+#' Cluster Data According to Centers and Recompute Centers
+#'
+#' For a given dataset and given centers, `cluster_with_centers()`
+#' assigns each data point to its closest center and then recomputes
+#' the centers as the mean of all points assigned to each class. An initial
+#' set of random cluster centers can be obtained with `init_rand_centers()`.
+#' These functions can be used to visualise the mechanism of kMeans.
+#'
+#' @param data a data.frame containing only the variables to be used for
+#'  clustering.
+#' @param centers a data.frame giving the centers of the clusters. It must have
+#'  the same number of columns as `data`.
+#'
+#' @return
+#' a list containing two Tibbles:
+#' * `centers`: the new centers of the clusters computet after cluster assignment
+#'     with the given centers.
+#' * `cluster`: the cluster assignment for each point in `data` unsing the
+#'     centers that were passed to the function
+#'
+#' @examples
+#' # demonstrate kMeans with iris data
+#' # keep the relevant columns
+#' iris2 <- iris[, c("Sepal.Length", "Petal.Length")]
+#'
+#' # initialise the cluster centers
+#' clust <- init_rand_centers(iris2, n = 3, seed = 2435)
+#'
+#' # plot the data with the cluster centers
+#' library(ggplot2)
+#' ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
+#'  geom_point(data = clust$centers, aes(colour = factor(1:3)),
+#'             shape = 18, size = 6) +
+#'  geom_point() +
+#'  scale_colour_brewer(palette = "Set1")
+#'
+#' # assign clusters and compute new centers
+#' clust_new <- cluster_with_centers(iris2, clust$centers)
+#'
+#' # plot the data with clustering
+#' clust$cluster <- clust_new$cluster
+#' voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
+#'                 data = iris2)
+#'
+#' # plot the data with new cluster centers
+#' clust$centers <- clust_new$centers
+#' voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
+#'                 data = iris2, colour_data = FALSE)
+#'
+#' # this procedure may be repeated until the algorithm converges
+#'
+#' @export
+
+cluster_with_centers <- function(data, centers) {
+
+  nc <- nrow(centers)
+  n_vars <- ncol(data)
+  if (ncol(centers) != n_vars) {
+    stop("data and centers must have the same number of columns.")
+  }
+
+  dist_to_data <- function(i) {
+    unlist(centers[i, ]) %>%
+      rep(nrow(data)) %>%
+      matrix(ncol = 2, byrow = TRUE) %>%
+      magrittr::subtract(data) %>%
+      magrittr::raise_to_power(2) %>%
+      rowSums() %>%
+      sqrt()
+  }
+
+  dists <- lapply(1:nc, dist_to_data) %>%
+    magrittr::set_names(1:nc) %>%
+    dplyr::as_tibble()
+
+  clustered <- data %>%
+    dplyr::mutate(cluster = factor(apply(dists, 1, which.min))  )
+
+  centers <- clustered %>%
+    dplyr::group_by(.data$cluster) %>%
+    dplyr::summarise(dplyr::across(.fns = mean)) %>%
+    dplyr::select(-"cluster")
+
+  list(centers = centers, cluster = clustered$cluster)
+}
+
+
+#' @rdname cluster_with_centers
+#'
+#' @param n the number of cluster centers to create
+#' @param seed a random seed for reproducability
+#'
+#' @export
+
+init_rand_centers <- function(data, n, seed = sample(1000:9999, 1)) {
+
+  if (n < 2) {
+    stop("n must be at least 2")
+  }
+  n <- round(n)
+
+  set.seed(seed)
+
+  centers <- data %>% dplyr::summarise(
+    dplyr::across(
+      .fns = function(x) stats::runif(n, min(x), max(x))
+    )
+  )
+
+  list(
+    centers = dplyr::as_tibble(centers),
+    cluster = factor(sample(1:n, nrow(data), replace = TRUE))
+  )
+}
