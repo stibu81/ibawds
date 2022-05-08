@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ibawds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0.9005</span>
       </span>
     </div>
 
@@ -56,6 +56,7 @@
   <span class="va">y</span>,
   data <span class="op">=</span> <span class="cn">NULL</span>,
   show_data <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,
+  colour_data <span class="op">=</span> <span class="cn">TRUE</span>,
   legend <span class="op">=</span> <span class="cn">TRUE</span>,
   point_size <span class="op">=</span> <span class="fl">2</span>,
   linewidth <span class="op">=</span> <span class="fl">0.7</span>
@@ -79,6 +80,9 @@ data points are plotted unless this is suppressed by specifying
 <dt>show_data</dt>
 <dd><p>should the data points be plotted? This is <code>TRUE</code> by default
 if <code>data</code> is given.</p></dd>
+<dt>colour_data</dt>
+<dd><p>should the data points be coloured according to the
+assigned cluster?</p></dd>
 <dt>legend</dt>
 <dd><p>should a colour legend for the clusters be plotted?</p></dd>
 <dt>point_size</dt>
