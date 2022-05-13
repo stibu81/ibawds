@@ -131,35 +131,35 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 }
 
 
-#' Cluster Data According to Centers and Recompute Centers
+#' Cluster Data According to Centres and Recompute Centres
 #'
-#' For a given dataset and given centers, `cluster_with_centers()`
-#' assigns each data point to its closest center and then recomputes
-#' the centers as the mean of all points assigned to each class. An initial
-#' set of random cluster centers can be obtained with `init_rand_centers()`.
-#' These functions can be used to visualise the mechanism of kMeans.
+#' For a given dataset and given centres, `cluster_with_centers()`
+#' assigns each data point to its closest centre and then recomputes
+#' the centres as the mean of all points assigned to each class. An initial
+#' set of random cluster centres can be obtained with `init_rand_centers()`.
+#' These functions can be used to visualise the mechanism of k-means.
 #'
 #' @param data a data.frame containing only the variables to be used for
 #'  clustering.
-#' @param centers a data.frame giving the centers of the clusters. It must have
+#' @param centers a data.frame giving the centres of the clusters. It must have
 #'  the same number of columns as `data`.
 #'
 #' @return
-#' a list containing two Tibbles:
-#' * `centers`: the new centers of the clusters computet after cluster assignment
-#'     with the given centers.
-#' * `cluster`: the cluster assignment for each point in `data` unsing the
-#'     centers that were passed to the function
+#' a list containing two tibbles:
+#' * `centers`: the new centres of the clusters computed after cluster assignment
+#'     with the given centres
+#' * `cluster`: the cluster assignment for each point in `data` using the
+#'     centres that were passed to the function
 #'
 #' @examples
-#' # demonstrate kMeans with iris data
+#' # demonstrate k-means with iris data
 #' # keep the relevant columns
 #' iris2 <- iris[, c("Sepal.Length", "Petal.Length")]
 #'
-#' # initialise the cluster centers
+#' # initialise the cluster centres
 #' clust <- init_rand_centers(iris2, n = 3, seed = 2435)
 #'
-#' # plot the data with the cluster centers
+#' # plot the data with the cluster centres
 #' library(ggplot2)
 #' ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
 #'  geom_point(data = clust$centers, aes(colour = factor(1:3)),
@@ -167,7 +167,7 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 #'  geom_point() +
 #'  scale_colour_brewer(palette = "Set1")
 #'
-#' # assign clusters and compute new centers
+#' # assign clusters and compute new centres
 #' clust_new <- cluster_with_centers(iris2, clust$centers)
 #'
 #' # plot the data with clustering
@@ -175,7 +175,7 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 #' voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
 #'                 data = iris2)
 #'
-#' # plot the data with new cluster centers
+#' # plot the data with new cluster centres
 #' clust$centers <- clust_new$centers
 #' voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
 #'                 data = iris2, colour_data = FALSE)
@@ -220,8 +220,8 @@ cluster_with_centers <- function(data, centers) {
 
 #' @rdname cluster_with_centers
 #'
-#' @param n the number of cluster centers to create
-#' @param seed a random seed for reproducability
+#' @param n the number of cluster centres to create
+#' @param seed a random seed for reproducibility
 #'
 #' @export
 

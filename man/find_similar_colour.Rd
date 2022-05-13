@@ -11,8 +11,8 @@ find_similar_colour(
 )
 }
 \arguments{
-\item{colour}{a colour specified in one of three forms: a hexidecimal string
-of the form "#rrggbb" or "#rrggbbaa", a numeric vector of length 3 or a
+\item{colour}{a colour specified in one of three forms: a hexadecimal string
+of the form \code{"#rrggbb"} or \code{"#rrggbbaa"}, a numeric vector of length 3 or a
 numeric matrix with dimensions \code{c(3, 1)}, as it is returned by
 \code{\link[=col2rgb]{col2rgb()}}.
 Numeric values must be between 0 and 255.}

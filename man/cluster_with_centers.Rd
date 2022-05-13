@@ -3,7 +3,7 @@
 \name{cluster_with_centers}
 \alias{cluster_with_centers}
 \alias{init_rand_centers}
-\title{Cluster Data According to Centers and Recompute Centers}
+\title{Cluster Data According to Centres and Recompute Centres}
 \usage{
 cluster_with_centers(data, centers)
 
@@ -13,38 +13,38 @@ init_rand_centers(data, n, seed = sample(1000:9999, 1))
 \item{data}{a data.frame containing only the variables to be used for
 clustering.}
 
-\item{centers}{a data.frame giving the centers of the clusters. It must have
+\item{centers}{a data.frame giving the centres of the clusters. It must have
 the same number of columns as \code{data}.}
 
-\item{n}{the number of cluster centers to create}
+\item{n}{the number of cluster centres to create}
 
-\item{seed}{a random seed for reproducability}
+\item{seed}{a random seed for reproducibility}
 }
 \value{
-a list containing two Tibbles:
+a list containing two tibbles:
 \itemize{
-\item \code{centers}: the new centers of the clusters computet after cluster assignment
-with the given centers.
-\item \code{cluster}: the cluster assignment for each point in \code{data} unsing the
-centers that were passed to the function
+\item \code{centers}: the new centres of the clusters computed after cluster assignment
+with the given centres
+\item \code{cluster}: the cluster assignment for each point in \code{data} using the
+centres that were passed to the function
 }
 }
 \description{
-For a given dataset and given centers, \code{cluster_with_centers()}
-assigns each data point to its closest center and then recomputes
-the centers as the mean of all points assigned to each class. An initial
-set of random cluster centers can be obtained with \code{init_rand_centers()}.
-These functions can be used to visualise the mechanism of kMeans.
+For a given dataset and given centres, \code{cluster_with_centers()}
+assigns each data point to its closest centre and then recomputes
+the centres as the mean of all points assigned to each class. An initial
+set of random cluster centres can be obtained with \code{init_rand_centers()}.
+These functions can be used to visualise the mechanism of k-means.
 }
 \examples{
-# demonstrate kMeans with iris data
+# demonstrate k-means with iris data
 # keep the relevant columns
 iris2 <- iris[, c("Sepal.Length", "Petal.Length")]
 
-# initialise the cluster centers
+# initialise the cluster centres
 clust <- init_rand_centers(iris2, n = 3, seed = 2435)
 
-# plot the data with the cluster centers
+# plot the data with the cluster centres
 library(ggplot2)
 ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
  geom_point(data = clust$centers, aes(colour = factor(1:3)),
@@ -52,7 +52,7 @@ ggplot(iris2, aes(x = Sepal.Length, y = Petal.Length)) +
  geom_point() +
  scale_colour_brewer(palette = "Set1")
 
-# assign clusters and compute new centers
+# assign clusters and compute new centres
 clust_new <- cluster_with_centers(iris2, clust$centers)
 
 # plot the data with clustering
@@ -60,7 +60,7 @@ clust$cluster <- clust_new$cluster
 voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
                 data = iris2)
 
-# plot the data with new cluster centers
+# plot the data with new cluster centres
 clust$centers <- clust_new$centers
 voronoi_diagram(clust, x = "Sepal.Length", y = "Petal.Length",
                 data = iris2, colour_data = FALSE)

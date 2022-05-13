@@ -2,8 +2,8 @@
 #'
 #' Find the named colour that is most similar to a given colour.
 #'
-#' @param colour a colour specified in one of three forms: a hexidecimal string
-#'  of the form "#rrggbb" or "#rrggbbaa", a numeric vector of length 3 or a
+#' @param colour a colour specified in one of three forms: a hexadecimal string
+#'  of the form `"#rrggbb"` or `"#rrggbbaa"`, a numeric vector of length 3 or a
 #'  numeric matrix with dimensions `c(3, 1)`, as it is returned by
 #'  [`col2rgb()`].
 #'  Numeric values must be between 0 and 255.
