@@ -19,7 +19,7 @@ mark points and shade the area under the curve."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ibawds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0.9006</span>
       </span>
     </div>
 
@@ -82,25 +82,39 @@ mark points and shade the area under the curve.</p>
     <dl><dt>fun</dt>
 <dd><p>a density or distribution function that takes
 quantiles as its first argument.</p></dd>
+
+
 <dt>range</dt>
 <dd><p>numeric vector of length two giving the
 range of quantiles to be plotted.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments that are passed to <code>fun()</code>.</p></dd>
+
+
 <dt>points</dt>
 <dd><p>numeric vector giving quantiles where the
 function should be marked with a red dot (continuous) or a red bar
 (discrete).</p></dd>
+
+
 <dt>var</dt>
 <dd><p>character giving the name of the quantile
 variable. This is only used to label the axes.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>character giving the title of the plot</p></dd>
+
+
 <dt>is_discrete</dt>
 <dd><p>logical indicating whether this is a discrete distribution.
 For discrete distributions, a bar plot is created. If omitted, the function
 tries to automatically determine, whether the distributions is discrete.
 In case this should fail, set this argument explicitly.</p></dd>
+
+
 <dt>from, to</dt>
 <dd><p>numeric values giving start and end of a
 range where the area under the density will be shaded (continuous)
@@ -108,10 +122,13 @@ or the bars will be drawn in red (discrete).
 If only one of the two values is given, the shading
 will start at negative infinity or go until positive infinity,
 respectively.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <code>ggplot</code> object</p>
+    
+
+<p>a <code>ggplot</code> object</p>
     </div>
 
     <div id="ref-examples">
@@ -143,7 +160,7 @@ respectively.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
