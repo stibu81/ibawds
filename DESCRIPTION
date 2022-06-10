@@ -40,6 +40,7 @@ Suggests:
     patchwork,
     ggrepel,
     GGally,
+    ggfortify,
     deldir,
     writexl,
     cowplot,
