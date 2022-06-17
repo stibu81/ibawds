@@ -10,8 +10,6 @@ A data frame with 32 rows and 12 variables. The format is identical
 to \code{\link{mtcars}} and details can be found in its documentation. The only
 difference is that the car model names are stored in the column \code{model}
 instead of the row names.
-
-
 }
 \usage{
 mtcars2

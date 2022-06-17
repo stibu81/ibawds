@@ -18,7 +18,7 @@
 "mtcars2"
 
 #' @rdname mtcars2
-#' @format
+#' @format NULL
 
 "mtcars2_na"
 
@@ -81,7 +81,7 @@
 "galton_sons"
 
 #' @rdname galton_sons
-#' @format
+#' @format NULL
 
 "galton_daughters"
 

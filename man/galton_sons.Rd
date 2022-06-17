@@ -12,8 +12,6 @@ respectively, and 2 variables:
 \item{father}{size of the father in cm.}
 \item{son/daughter}{size of the son or daughter, respectively, in cm.}
 }
-
-
 }
 \usage{
 galton_sons
