@@ -5,7 +5,7 @@ test_that("check get_required_packages()", {
             "ggplot2", "scales", "dplyr", "stringr", "magrittr", "deldir",
             "kableExtra", "tidyverse", "rmarkdown", "caret", "reshape2",
             "lubridate", "ggrepel", "writexl", "cowplot", "DT", "gutenbergr",
-            "tidytext", "rvest", "Lahman", "pdftools", "HistData", "titanic",
+            "tidytext", "rvest", "Lahman", "HistData", "titanic",
             "BiocManager", "waldo", "cluster", "ggfortify",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger")
   expect_true(all(pkgs %in% req_pkgs))
