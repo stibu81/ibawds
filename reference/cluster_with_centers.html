@@ -18,7 +18,7 @@ These functions can be used to visualise the mechanism of k-means."><!-- mathjax
     
     <a class="navbar-brand me-2" href="../index.html">ibawds</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,9 @@ These functions can be used to visualise the mechanism of k-means.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cluster_with_centers</span><span class="op">(</span><span class="va">data</span>, <span class="va">centers</span><span class="op">)</span>
-
-<span class="fu">init_rand_centers</span><span class="op">(</span><span class="va">data</span>, <span class="va">n</span>, seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">:</span><span class="fl">9999</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cluster_with_centers</span><span class="op">(</span><span class="va">data</span>, <span class="va">centers</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">init_rand_centers</span><span class="op">(</span><span class="va">data</span>, <span class="va">n</span>, seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">:</span><span class="fl">9999</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -97,39 +97,39 @@ centres that were passed to the function</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># demonstrate k-means with iris data</span></span>
-<span class="r-in"><span class="co"># keep the relevant columns</span></span>
-<span class="r-in"><span class="va">iris2</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># initialise the cluster centres</span></span>
-<span class="r-in"><span class="va">clust</span> <span class="op">&lt;-</span> <span class="fu">init_rand_centers</span><span class="op">(</span><span class="va">iris2</span>, n <span class="op">=</span> <span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">2435</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot the data with the cluster centres</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iris2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in"> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">clust</span><span class="op">$</span><span class="va">centers</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">            shape <span class="op">=</span> <span class="fl">18</span>, size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in"> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in"> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># demonstrate k-means with iris data</span></span></span>
+<span class="r-in"><span><span class="co"># keep the relevant columns</span></span></span>
+<span class="r-in"><span><span class="va">iris2</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># initialise the cluster centres</span></span></span>
+<span class="r-in"><span><span class="va">clust</span> <span class="op">&lt;-</span> <span class="fu">init_rand_centers</span><span class="op">(</span><span class="va">iris2</span>, n <span class="op">=</span> <span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">2435</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot the data with the cluster centres</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">iris2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">clust</span><span class="op">$</span><span class="va">centers</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            shape <span class="op">=</span> <span class="fl">18</span>, size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="cluster_with_centers-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># assign clusters and compute new centres</span></span>
-<span class="r-in"><span class="va">clust_new</span> <span class="op">&lt;-</span> <span class="fu">cluster_with_centers</span><span class="op">(</span><span class="va">iris2</span>, <span class="va">clust</span><span class="op">$</span><span class="va">centers</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot the data with clustering</span></span>
-<span class="r-in"><span class="va">clust</span><span class="op">$</span><span class="va">cluster</span> <span class="op">&lt;-</span> <span class="va">clust_new</span><span class="op">$</span><span class="va">cluster</span></span>
-<span class="r-in"><span class="fu"><a href="voronoi_diagram.html">voronoi_diagram</a></span><span class="op">(</span><span class="va">clust</span>, x <span class="op">=</span> <span class="st">"Sepal.Length"</span>, y <span class="op">=</span> <span class="st">"Petal.Length"</span>,</span>
-<span class="r-in">                data <span class="op">=</span> <span class="va">iris2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># assign clusters and compute new centres</span></span></span>
+<span class="r-in"><span><span class="va">clust_new</span> <span class="op">&lt;-</span> <span class="fu">cluster_with_centers</span><span class="op">(</span><span class="va">iris2</span>, <span class="va">clust</span><span class="op">$</span><span class="va">centers</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot the data with clustering</span></span></span>
+<span class="r-in"><span><span class="va">clust</span><span class="op">$</span><span class="va">cluster</span> <span class="op">&lt;-</span> <span class="va">clust_new</span><span class="op">$</span><span class="va">cluster</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="voronoi_diagram.html">voronoi_diagram</a></span><span class="op">(</span><span class="va">clust</span>, x <span class="op">=</span> <span class="st">"Sepal.Length"</span>, y <span class="op">=</span> <span class="st">"Petal.Length"</span>,</span></span>
+<span class="r-in"><span>                data <span class="op">=</span> <span class="va">iris2</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="cluster_with_centers-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot the data with new cluster centres</span></span>
-<span class="r-in"><span class="va">clust</span><span class="op">$</span><span class="va">centers</span> <span class="op">&lt;-</span> <span class="va">clust_new</span><span class="op">$</span><span class="va">centers</span></span>
-<span class="r-in"><span class="fu"><a href="voronoi_diagram.html">voronoi_diagram</a></span><span class="op">(</span><span class="va">clust</span>, x <span class="op">=</span> <span class="st">"Sepal.Length"</span>, y <span class="op">=</span> <span class="st">"Petal.Length"</span>,</span>
-<span class="r-in">                data <span class="op">=</span> <span class="va">iris2</span>, colour_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot the data with new cluster centres</span></span></span>
+<span class="r-in"><span><span class="va">clust</span><span class="op">$</span><span class="va">centers</span> <span class="op">&lt;-</span> <span class="va">clust_new</span><span class="op">$</span><span class="va">centers</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="voronoi_diagram.html">voronoi_diagram</a></span><span class="op">(</span><span class="va">clust</span>, x <span class="op">=</span> <span class="st">"Sepal.Length"</span>, y <span class="op">=</span> <span class="st">"Petal.Length"</span>,</span></span>
+<span class="r-in"><span>                data <span class="op">=</span> <span class="va">iris2</span>, colour_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="cluster_with_centers-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># this procedure may be repeated until the algorithm converges</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># this procedure may be repeated until the algorithm converges</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -141,7 +141,7 @@ centres that were passed to the function</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer></div>
