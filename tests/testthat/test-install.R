@@ -7,7 +7,7 @@ test_that("check get_required_packages()", {
             "lubridate", "ggrepel", "writexl", "cowplot", "DT", "gutenbergr",
             "tidytext", "rvest", "Lahman", "pdftools", "HistData", "titanic",
             "BiocManager", "waldo", "cluster", "ggfortify",
-            "knitr", "hexbin", "patchwork", "GGally")
+            "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger")
   expect_true(all(pkgs %in% req_pkgs))
   expect_false(any(c("R", "testthat", "usethis", "vdiffr", "covr") %in% req_pkgs))
 })

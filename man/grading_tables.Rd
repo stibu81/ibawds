@@ -21,9 +21,9 @@ create_grading_table(p_text, p_tab, p_plot, p_code, p_stat)
 
 \item{n_stat}{integer, number of statistical computations}
 
-\item{p_text}{numeric between 0 and 5, points given for the text}
+\item{p_text}{numeric between 0 and 3, points given for the text}
 
-\item{p_tab}{numeric between 0 and 5, points given for the tables}
+\item{p_tab}{numeric between 0 and 3, points given for the tables}
 
 \item{p_plot}{numeric between 0 and 5, points given for the plots}
 

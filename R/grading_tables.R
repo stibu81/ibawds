@@ -8,8 +8,8 @@
 #' @param n_plot_kinds integer, number of different kinds of plots
 #' @param n_plots integer, number of plots
 #' @param n_stat integer, number of statistical computations
-#' @param p_text numeric between 0 and 5, points given for the text
-#' @param p_tab numeric between 0 and 5, points given for the tables
+#' @param p_text numeric between 0 and 3, points given for the text
+#' @param p_tab numeric between 0 and 3, points given for the tables
 #' @param p_plot numeric between 0 and 5, points given for the plots
 #' @param p_code numeric between 0 and 5, points given for the code
 #' @param p_stat numeric between 0 and 5, points given for the
@@ -89,7 +89,7 @@ create_grading_table <- function(p_text, p_tab, p_plot, p_code, p_stat) {
   rlang::check_installed("kableExtra")
 
   points <- c(p_text, p_tab, p_plot, p_code, p_stat)
-  max <- c(5, 5, 5, 5, 5)
+  max <- c(3, 3, 5, 5, 5)
 
   if (any(points < 0 | points > max)) {
     stop("invalid points")
@@ -99,12 +99,13 @@ create_grading_table <- function(p_text, p_tab, p_plot, p_code, p_stat) {
     Titel = c("Text", "Tabellen", "Plots", "Code", "Stat. Auswertungen"),
     Punkte = points,
     Von = max,
-    Prozent = scales::percent(.data$Punkte / .data$Von)
+    Prozent = scales::label_percent(accuracy = 1)(.data$Punkte / .data$Von)
   ) %>%
     dplyr::bind_rows(
-      dplyr::tibble(Titel = "Total", Punkte = sum(.$Punkte),
-                    Von = sum(.$Von),
-                    Prozent = scales::percent(.data$Punkte / .data$Von))
+      dplyr::tibble(
+        Titel = "Total", Punkte = sum(.$Punkte),
+        Von = sum(.$Von),
+        Prozent = scales::label_percent(accuracy = 1)(.data$Punkte / .data$Von))
     ) %>%
     kableExtra::kable(format = "html") %>%
     kableExtra::kable_styling() %>%
