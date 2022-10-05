@@ -4,7 +4,7 @@ test_that("check get_required_packages()", {
   pkgs <- c("dslabs", "stats", "grDevices", "methods", "rlang",
             "ggplot2", "scales", "dplyr", "stringr", "magrittr", "deldir",
             "kableExtra", "tidyverse", "rmarkdown", "caret", "reshape2",
-            "lubridate", "ggrepel", "writexl", "cowplot", "DT", "gutenbergr",
+            "lubridate", "ggrepel", "writexl", "cowplot", "DT",
             "tidytext", "rvest", "Lahman", "HistData", "titanic",
             "BiocManager", "waldo", "cluster", "ggfortify",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger")
