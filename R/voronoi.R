@@ -211,7 +211,7 @@ cluster_with_centers <- function(data, centers) {
 
   centers <- clustered %>%
     dplyr::group_by(.data$cluster) %>%
-    dplyr::summarise(dplyr::across(.fns = mean)) %>%
+    dplyr::summarise(dplyr::across(.cols = dplyr::everything(), .fns = mean)) %>%
     dplyr::select(-"cluster")
 
   list(centers = centers, cluster = clustered$cluster)
@@ -236,6 +236,7 @@ init_rand_centers <- function(data, n, seed = sample(1000:9999, 1)) {
 
   centers <- data %>% dplyr::summarise(
     dplyr::across(
+      .cols = dplyr::everything(),
       .fns = function(x) stats::runif(n, min(x), max(x))
     )
   )
