@@ -98,7 +98,7 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
       dplyr::as_tibble(tile[c("x", "y")])
     }) %>%
     dplyr::bind_rows(.id = ".cluster") %>%
-    dplyr::rename(!!x := .data$x, !!y := .data$y) %>%
+    dplyr::rename(!!x := "x", !!y := "y") %>%
     dplyr::mutate(.cluster = stringr::str_remove(.data$.cluster, "^pt."))
 
   # create the Voronoi diagram without data points
