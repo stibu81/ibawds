@@ -103,9 +103,9 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 
   # create the Voronoi diagram without data points
   plot <- centers %>%
-    ggplot2::ggplot(ggplot2::aes_string(x, y,
-                                        fill = ".cluster",
-                                        colour = ".cluster")) +
+    ggplot2::ggplot(ggplot2::aes(.data[[x]], .data[[y]],
+                                 fill = .data$.cluster,
+                                 colour = .data$.cluster)) +
     ggplot2::geom_polygon(data = polys,
                           colour = "black", alpha = 0.8,
                           linewidth = linewidth) +

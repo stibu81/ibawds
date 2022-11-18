@@ -89,7 +89,7 @@ distribution_plot <- function(fun, range, ...,
   # continuous plot #####
   } else {
     plot <- dplyr::tibble(x = range) %>%
-      ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
+      ggplot2::ggplot(ggplot2::aes(x = .data$x)) +
       ggplot2::stat_function(fun = pfun, linewidth = 0.8) +
       ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1))
 
@@ -174,7 +174,7 @@ density_plot <- function(fun, range, ...,
   # continuous plot #####
   } else {
     plot <- dplyr::tibble(x = range) %>%
-      ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
+      ggplot2::ggplot(ggplot2::aes(x = .data$x)) +
       ggplot2::stat_function(fun = dfun, linewidth = 0.8) +
       ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1))
 
