@@ -108,7 +108,7 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
                                         colour = ".cluster")) +
     ggplot2::geom_polygon(data = polys,
                           colour = "black", alpha = 0.8,
-                          lwd = linewidth) +
+                          linewidth = linewidth) +
     ggplot2::geom_point(shape = 18, size = 3 * point_size) +
     ggplot2::scale_fill_brewer(palette = "Pastel1", guide = "none") +
     ggplot2::scale_colour_brewer(palette = "Set1",

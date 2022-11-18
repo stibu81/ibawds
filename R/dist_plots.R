@@ -81,7 +81,7 @@ distribution_plot <- function(fun, range, ...,
             # subtract 0.45 to avoid changing the extent of the x-axis
             x = c(min(range) - 0.45, px), y = c(py, py),
             alpha = 0.6, linetype = "dashed",
-            colour = "red", size = 0.7
+            colour = "red", linewidth = 0.7
           )
       }
     }
@@ -90,7 +90,7 @@ distribution_plot <- function(fun, range, ...,
   } else {
     plot <- dplyr::tibble(x = range) %>%
       ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
-      ggplot2::stat_function(fun = pfun, size = 0.8) +
+      ggplot2::stat_function(fun = pfun, linewidth = 0.8) +
       ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1))
 
     if (!is.null(points)) {
@@ -100,7 +100,7 @@ distribution_plot <- function(fun, range, ...,
           ggplot2::annotate("line",
                             x = c(min(range), px, px), y = c(py, py, 0),
                             alpha = 0.6, linetype = "dashed",
-                            colour = "red", size = 0.7) +
+                            colour = "red", linewidth = 0.7) +
           ggplot2::annotate("point", x = px, y = py,
                             colour = "red", size = 3)
       }
@@ -175,7 +175,7 @@ density_plot <- function(fun, range, ...,
   } else {
     plot <- dplyr::tibble(x = range) %>%
       ggplot2::ggplot(ggplot2::aes_(x = ~x)) +
-      ggplot2::stat_function(fun = dfun, size = 0.8) +
+      ggplot2::stat_function(fun = dfun, linewidth = 0.8) +
       ggplot2::scale_x_continuous(breaks = seq(min(range), max(range), by = 1))
 
     # add area, if requestd
@@ -196,7 +196,7 @@ density_plot <- function(fun, range, ...,
           ggplot2::annotate("line",
                             x = c(min(range), px, px), y = c(py, py, 0),
                             alpha = 0.6, linetype = "dashed",
-                            colour = "red", size = 0.7) +
+                            colour = "red", linewidth = 0.7) +
           ggplot2::annotate("point", x = px, y = py,
                             colour = "red", size = 3)
       }
