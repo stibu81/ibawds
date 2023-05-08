@@ -234,7 +234,7 @@ init_rand_centers <- function(data, n, seed = sample(1000:9999, 1)) {
 
   set.seed(seed)
 
-  centers <- data %>% dplyr::summarise(
+  centers <- data %>% dplyr::reframe(
     dplyr::across(
       .cols = dplyr::everything(),
       .fns = function(x) stats::runif(n, min(x), max(x))

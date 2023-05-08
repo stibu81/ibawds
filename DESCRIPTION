@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 0.5.0.9006
+Version: 0.5.0.9007
 Author: Stefan Lanz
 Maintainer: Stefan Lanz <slanz1137@gmail.com>
 Description: A collection of useful functions and datasets for the Data Science
@@ -25,7 +25,7 @@ Imports:
   remotes,
   ggplot2,
   scales,
-  dplyr,
+  dplyr (>= 1.1.0),
   stringr,
   magrittr
 Suggests:
