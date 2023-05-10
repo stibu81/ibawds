@@ -24,6 +24,10 @@ R version according to the snapshot of \url{https://cran.r-project.org} on
 \href{https://mran.microsoft.com}{MRAN}.
 }
 \details{
+\strong{Note:} MRAN will shutdown on July 1 and this function will stop
+working by then. It seems that no new snapshots are taken since
+2023-03-07, such that only dates before that will work.
+
 MRAN has data starting from September 17 2014. Data for a few selected dates
 before September 17 2014 can be obtained from the dataset
 \href{https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages}{\code{CRANpackages}}

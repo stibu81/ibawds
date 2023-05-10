@@ -18,9 +18,12 @@ if (initialise) {
 # get number of available CRAN packages from MRAN for every quarter
 # since 2014-10-01. Do not redownload the quarters that are already
 # available in the package
+# MRAN stopped working in 2023. There is no data for 2023-04-01, the latest
+# data I found is on 2023-03-06
 start_date <- as.Date("2014-10-01")
-dates <- seq(start_date, lubridate::today(), by = "3 months") %>%
+dates <- seq(start_date, as.Date("2023-01-01"), by = "3 months") %>%
   as.character %>%
+  c("2023-03-06") %>%
   setdiff(as.character(cran_history$date)) %>%
   as.Date()
 

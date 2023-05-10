@@ -5,6 +5,10 @@
 #' R version according to the snapshot of <https://cran.r-project.org> on
 #' [MRAN](https://mran.microsoft.com).
 #'
+#' **Note:** MRAN will shutdown on July 1 and this function will stop
+#'  working by then. It seems that no new snapshots are taken since
+#'  2023-03-07, such that only dates before that will work.
+#'
 #' @param date the date of the snapshot to be used. It can be a `Date` object
 #'  or a character in the format `%Y-%m-%d`.
 #'
