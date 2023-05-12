@@ -1,27 +1,17 @@
-#' Number of Available R Packages and R Versions from MRAN
+#' Number of Available R Packages and R Versions from CRAN
 #'
-#' MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
-#' These functions return the number of available packages and the available
-#' R version according to the snapshot of <https://cran.r-project.org> on
-#' [MRAN](https://mran.microsoft.com).
+#' Obtain the number of available packages on CRAN and the current R version.
 #'
-#' **Note:** MRAN will shutdown on July 1 and this function will stop
-#'  working by then. It seems that no new snapshots are taken since
-#'  2023-03-07, such that only dates before that will work.
-#'
-#' @param date the date of the snapshot to be used. It can be a `Date` object
-#'  or a character in the format `%Y-%m-%d`.
+#' @param cran character vector giving the base URL of the CRAN server to use.
 #'
 #' @details
-#' MRAN has data starting from September 17 2014. Data for a few selected dates
-#' before September 17 2014 can be obtained from the dataset
-#' [`CRANpackages`](https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages)
-#' from the package [`Ecdat`](https://cran.r-project.org/package=Ecdat).
-#' A more complete dataset ranging from 2001 until
-#' today is included in the package as [`cran_history`].
+#' The number of packages on CRAN and the R version can be obtained for selected
+#' dates in the past from the dataset [`cran_history`].
 #'
-#' Note that for some dates there is no snapshot on MRAN. The function will
-#' return an error in those cases.
+#' **Note:** Previously, these functions could obtain the number of packages on
+#' CRAN and the then current R version also for past dates by using snapshots
+#' from Microsoft's MRAN. However, MRAN shut down on 1 July 2023 such that this
+#' functionality is no longer available.
 #'
 #' @return
 #' the number of available packages as an integer or the R version number as
@@ -31,8 +21,8 @@
 #'
 #' @export
 
-n_available_packages <- function(date = Sys.Date()) {
-  get_mran_page(date, "packages") %>%
+n_available_packages <- function(cran = getOption("repos")) {
+  get_cran_page(cran, "packages") %>%
     stringr::str_subset("repository features \\d+ available packages") %>%
     stringr::str_extract("(?<=features )\\d+(?= available)") %>%
     as.integer()
@@ -42,36 +32,20 @@ n_available_packages <- function(date = Sys.Date()) {
 #' @rdname n_available_packages
 #' @export
 
-available_r_version <- function(date = Sys.Date()) {
-  get_mran_page(date, "main") %>%
+available_r_version <- function(cran = getOption("repos")) {
+  get_cran_page(cran, "main") %>%
     stringr::str_subset("R-[0-9.]+\\.tar\\.gz") %>%
     stringr::str_extract("(?<=R-)[0-9.]+(?=\\.tar\\.gz)")
 }
 
-# helper function to download a page from MRAN
-get_mran_page <- function(date, type) {
-
-  if (is.character(date)) date <- try(as.Date(date), silent = TRUE)
-
-  if (!methods::is(date, "Date")) {
-    stop(deparse(substitute(date)), " is not a valid date.")
-  }
-
-  # MRAN goes back to 2014-09-17
-  if (date < as.Date("2014-09-17")) {
-    stop("MRAN has no data for dates before 2014-09-17.\n",
-         "Data for some older dates can be ",
-         "obtained from Ecdat::CRANpackages.")
-  }
-  if (date > Sys.Date()) {
-    stop("MRAN has no data for dates in the future.")
-  }
+# helper function to download a page from CRAN
+get_cran_page <- function(cran, type) {
 
   # determine the url and download
   url <- if (type == "packages") {
-    paste0("https://cran.microsoft.com/snapshot/", date, "/web/packages/")
+    paste0(cran, "/web/packages/")
   } else if (type == "main") {
-    paste0("https://cran.microsoft.com/snapshot/", date, "/banner.shtml")
+    paste0(cran, "/banner.shtml")
   } else {
     stop("invalid value for type")
   }
@@ -81,7 +55,7 @@ get_mran_page <- function(date, type) {
     error = function(e) {
       stop(
         simpleError(
-          paste("Obtaining data from MRAN failed with error:",
+          paste("Obtaining data from CRAN failed with error:",
                 conditionMessage(e)),
           call = sys.call(-4)
         )

@@ -3,40 +3,30 @@
 \name{n_available_packages}
 \alias{n_available_packages}
 \alias{available_r_version}
-\title{Number of Available R Packages and R Versions from MRAN}
+\title{Number of Available R Packages and R Versions from CRAN}
 \usage{
-n_available_packages(date = Sys.Date())
+n_available_packages(cran = getOption("repos"))
 
-available_r_version(date = Sys.Date())
+available_r_version(cran = getOption("repos"))
 }
 \arguments{
-\item{date}{the date of the snapshot to be used. It can be a \code{Date} object
-or a character in the format \verb{\%Y-\%m-\%d}.}
+\item{cran}{character vector giving the base URL of the CRAN server to use.}
 }
 \value{
 the number of available packages as an integer or the R version number as
 a character
 }
 \description{
-MRAN has an archive of Snapshots of CRAN dating back to September 17 2014.
-These functions return the number of available packages and the available
-R version according to the snapshot of \url{https://cran.r-project.org} on
-\href{https://mran.microsoft.com}{MRAN}.
+Obtain the number of available packages on CRAN and the current R version.
 }
 \details{
-\strong{Note:} MRAN will shutdown on July 1 and this function will stop
-working by then. It seems that no new snapshots are taken since
-2023-03-07, such that only dates before that will work.
+The number of packages on CRAN and the R version can be obtained for selected
+dates in the past from the dataset \code{\link{cran_history}}.
 
-MRAN has data starting from September 17 2014. Data for a few selected dates
-before September 17 2014 can be obtained from the dataset
-\href{https://www.rdocumentation.org/packages/Ecdat/versions/0.3-9/topics/CRANpackages}{\code{CRANpackages}}
-from the package \href{https://cran.r-project.org/package=Ecdat}{\code{Ecdat}}.
-A more complete dataset ranging from 2001 until
-today is included in the package as \code{\link{cran_history}}.
-
-Note that for some dates there is no snapshot on MRAN. The function will
-return an error in those cases.
+\strong{Note:} Previously, these functions could obtain the number of packages on
+CRAN and the then current R version also for past dates by using snapshots
+from Microsoft's MRAN. However, MRAN shut down on 1 July 2023 such that this
+functionality is no longer available.
 }
 \seealso{
 \code{\link{cran_history}}

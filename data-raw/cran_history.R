@@ -1,41 +1,17 @@
 library(ibawds)
 library(dplyr)
 
-# set initialise to TRUE in order to create the data set from scratch
-initialise <- FALSE
+cran_history <- ibawds::cran_history
 
-if (initialise) {
-  # data until 2014-04-13 comes from Ecdat. This data is licenced under GPL-3.
-  cran_history <- Ecdat::CRANpackages %>%
-    dplyr::as_tibble() %>%
-    dplyr::select(date = "Date", n_packages = "Packages",
-                  version = "Version", source = "Source") %>%
-    dplyr::mutate(source = stringr::str_trim(.data$source))
-} else {
-  cran_history <- ibawds::cran_history
-}
-
-# get number of available CRAN packages from MRAN for every quarter
-# since 2014-10-01. Do not redownload the quarters that are already
-# available in the package
-# MRAN stopped working in 2023. There is no data for 2023-04-01, the latest
-# data I found is on 2023-03-06
-start_date <- as.Date("2014-10-01")
-dates <- seq(start_date, as.Date("2023-01-01"), by = "3 months") %>%
-  as.character %>%
-  c("2023-03-06") %>%
-  setdiff(as.character(cran_history$date)) %>%
-  as.Date()
-
-if (length(dates) == 0) {
-  stop("There is no new data to download.", call. = FALSE)
+if (Sys.Date() %in% cran_history$date) {
+  stop("Data for today has already been collected.")
 }
 
 cran_history_new <- tibble(
-  date = dates,
-  n_packages = vapply(dates, n_available_packages, integer(1)),
-  version = vapply(dates, available_r_version, character(1)),
-  source = "MRAN"
+  date = Sys.Date(),
+  n_packages = n_available_packages(),
+  version = available_r_version(),
+  source = "CRAN"
 )
 
 cran_history <- bind_rows(cran_history, cran_history_new)

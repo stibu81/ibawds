@@ -265,9 +265,14 @@
 #' Table with the number of packages available on CRAN and the current R version
 #' for historic dates back to 21 June 2001.
 #'
-#' @format Data frame with 25 rows and 10 variables. The first column (`Country`)
-#'  indicates the name of the country, the other columns indicate protein
-#'  consumption from nine sources sources in unknown units.
+#' @format A data frame with `r nrow(cran_history)` rows and
+#'  `r ncol(cran_history)` variables.
+#' \describe{
+#'   \item{date}{date}
+#'   \item{n_packages}{the number of available R packages on CRAN}
+#'   \item{version}{the then current version of R}
+#'   \item{source}{source of the data (see 'Details')}
+#' }
 #'
 #' @details
 #' Data on the number of packages on CRAN between 2001-06-21 and 2014-04-13
@@ -276,13 +281,17 @@
 #' from the package [`Ecdat`](https://cran.r-project.org/package=Ecdat).
 #' This data was collected by John Fox and Spencer Graves.
 #' Intervals between data points are irregularly spaced. These data are
-#' marked with `John Fox` or `Spencer Graves` in the column `source`.
+#' marked with "John Fox" or "Spencer Graves" in the column `source`.
 #' They are licenced under GPL-2/GPL-3.
 #'
-#' Newer data was obtained using the functions [`n_available_packages()`] and
-#' [`available_r_version()`] which extract the information from CRAN snapshots
-#' on MRAN. One data point per quarter is available starting on 2014-10-01.
-#' These data are marked with `MRAN` in the column `source`.
+#' Data between 2014-10-01 and 2023-03-06 was collected by the package author
+#' from CRAN snapshots on Microsoft's MRAN, which was retired on 1 July 2023.
+#' Data was collected on the first day of each quarter.
+#' These data are marked with "MRAN" in the column `source`.
+#'
+#' Newer data has been collected in irregular intervals using the functions
+#' [`n_available_packages()`] and [`available_r_version()`].
+#' These data are marked with "CRAN" in the column `source`.
 #'
 #' @examples
 #' library(ggplot2)
