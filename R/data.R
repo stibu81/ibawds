@@ -189,7 +189,7 @@
 #'
 #' @source
 #' The data is available on the
-#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/ml/datasets/wine+quality).
+#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/dataset/186/wine+quality).
 #'
 #' P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis,
 #' *Modeling wine preferences by data mining from physicochemical properties*,
@@ -224,7 +224,7 @@
 #'
 #' @source
 #' The data is available on the
-#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+original).
+#' [UC Irvine Machine Learning Repository](https://archive-beta.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original).
 #'
 #' O. L. Mangasarian and W. H. Wolberg, *Cancer diagnosis via linear programming*,
 #' SIAM News, Volume 23(5) (1990) 1 & 18.

@@ -25,7 +25,7 @@ by sensory analysis.}
 }
 \source{
 The data is available on the
-\href{https://archive-beta.ics.uci.edu/ml/datasets/wine+quality}{UC Irvine Machine Learning Repository}.
+\href{https://archive-beta.ics.uci.edu/dataset/186/wine+quality}{UC Irvine Machine Learning Repository}.
 
 P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis,
 \emph{Modeling wine preferences by data mining from physicochemical properties},

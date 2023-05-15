@@ -23,7 +23,7 @@ integers in the range 1 to 10.
 }
 \source{
 The data is available on the
-\href{https://archive-beta.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+original}{UC Irvine Machine Learning Repository}.
+\href{https://archive-beta.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original}{UC Irvine Machine Learning Repository}.
 
 O. L. Mangasarian and W. H. Wolberg, \emph{Cancer diagnosis via linear programming},
 SIAM News, Volume 23(5) (1990) 1 & 18.
