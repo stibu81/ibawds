@@ -51,7 +51,7 @@ get_cran_page <- function(cran, type) {
   }
 
   tryCatch(
-    page <- readLines(url, n = 40),
+    page <- readLines(url, n = 80),
     error = function(e) {
       stop(
         simpleError(
