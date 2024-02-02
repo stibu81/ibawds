@@ -65,7 +65,7 @@ newer.
 We will use RStudio as our
 [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment)
 in the course. You can download it from this
-[link](https://www.rstudio.com/products/rstudio/download/#download). Usually,
+[link](https://posit.co/download/rstudio-desktop). Usually,
 it is easiest to use the installer for your operating system. 
 However, if you don't have admin access on your computer, you should instead
 download the appropriate zip-file / tarball. Under Windows, extract the zip-file
