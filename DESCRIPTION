@@ -47,6 +47,7 @@ Suggests:
     writexl,
     cowplot,
     DT,
+    gutenbergr,
     tidytext,
     Lahman,
     HistData,
