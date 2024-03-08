@@ -69,8 +69,8 @@
 #' randomly selecting one son or daughter per family. Since some families consist
 #' of only sons or only daughters, not all families are contained in both tables.
 #'
-#' @format Two data frames with 179 (`galton_sons`) or 176 (`galton_daughters`),
-#'  respectively, and 2 variables:
+#' @format Two data frames with 179 (`galton_sons`) or 176 (`galton_daughters`)$
+#'  rows, respectively, and 2 variables:
 #' \describe{
 #'   \item{father}{size of the father in cm.}
 #'   \item{son/daughter}{size of the son or daughter, respectively, in cm.}

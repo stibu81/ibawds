@@ -6,8 +6,8 @@
 \alias{galton_daughters}
 \title{Galton's data on the heights of fathers and their children}
 \format{
-Two data frames with 179 (\code{galton_sons}) or 176 (\code{galton_daughters}),
-respectively, and 2 variables:
+Two data frames with 179 (\code{galton_sons}) or 176 (\code{galton_daughters})$
+rows, respectively, and 2 variables:
 \describe{
 \item{father}{size of the father in cm.}
 \item{son/daughter}{size of the son or daughter, respectively, in cm.}
