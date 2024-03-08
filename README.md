@@ -18,8 +18,8 @@ coverage](https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg)](h
 
 ibawds provides useful functions and datasets for the [Data Science
 course at
-IBAW](https://ibaw.ch/bildungsangebote/it/data-science-ndk-hf/) in
-Lucerne.
+IBAW](https://ibaw.ch/bildungsangebote/informatik/coding-data-science/data-science-ndk-hf/)
+in Lucerne.
 
 ## Installation
 
@@ -57,7 +57,7 @@ you install version 4.0 or newer.
 We will use RStudio as our
 [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment)
 in the course. You can download it from this
-[link](https://posit.co/download/rstudio-desktop). Usually, it is
+[link](https://posit.co/download/rstudio-desktop/). Usually, it is
 easiest to use the installer for your operating system. However, if you
 don’t have admin access on your computer, you should instead download
 the appropriate zip-file / tarball. Under Windows, extract the zip-file
