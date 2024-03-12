@@ -3,7 +3,7 @@
 \docType{data}
 \name{noisy_data}
 \alias{noisy_data}
-\title{Noisy Data From a Tenth Order Polygon}
+\title{Noisy Data From a Tenth Order Polynomial}
 \format{
 a list of two tibbles with two columns each. \eqn{x} stands for the
 independent, \eqn{y} for the dependent variable. The training data
@@ -14,7 +14,7 @@ independent, \eqn{y} for the dependent variable. The training data
 noisy_data
 }
 \description{
-Training and test data create from a tenth order polynomial with added noise.
+Training and test data created from a tenth order polynomial with added noise.
 The polynomial is given by
 \deqn{f(x) = 2 x - 10 x^5 + 15 x^{10}}{f(x) = 2 x - 10 x^5 + 15 x^10}
 The noise follows a standard normal distribution. The data can be used to
