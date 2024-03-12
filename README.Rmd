@@ -24,8 +24,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 ibawds provides useful functions and datasets for the
-[Data Science course at IBAW](https://ibaw.ch/bildungsangebote/informatik/coding-data-science/data-science-ndk-hf/)
-in Lucerne.
+[Data Science course at IBAW](https://ibaw.ch/bildungsangebote/informatik/coding-data-science/data-science-ndk-hf/).
 
 
 ## Installation
