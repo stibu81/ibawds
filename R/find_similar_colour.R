@@ -65,12 +65,7 @@ find_similar_colour <- function(colour,
   cols_rgb <- grDevices::col2rgb(cols)
 
   # compute the distances and find the most similar colour
-  if (distance == "euclidean") {
-    dist <- apply(cols_rgb, 2, function(x) sum((x - col_rgb)^2))
-  } else {
-    dist <- apply(cols_rgb, 2, function(x) sum(abs(x - col_rgb)))
-  }
-  i_min <- which.min(dist)
+  i_min <- which_min_dist(col_rgb, cols_rgb, distance)
   sim_col <- cols[i_min]
 
   if (verbose) {
@@ -83,4 +78,17 @@ find_similar_colour <- function(colour,
 
   sim_col
 
+}
+
+
+# compute the distance between x and each value of y
+
+which_min_dist <- function(x, y, method) {
+  dist_fun <- if (method == "euclidean") {
+    function(z) sum((x - z)^2)
+  } else {
+    function(z) sum(abs(x - z))
+  }
+  apply(y, 2, dist_fun) %>%
+    which.min()
 }
