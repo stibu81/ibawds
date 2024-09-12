@@ -5,7 +5,7 @@
 \alias{cran_history}
 \title{History of the Number of Available CRAN Packages}
 \format{
-A data frame with 68 rows and
+A data frame with 69 rows and
 4 variables.
 \describe{
 \item{date}{date}
