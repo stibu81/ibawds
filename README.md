@@ -13,7 +13,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue)](http
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/stibu81/ibawds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/stibu81/ibawds?branch=master)
+coverage](https://codecov.io/gh/stibu81/ibawds/graph/badge.svg)](https://app.codecov.io/gh/stibu81/ibawds)
 <!-- badges: end -->
 
 ibawds provides useful functions and datasets for the [Data Science
