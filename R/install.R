@@ -32,6 +32,141 @@ install_ibawds <- function() {
 }
 
 
+# nocov start
+
+#' Check If the User Is Ready for the Course
+#'
+#' @description
+#' Check if the current system is ready for the course by verifying the
+#' following:
+#'
+#' * R and RStudio are up to date
+#' * the ibawds package is up to date
+#' * all the required packages are installed
+#'
+#' The function must be run from RStudio in order to run properly.
+#'
+#' @return
+#' a logical indicating whether the system is up to date (invisibly).
+#' Messages inform the user about the status of the system.
+#'
+#' @export
+
+check_ibawds_setup <- function() {
+
+  cli::cli_alert_info("Checking the setup for the course ...")
+  cli::cli_alert_info(paste("Operating system:", utils::osVersion))
+
+  ok <- TRUE
+
+  # check the R version: it should be at most 1 year old
+  r_date <- R.version.string %>%
+    stringr::str_extract("(?<=\\()\\d{4}-\\d{2}-\\d{2}(?=\\))") %>%
+    as.Date()
+  r_ver <- R.version.string %>%
+    stringr::str_extract("(?<=R version )\\d+\\.\\d+\\.\\d+")
+  if (Sys.Date() - r_date < 365) {
+    cli::cli_alert_success(paste("R is up to date:", r_ver))
+  } else {
+    cli::cli_alert_danger(paste("R is outdated:", r_ver))
+    cli::cli_alert_info(
+      c("Please install the current version from {.url https://cran.r-project.org/}")
+    )
+    ok <- FALSE
+  }
+
+  # check the RStudio version: it should be at most 1 year old
+  rs_ver <- tryCatch(
+    rstudioapi::versionInfo()$version,
+    error = function(e) NA_character_
+  )
+  if (is.na(rs_ver)) {
+    cli::cli_alert_danger("This function must be run from RStudio.")
+    cli::cli_alert_info(
+      c("If you don't have RStudio installed, please install it from ",
+        "{.url https://posit.co/download/rstudio-desktop/}")
+    )
+    ok <- FALSE
+  } else {
+    rs_date <- as.Date(paste0(rs_ver[1, 1], "-", rs_ver[1, 2], "-01"))
+    if (Sys.Date() - rs_date < 365) {
+      cli::cli_alert_success(paste("RStudio is up to date:", rs_ver))
+    } else {
+      cli::cli_alert_danger(paste("RStudio is outdated:", rs_ver))
+      cli::cli_alert_info(
+        c("Please install the current version from ",
+          "{.url https://posit.co/download/rstudio-desktop/}")
+      )
+      ok <- FALSE
+    }
+  }
+
+  # check that all packages are installed
+  required_packages <- get_required_packages()
+  pkg_installed <- suppressMessages(rlang::is_installed(required_packages))
+  if (!pkg_installed) {
+    cli::cli_alert_danger("Some required packages are not installed.")
+    cli::cli_alert_info(
+      c("Please run {.run [install_ibawds()](ibawds::install_ibawds())} ",
+        "to install them.")
+    )
+    ok <- FALSE
+  } else {
+    cli::cli_alert_success("All the required packages are installed.")
+  }
+
+  # check ibawds version: it should be the newest one
+  ibawds_ver <- utils::packageVersion("ibawds")
+  ibawds_cur <- utils::available.packages()["ibawds", "Version"]
+  if (ibawds_ver < ibawds_cur) {
+    cli::cli_alert_danger(paste("ibawds is outdated:", ibawds_ver))
+    cli::cli_alert_info(
+      c("Please run install.packages(\"ibawds\") to install the current version.")
+    )
+    ok <- FALSE
+  } else {
+    cli::cli_alert_success(paste("ibawds is up to date:", ibawds_ver))
+  }
+
+  # summarise
+  if (ok) {
+    emoji <- praise_emoji()
+    cli::cli_alert_success(
+      c(emoji, " Your system is ready for the course! ", emoji)
+    )
+  } else {
+    cli::cli_alert_danger("Please fix the issues before starting the course.")
+  }
+
+  return(invisible(ok))
+
+}
+
+
+# this function is taken from the testthat package
+# https://github.com/r-lib/testthat/tree/fe38519
+# and is licensed under the MIT license
+
+praise_emoji <- function() {
+  if (!cli::is_utf8_output()) {
+    return("")
+  }
+
+  emoji <- c(
+    "\U0001f600", # smile
+    "\U0001f973", # party face
+    "\U0001f638", # cat grin
+    "\U0001f308", # rainbow
+    "\U0001f947", # gold medal
+    "\U0001f389", # party popper
+    "\U0001f38a" # confetti ball
+  )
+  sample(emoji, 1)
+}
+
+# nocov end
+
+
 get_required_packages <- function() {
 
   system.file("DESCRIPTION", package = "ibawds") %>%
@@ -94,3 +229,4 @@ downgrade_package <- function(pkg) {
 
   TRUE
 }
+
