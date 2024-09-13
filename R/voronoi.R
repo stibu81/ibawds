@@ -50,7 +50,7 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
 
   # check that cluster contains the required fields
   if (any(!c("cluster", "centers") %in% names(cluster))) {
-    stop("cluster must contain the fields 'cluster' and 'centers'.")
+    cli::cli_abort("cluster must contain the fields 'cluster' and 'centers'.")
   }
 
   # get the cluster centers and ensure that the requested variables exist
@@ -58,24 +58,40 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
     dplyr::as_tibble() %>%
     dplyr::mutate(.cluster = factor(1:dplyr::n()))
   if (!x %in% names(centers)) {
-    stop("variable ", deparse(substitute(x)), " does not exist in ",
-         deparse(substitute(cluster)), ".")
+    cli::cli_abort(
+      paste0(
+        "variable ", deparse(substitute(x)), " does not exist in ",
+        deparse(substitute(cluster)), "."
+      )
+    )
   }
   if (!y %in% names(centers)) {
-    stop("variable ", deparse(substitute(y)), " does not exist in ",
-         deparse(substitute(cluster)), ".")
+    cli::cli_abort(
+      paste0(
+        "variable ", deparse(substitute(y)), " does not exist in ",
+        deparse(substitute(cluster)), "."
+      )
+    )
   }
 
   # if data is provided, use it to create an bounding box for the diagram
   # deldir requires the edges to be given in order c(xmin, xmax, ymin, ymax)
   bbox <- if (!is.null(data)) {
     if (!x %in% names(data)) {
-      stop("variable ", deparse(substitute(x)), " does not exist in ",
-           deparse(substitute(data)), ".")
+      cli::cli_abort(
+        paste0(
+          "variable ", deparse(substitute(x)), " does not exist in ",
+          deparse(substitute(data)), "."
+        )
+      )
     }
     if (!y %in% names(data)) {
-      stop("variable ", deparse(substitute(y)), " does not exist in ",
-           deparse(substitute(data)), ".")
+      cli::cli_abort(
+        paste0(
+          "variable ", deparse(substitute(y)), " does not exist in ",
+          deparse(substitute(data)), "."
+        )
+      )
     }
 
     # add column with the cluster assignment
@@ -189,7 +205,7 @@ cluster_with_centers <- function(data, centers) {
   nc <- nrow(centers)
   n_vars <- ncol(data)
   if (ncol(centers) != n_vars) {
-    stop("data and centers must have the same number of columns.")
+    cli::cli_abort("data and centers must have the same number of columns.")
   }
 
   dist_to_data <- function(i) {
@@ -228,7 +244,7 @@ cluster_with_centers <- function(data, centers) {
 init_rand_centers <- function(data, n, seed = sample(1000:9999, 1)) {
 
   if (n < 2) {
-    stop("n must be at least 2")
+    cli::cli_abort("n must be at least 2")
   }
   n <- round(n)
 

@@ -54,7 +54,7 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
 
   # don't accept negative points
   if (any(c(n_tab, n_plot_kinds, n_plots, n_stat) < 0)) {
-    stop("invalid input: positive numbers expected.")
+    cli::cli_abort("invalid input: positive numbers expected.")
   }
 
   # vector of minimal requirements
@@ -92,7 +92,7 @@ create_grading_table <- function(p_text, p_tab, p_plot, p_code, p_stat) {
   max <- c(3, 3, 5, 5, 5)
 
   if (any(points < 0 | points > max)) {
-    stop("invalid points")
+    cli::cli_abort("invalid points")
   }
 
   dplyr::tibble(

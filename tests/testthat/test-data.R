@@ -1,8 +1,9 @@
-library(dplyr, warn.conflict = FALSE)
+library(dplyr, warn.conflicts = FALSE)
 
 test_that("test get_reading_exercise_files()", {
   tmpdir <- tempfile("reading_exercise_files")
-  expect_error(get_reading_exercise_files(tmpdir), "does not exist")
+  expect_error(get_reading_exercise_files(tmpdir),
+               "Directory .* does not exist")
   dir.create(tmpdir)
   expect_true(get_reading_exercise_files(tmpdir))
   expect_equal(

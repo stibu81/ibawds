@@ -325,7 +325,7 @@
 get_reading_exercise_files <- function(path, unzip = TRUE) {
 
   if (!dir.exists(path)) {
-    stop("Directory ", path, " does not exist.")
+    cli::cli_abort(paste0("Directory \"", path, "\" does not exist."))
   }
 
   zipfile <- system.file("extdata", "files.zip", package = "ibawds")

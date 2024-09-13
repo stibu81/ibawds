@@ -40,24 +40,24 @@ find_similar_colour <- function(colour,
     # if it's a numeric vector, check and convert to a matrix
     } else if (is.numeric(colour) && is.vector(colour)) {
       if (length(colour) != 3) {
-        stop("if colour is a numeric vector, it must have length 3")
+        cli::cli_abort("if colour is a numeric vector, it must have length 3")
       }
       if (any(colour > 255 | colour < 0)) {
-        stop("if colour is a numeric vector, all values must be between 0 and 255.")
+        cli::cli_abort("if colour is a numeric vector, all values must be between 0 and 255.")
       }
       matrix(colour, ncol = 1, dimnames = list(c("red", "green", "blue")))
     # if it's a numeric matrix, check and return unchanged
     } else if (is.numeric(colour) && is.matrix(colour)) {
       if (!identical(dim(colour), c(3L, 1L))) {
-        stop("if colour is a numeric matrix, it must have dimensions c(3, 1).")
+        cli::cli_abort("if colour is a numeric matrix, it must have dimensions c(3, 1).")
       }
       if (any(colour > 255 | colour < 0)) {
-        stop("if colour is a numeric matrix, all values must be between 0 and 255.")
+        cli::cli_abort("if colour is a numeric matrix, all values must be between 0 and 255.")
       }
       colour
     # any other format is invalid
     } else {
-      stop("invalid input for colour")
+      cli::cli_abort("invalid input for colour")
     }
 
   # prepare all the named colours in the right format
@@ -69,7 +69,7 @@ find_similar_colour <- function(colour,
   sim_col <- cols[i_min]
 
   if (verbose) {
-    message("most similar colour is \"", sim_col, "\"")
+    cli::cli_alert_info(paste0("most similar colour is \"", sim_col, "\""))
     cbind(col_rgb, cols_rgb[, i_min], cols_rgb[, i_min] - col_rgb) %>%
       magrittr::set_colnames(c("input", sim_col, "difference")) %>%
       print()

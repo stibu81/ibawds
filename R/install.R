@@ -25,7 +25,7 @@ install_ibawds <- function() {
   # otherwise, ask to install the missing packages
   # suppress messages that may be created when is_installed() loads packages
   if (suppressMessages(rlang::is_installed(required_packages))) {
-    message("All the required packages are installed.")
+    cli::cli_alert_success("All the required packages are installed.")
   } else {
     rlang::check_installed(required_packages)
   }
@@ -71,7 +71,7 @@ get_required_packages <- function() {
 
 downgrade_packages <- function(pkg) {
 
-  vapply(pkg, downgrade_package, character(1)) %>%
+  vapply(pkg, downgrade_package, logical(1)) %>%
     stats::na.omit() %>%
     as.vector() %>%
     invisible()
@@ -80,13 +80,17 @@ downgrade_packages <- function(pkg) {
 downgrade_package <- function(pkg) {
 
   if (!suppressMessages(rlang::is_installed(pkg))) {
-    warning(pkg, " is not installed and cannot be downgraded.", call. = FALSE)
-    return(NA_character_)
+    cli::cli_warn(
+      c(
+        "!" = paste0("\"", pkg, "\" is not installed and cannot be downgraded.")
+      )
+    )
+    return(FALSE)
   }
 
   version <- as.character(utils::packageVersion(pkg))
-  message("downgrading ", pkg, " from version ", version, " ...")
+  cli::cli_alert_info(paste("downgrading", pkg, "from version", version, "..."))
   remotes::install_version(pkg, version = paste("<", version))
 
-  pkg
+  TRUE
 }

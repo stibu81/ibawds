@@ -39,7 +39,7 @@ available_r_version <- function(cran = getOption("repos")) {
 }
 
 # helper function to download a page from CRAN
-get_cran_page <- function(cran, type) {
+get_cran_page <- function(cran, type, error_call = rlang::caller_env()) {
 
   # determine the url and download
   url <- if (type == "packages") {
@@ -47,18 +47,16 @@ get_cran_page <- function(cran, type) {
   } else if (type == "main") {
     paste0(cran, "/banner.shtml")
   } else {
-    stop("invalid value for type")
+    cli::cli_abort("invalid value for type")
   }
 
   tryCatch(
     page <- readLines(url, n = 80),
     error = function(e) {
-      stop(
-        simpleError(
-          paste("Obtaining data from CRAN failed with error:",
-                conditionMessage(e)),
-          call = sys.call(-4)
-        )
+      cli::cli_abort(
+        paste("Obtaining data from CRAN failed with error:",
+              conditionMessage(e)),
+        call = error_call
       )
     })
 

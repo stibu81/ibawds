@@ -36,13 +36,16 @@
 rescale <- function(x, mu = mean(x), sigma = sd(x)) {
 
   if (length(mu) > 1 || length(sigma) > 1) {
-    warning("mu and sigma must be single numbers. Keeping only the first element.")
+    cli::cli_warn(
+      c("!" = paste("mu and sigma must be single numbers.",
+                    "Keeping only the first element."))
+    )
     mu <- mu[1]
     sigma <- sigma[1]
   }
 
   if (sigma < 0) {
-    stop("sigma must be positive.")
+    cli::cli_abort("sigma must be positive.")
   }
 
   mu + sigma / stats::sd(x) * (x - mean(x))
@@ -89,7 +92,7 @@ rescale <- function(x, mu = mean(x), sigma = sd(x)) {
 rand_with_cor <- function(y, rho, mu = mean(y), sigma = sd(y)) {
 
   if (abs(rho) > 1) {
-    stop("rho must lie between -1 and 1.")
+    cli::cli_abort("rho must lie between -1 and 1.")
   }
 
   x <- stats::rnorm(length(y))

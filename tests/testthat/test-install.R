@@ -24,8 +24,7 @@ test_that("test install_ibawds()", {
 # downgrade_packages() is only tested for a package that does not exist.
 test_that("test downgrade_packages()", {
   expect_warning(
-    expect_equal(downgrade_packages("thispackagedoesnotexistoncran"),
-                 character(0)),
-    "thispackagedoesnotexistoncran is not installed and cannot be downgraded."
+    expect_false(downgrade_packages("notoncran!")),
+    "\"notoncran!\" is not installed and cannot be downgraded."
   )
 })

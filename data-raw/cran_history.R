@@ -1,10 +1,11 @@
 library(ibawds)
 library(dplyr)
+library(cli)
 
 cran_history <- ibawds::cran_history
 
 if (Sys.Date() %in% cran_history$date) {
-  stop("Data for today has already been collected.")
+  cli_abort("Data for today has already been collected.")
 }
 
 cran_history_new <- tibble(
