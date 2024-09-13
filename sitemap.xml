@@ -1,93 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://stibu81.github.io/ibawds/404.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/index.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/bills.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/breast_cancer.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/cluster_with_centers.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/cran_history.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/define_latex_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/dentition.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/distribution_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/downgrade_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/find_similar_colour.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/galton_sons.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/get_reading_exercise_files.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/grading_tables.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/ibawds-package.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/install_ibawds.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/mtcars2.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/n_available_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/noisy_data.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/protein.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/rand_with_cor.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/rescale.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/seatbelts.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/set_slide_options.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/voronoi_diagram.html</loc>
-  </url>
-  <url>
-    <loc>https://stibu81.github.io/ibawds/reference/wine_quality.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://stibu81.github.io/ibawds/404.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/LICENSE-text.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/LICENSE.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/authors.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/index.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/bills.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/breast_cancer.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/check_ibawds_setup.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/cluster_with_centers.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/cran_history.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/define_latex_stats.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/dentition.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/distribution_plot.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/downgrade_packages.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/find_similar_colour.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/galton_sons.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/get_reading_exercise_files.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/grading_tables.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/ibawds-package.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/index.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/install_ibawds.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/mtcars2.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/n_available_packages.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/noisy_data.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/protein.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/rand_with_cor.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/rescale.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/seatbelts.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/set_slide_options.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/voronoi_diagram.html</loc></url>
+<url><loc>https://stibu81.github.io/ibawds/reference/wine_quality.html</loc></url>
 </urlset>
+
