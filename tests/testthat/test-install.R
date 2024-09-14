@@ -6,7 +6,7 @@ test_that("check get_required_packages()", {
             "kableExtra", "tidyverse", "rmarkdown", "caret", "reshape2",
             "lubridate", "ggrepel", "writexl", "cowplot", "DT",
             "tidytext", "rvest", "Lahman", "HistData", "titanic",
-            "BiocManager", "waldo", "cluster", "ggfortify",
+            "BiocManager", "waldo", "clValid", "ggfortify",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger")
   expect_true(all(pkgs %in% req_pkgs))
   expect_false(any(c("R", "testthat", "usethis", "vdiffr", "covr") %in% req_pkgs))
