@@ -55,20 +55,16 @@ install_ibawds <- function() {
 check_ibawds_setup <- function() {
 
   cli::cli_alert_info("Checking the setup for the course ...")
-  cli::cli_alert_info(paste("Operating system:", utils::osVersion))
-
+  sw <- get_software_versions()
   ok <- TRUE
 
+  cli::cli_alert_info(paste("Operating system:", sw$os))
+
   # check the R version: it should be at most 1 year old
-  r_date <- R.version.string %>%
-    stringr::str_extract("(?<=\\()\\d{4}-\\d{2}-\\d{2}(?=\\))") %>%
-    as.Date()
-  r_ver <- R.version.string %>%
-    stringr::str_extract("(?<=R version )\\d+\\.\\d+\\.\\d+")
-  if (Sys.Date() - r_date < 365) {
-    cli::cli_alert_success(paste("R is up to date:", r_ver))
+  if (Sys.Date() - sw$R$date < 365) {
+    cli::cli_alert_success(paste("R is up to date:", sw$R$version))
   } else {
-    cli::cli_alert_danger(paste("R is outdated:", r_ver))
+    cli::cli_alert_danger(paste("R is outdated:", sw$R$version))
     cli::cli_alert_info(
       c("Please install the current version from {.url https://cran.r-project.org/}")
     )
@@ -76,35 +72,26 @@ check_ibawds_setup <- function() {
   }
 
   # check the RStudio version: it should be at most 1 year old
-  rs_ver <- tryCatch(
-    rstudioapi::versionInfo()$version,
-    error = function(e) NA_character_
-  )
-  if (is.na(rs_ver)) {
+  if (is.na(sw$RStudio$version)) {
     cli::cli_alert_danger("This function must be run from RStudio.")
     cli::cli_alert_info(
       c("If you don't have RStudio installed, please install it from ",
         "{.url https://posit.co/download/rstudio-desktop/}")
     )
     ok <- FALSE
+  } else if (Sys.Date() - sw$RStudio$date < 365) {
+    cli::cli_alert_success(paste("RStudio is up to date:", sw$RStudio$version))
   } else {
-    rs_date <- as.Date(paste0(rs_ver[1, 1], "-", rs_ver[1, 2], "-01"))
-    if (Sys.Date() - rs_date < 365) {
-      cli::cli_alert_success(paste("RStudio is up to date:", rs_ver))
-    } else {
-      cli::cli_alert_danger(paste("RStudio is outdated:", rs_ver))
-      cli::cli_alert_info(
-        c("Please install the current version from ",
-          "{.url https://posit.co/download/rstudio-desktop/}")
-      )
-      ok <- FALSE
-    }
+    cli::cli_alert_danger(paste("RStudio is outdated:", sw$RStudio$version))
+    cli::cli_alert_info(
+      c("Please install the current version from ",
+        "{.url https://posit.co/download/rstudio-desktop/}")
+    )
+    ok <- FALSE
   }
 
   # check that all packages are installed
-  required_packages <- get_required_packages()
-  pkg_installed <- suppressMessages(rlang::is_installed(required_packages))
-  if (!pkg_installed) {
+  if (!sw$pkg_installed) {
     cli::cli_alert_danger("Some required packages are not installed.")
     cli::cli_alert_info(
       c("Please run {.run [install_ibawds()](ibawds::install_ibawds())} ",
@@ -116,16 +103,14 @@ check_ibawds_setup <- function() {
   }
 
   # check ibawds version: it should be the newest one
-  ibawds_ver <- utils::packageVersion("ibawds")
-  ibawds_cur <- utils::available.packages()["ibawds", "Version"]
-  if (ibawds_ver < ibawds_cur) {
-    cli::cli_alert_danger(paste("ibawds is outdated:", ibawds_ver))
+  if (sw$ibawds$installed < sw$ibawds$current) {
+    cli::cli_alert_danger(paste("ibawds is outdated:", sw$ibawds$installed))
     cli::cli_alert_info(
       c("Please run install.packages(\"ibawds\") to install the current version.")
     )
     ok <- FALSE
   } else {
-    cli::cli_alert_success(paste("ibawds is up to date:", ibawds_ver))
+    cli::cli_alert_success(paste("ibawds is up to date:", sw$ibawds$installed))
   }
 
   # summarise
@@ -139,6 +124,60 @@ check_ibawds_setup <- function() {
   }
 
   return(invisible(ok))
+
+}
+
+
+# determine software versions for check_ibawds_setup()
+# this is done in a separate function such that it can be tested
+get_software_versions <- function() {
+
+  os <- utils::osVersion
+
+  # get R version and release date
+  R <- list(
+    version = paste(R.version$major, R.version$minor, sep = ".") %>%
+      as.numeric_version(),
+    date = paste(R.version$year, R.version$month, R.version$day, sep = "-") %>%
+      as.Date()
+  )
+
+
+  # get RStudio version and release date
+  RStudio <- list(
+    version = tryCatch(
+        rstudioapi::versionInfo()$version,
+        error = function(e) as.numeric_version(NA_character_)
+      ),
+    date = as.Date(NA_character_)
+  )
+  if (!is.na(RStudio$version)) {
+    RStudio$date <- paste0(
+        RStudio$version[1, 1], "-", RStudio$version[1, 2], "-01"
+      ) %>%
+      as.Date()
+  }
+
+  # check that all packages are installed
+  suppressMessages(
+    pkg_installed <- get_required_packages() %>%
+      rlang::is_installed()
+  )
+
+  # get ibawds version (installed and current)
+  ibawds <- list(
+    installed = utils::packageVersion("ibawds"),
+    current = utils::available.packages()["ibawds", "Version"] %>%
+    as.numeric_version()
+  )
+
+  list(
+    os = os,
+    R = R,
+    RStudio = RStudio,
+    pkg_installed = pkg_installed,
+    ibawds = ibawds
+  )
 
 }
 
