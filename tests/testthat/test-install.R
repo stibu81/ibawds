@@ -44,7 +44,12 @@ test_that("test get_software_versions()", {
   expect_type(sw$os, "character")
   expect_s3_class(sw$R$version, "numeric_version")
   expect_s3_class(sw$R$date, "Date")
-  expect_s3_class(sw$RStudio$version, "numeric_version")
+  # NA as version number is not supported for R < 4.4.0, so the check needs
+  # to be different depending on the R version
+  expect_s3_class(
+    sw$RStudio$version,
+    if (getRversion() >= "4.4.0") "numeric_version" else "character"
+  )
   expect_s3_class(sw$RStudio$date, "Date")
   expect_true(sw$pkg_installed)
   expect_s3_class(sw$ibawds$installed, "numeric_version")

@@ -136,8 +136,7 @@ get_software_versions <- function() {
 
   # get R version and release date
   R <- list(
-    version = paste(R.version$major, R.version$minor, sep = ".") %>%
-      as.numeric_version(),
+    version = getRversion(),
     date = paste(R.version$year, R.version$month, R.version$day, sep = "-") %>%
       as.Date()
   )
@@ -147,7 +146,14 @@ get_software_versions <- function() {
   RStudio <- list(
     version = tryCatch(
         rstudioapi::versionInfo()$version,
-        error = function(e) as.numeric_version(NA_character_)
+        error = function(e) {
+          # NA as version number is not supported for R < 4.4.0
+          if (getRversion() >= "4.4.0") {
+            as.numeric_version(NA_character_)
+          } else {
+            NA_character_
+          }
+        }
       ),
     date = as.Date(NA_character_)
   )
