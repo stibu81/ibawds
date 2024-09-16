@@ -127,6 +127,29 @@ check_ibawds_setup <- function() {
 
 }
 
+# this function is taken from the testthat package
+# https://github.com/r-lib/testthat/tree/fe38519
+# and is licensed under the MIT license
+
+praise_emoji <- function() {
+  if (!cli::is_utf8_output()) {
+    return("")
+  }
+
+  emoji <- c(
+    "\U0001f600", # smile
+    "\U0001f973", # party face
+    "\U0001f638", # cat grin
+    "\U0001f308", # rainbow
+    "\U0001f947", # gold medal
+    "\U0001f389", # party popper
+    "\U0001f38a" # confetti ball
+  )
+  sample(emoji, 1)
+}
+
+# nocov end
+
 
 # determine software versions for check_ibawds_setup()
 # this is done in a separate function such that it can be tested
@@ -186,30 +209,6 @@ get_software_versions <- function() {
   )
 
 }
-
-
-# this function is taken from the testthat package
-# https://github.com/r-lib/testthat/tree/fe38519
-# and is licensed under the MIT license
-
-praise_emoji <- function() {
-  if (!cli::is_utf8_output()) {
-    return("")
-  }
-
-  emoji <- c(
-    "\U0001f600", # smile
-    "\U0001f973", # party face
-    "\U0001f638", # cat grin
-    "\U0001f308", # rainbow
-    "\U0001f947", # gold medal
-    "\U0001f389", # party popper
-    "\U0001f38a" # confetti ball
-  )
-  sample(emoji, 1)
-}
-
-# nocov end
 
 
 get_required_packages <- function() {
