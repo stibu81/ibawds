@@ -3,14 +3,12 @@ options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 test_that("test n_available_packages()", {
   skip_on_cran()
-  skip_on_ci()
   expect_type(n_available_packages(), "integer")
   expect_gt(n_available_packages(), 15000)
 })
 
 test_that("test available_r_version()", {
   skip_on_cran()
-  skip_on_ci()
   expect_match(available_r_version(), "\\d\\.\\d\\.\\d")
 })
 
