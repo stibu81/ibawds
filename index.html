@@ -89,6 +89,20 @@
 <span><span class="fu"><a href="reference/install_ibawds.html">install_ibawds</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You will be asked to install missing packages. Confirm to install them. Note that this may take more than 30 minutes depending on your system and configuration.</p>
 </div>
+<div class="section level3">
+<h3 id="check-the-setup">Check the Setup<a class="anchor" aria-label="anchor" href="#check-the-setup"></a>
+</h3>
+<p>In order to check that everything is set up correctly for the course, run the following command:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/check_ibawds_setup.html">check_ibawds_setup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The function verifies that</p>
+<ul>
+<li>R and RStudio are up to date,</li>
+<li>the ibawds package is up to date, and</li>
+<li>all the required packages are installed</li>
+</ul>
+<p>The function must be run from RStudio in order to run properly. If everything is set up correctly, you will see a message that confirms that your system is ready for the course. If not, the function will inform you about the steps that are needed to fix the remaining issues.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -129,7 +143,6 @@
 <li><a href="https://CRAN.R-project.org/package=ibawds" class="external-link"><img src="https://www.r-pkg.org/badges/version/ibawds" alt="CRAN status"></a></li>
 <li><a href="https://r-pkg.org/pkg/ibawds" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 <li><a href="https://github.com/stibu81/ibawds/actions" class="external-link"><img src="https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://app.codecov.io/gh/stibu81/ibawds" class="external-link"><img src="https://codecov.io/gh/stibu81/ibawds/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
