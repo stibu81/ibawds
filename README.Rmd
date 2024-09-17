@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/ibawds)](https://CRAN.R-project.org/package=ibawds)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/ibawds?color=blue)](https://r-pkg.org/pkg/ibawds)
 [![R-CMD-check](https://github.com/stibu81/ibawds/workflows/R-CMD-check/badge.svg)](https://github.com/stibu81/ibawds/actions)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test coverage](https://codecov.io/gh/stibu81/ibawds/graph/badge.svg)](https://app.codecov.io/gh/stibu81/ibawds)
 <!-- badges: end -->
 
@@ -97,3 +96,26 @@ install_ibawds()
 You will be asked to install missing packages. Confirm to install them. Note
 that this may take more than 30 minutes depending on your system
 and configuration.
+
+
+### Check the Setup
+
+In order to check that everything is set up correctly for the course, run
+the following command:
+
+
+```r
+check_ibawds_setup()
+```
+
+The function verifies that
+
+* R and RStudio are up to date,
+* the ibawds package is up to date, and
+* all the required packages are installed
+
+The function must be run from RStudio in order to run properly. If everything
+is set up correctly, you will see a message that confirms that your system is
+ready for the course. If not, the function will inform you about the steps
+that are needed to fix the remaining issues.
+
