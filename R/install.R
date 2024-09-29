@@ -228,15 +228,30 @@ get_required_packages <- function() {
 }
 
 
-#' Downgrade Packages to the Previous Version
+#' Downgrade Packages to an Older Version
 #'
-#' Downgrade packages to the previous version available on CRAN.
-#' This is useful in order to prepare the system for a demonstration of
-#' package updates.
+#' Downgrade packages to an older version available on CRAN. This can be useful
+#' when debugging problems that might have arisen due to a package update.
 #'
 #' @param pkg character with the names of the packages to be downgraded.
+#' @param dec_version character giving the version to decrease. Possible
+#' values are "any", "patch", "minor", and "major". See 'Details'.
 #'
 #' @details
+#' Using the argument `dec_version`, the user can control which version will
+#' be installed. The possible values are:
+#'
+#' \describe{
+#' \item{`"any"`}{The previous available version will be installed.}
+#' \item{`"patch"`}{The newest available version with a smaller patch version
+#'   number will be installed. For packages with three version numbers, this
+#'   is the same as using `"any"`.}
+#' \item{`"minor"`}{The newest available version with a smaller minor version
+#'   number will be installed.}
+#' \item{`"major"`}{The newest available version with a smaller major version
+#'   number will be installed.}
+#' }
+#'
 #' Downgrading is only possible for packages that are currently installed. For
 #' packages that are not installed, a warning is issued.
 #'
@@ -248,15 +263,18 @@ get_required_packages <- function() {
 #'
 #' @export
 
-downgrade_packages <- function(pkg) {
+downgrade_packages <- function(pkg,
+                               dec_version = c("any", "patch", "minor", "major")) {
 
-  vapply(pkg, downgrade_package, logical(1)) %>%
+  dec_version <- match.arg(dec_version)
+
+  vapply(pkg, downgrade_package, logical(1), dec_version) %>%
     stats::na.omit() %>%
     as.vector() %>%
     invisible()
 }
 
-downgrade_package <- function(pkg) {
+downgrade_package <- function(pkg, dec_version) {
 
   if (!suppressMessages(rlang::is_installed(pkg))) {
     cli::cli_warn(
@@ -267,10 +285,32 @@ downgrade_package <- function(pkg) {
     return(FALSE)
   }
 
-  version <- as.character(utils::packageVersion(pkg))
-  cli::cli_alert_info(paste("downgrading", pkg, "from version", version, "..."))
-  remotes::install_version(pkg, version = paste("<", version))
+  version <- utils::packageVersion(pkg)
+  cli::cli_alert_info(paste0("installed version of ", pkg, ": ", version))
+  version_after <- get_version_after_to_install(version, dec_version)
+  cli::cli_alert_info(paste("downgrade to version before", version_after, "..."))
+  remotes::install_version(pkg, version = paste("<", version_after))
+  cli::cli_alert_info(
+    paste("installed", pkg, "version", utils::packageVersion(pkg))
+  )
 
   TRUE
 }
 
+
+# determine the version *after* the one to be installed. This is done by
+# setting all the version numbers to zero after the one to be decreased.
+# E.g., if dec_version = "minor", from 1.5.3.2, we would get 1.5.0.0.
+get_version_after_to_install <- function(version, dec_version) {
+
+  if (dec_version == "any") return(version)
+
+  # set all version numbers after the one to be decreased to zero
+  n_ver_num <- length(unclass(version)[[1]])
+  i_dec_ver <- which(c("major", "minor", "patch") == dec_version)
+  if (n_ver_num > i_dec_ver) {
+    version[1, (i_dec_ver + 1):n_ver_num] <- 0
+  }
+
+  version
+}

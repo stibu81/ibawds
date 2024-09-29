@@ -2,22 +2,38 @@
 % Please edit documentation in R/install.R
 \name{downgrade_packages}
 \alias{downgrade_packages}
-\title{Downgrade Packages to the Previous Version}
+\title{Downgrade Packages to an Older Version}
 \usage{
-downgrade_packages(pkg)
+downgrade_packages(pkg, dec_version = c("any", "patch", "minor", "major"))
 }
 \arguments{
 \item{pkg}{character with the names of the packages to be downgraded.}
+
+\item{dec_version}{character giving the version to decrease. Possible
+values are "any", "patch", "minor", and "major". See 'Details'.}
 }
 \value{
 A character vector with the names of the downgraded packages, invisibly.
 }
 \description{
-Downgrade packages to the previous version available on CRAN.
-This is useful in order to prepare the system for a demonstration of
-package updates.
+Downgrade packages to an older version available on CRAN. This can be useful
+when debugging problems that might have arisen due to a package update.
 }
 \details{
+Using the argument \code{dec_version}, the user can control which version will
+be installed. The possible values are:
+
+\describe{
+\item{\code{"any"}}{The previous available version will be installed.}
+\item{\code{"patch"}}{The newest available version with a smaller patch version
+number will be installed. For packages with three version numbers, this
+is the same as using \code{"any"}.}
+\item{\code{"minor"}}{The newest available version with a smaller minor version
+number will be installed.}
+\item{\code{"major"}}{The newest available version with a smaller major version
+number will be installed.}
+}
+
 Downgrading is only possible for packages that are currently installed. For
 packages that are not installed, a warning is issued.
 

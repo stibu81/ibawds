@@ -35,6 +35,42 @@ test_that("test downgrade_packages()", {
 })
 
 
+test_that("test get_version_after_to_install()", {
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3"), "any"),
+    as.numeric_version("1.4.3")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3.2"), "any"),
+    as.numeric_version("1.4.3.2")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3"), "patch"),
+    as.numeric_version("1.4.3")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3.2"), "patch"),
+    as.numeric_version("1.4.3.0")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3"), "minor"),
+    as.numeric_version("1.4.0")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3.2"), "minor"),
+    as.numeric_version("1.4.0.0")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3"), "major"),
+    as.numeric_version("1.0.0")
+  )
+  expect_equal(
+    get_version_after_to_install(as.numeric_version("1.4.3.2"), "major"),
+    as.numeric_version("1.0.0.0")
+  )
+})
+
+
 test_that("test get_software_versions()", {
   sw <- get_software_versions()
   expect_named(sw, c("os", "R", "RStudio", "pkg_installed", "ibawds"))
