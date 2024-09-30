@@ -16,4 +16,8 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Stefan Lanz \email{slanz1137@gmail.com}
+
+}
 \keyword{internal}
