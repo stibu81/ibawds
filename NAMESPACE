@@ -2,6 +2,7 @@
 
 export(available_r_version)
 export(check_ibawds_setup)
+export(check_lecture_packages)
 export(cluster_with_centers)
 export(create_grading_table)
 export(create_minreq_table)

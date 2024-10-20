@@ -1,10 +1,14 @@
+library(withr)
+library(dplyr, warn.conflicts = FALSE)
+library(readr, warn.conflicts = FALSE)
+
 # CRAN URL must be set for the tests to work
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 test_that("check get_required_packages()", {
   req_pkgs <- get_required_packages()
   expect_type(req_pkgs, "character")
-  pkgs <- c("dslabs", "stats", "grDevices", "rlang",
+  pkgs <- c("dslabs", "stats", "grDevices", "tools", "rlang", "tidyr", "readr",
             "ggplot2", "scales", "dplyr", "stringr", "magrittr", "deldir",
             "kableExtra", "tidyverse", "rmarkdown", "caret", "reshape2",
             "lubridate", "ggrepel", "writexl", "cowplot", "DT",
@@ -94,4 +98,45 @@ test_that("test get_software_versions()", {
   expect_true(sw$pkg_installed)
   expect_s3_class(sw$ibawds$installed, "numeric_version")
   expect_s3_class(sw$ibawds$current, "numeric_version")
+})
+
+
+test_that("Test find_lectures_root()", {
+  withr::with_tempdir({
+    curr_dir <- getwd()
+    expect_error(find_lectures_root(curr_dir),
+                 "Directory.*not inside a lectures directory")
+    expect_error(find_lectures_root(file.path(curr_dir, "does_not_exist")),
+                 "Directory.*does not exist")
+    subdirs <- "01_R_Basics/slides/pics"
+    dir.create(subdirs, recursive = TRUE)
+    expect_equal(find_lectures_root(curr_dir), curr_dir)
+    expect_equal(find_lectures_root(file.path(curr_dir, subdirs)),
+                 curr_dir)
+    subdirs <- "02_Visualisation/exercises/"
+    dir.create(subdirs, recursive = TRUE)
+    expect_equal(find_lectures_root(file.path(curr_dir, subdirs)),
+                 curr_dir)
+  })
+})
+
+
+test_that("Test get_loaded_packages()", {
+  with_tempfile("rfile", {
+    # write file that loads packages in various ways.
+    write_lines(
+      c("library(p1)", "library(\"p2\")", "library('p3')",
+        "library(p4, warn.conflicts = FALSE)",
+        "require(p5)", "require(\"p6\")", "require('p7')",
+        "require(p8, quietly = TRUE)",
+        "    library(p9)", "    require('p10')", "library(p11, lib.loc = '/')",
+        # duplicates should be removed
+        "library(p12)", "require(p12)", "library('p12')", "require(\"p12\")",
+        # comments should be ignored
+        "# library(p13)"),
+      rfile
+    )
+    expect_equal(get_loaded_packages(basename(rfile), dirname(rfile)),
+                 tibble(file = basename(rfile), package = paste0("p", 1:12)))
+  })
 })

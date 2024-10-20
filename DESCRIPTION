@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 1.0.0.9000
+Version: 1.0.0.9001
 Authors@R: person(given = "Stefan",
                   family = "Lanz",
                   role = c("aut", "cre"),
@@ -21,11 +21,14 @@ Depends:
   dslabs
 Imports:
   stats,
+  tools,
   grDevices,
   rlang,
   rstudioapi,
   remotes,
   ggplot2,
+  tidyr,
+  readr,
   scales,
   dplyr (>= 1.1.0),
   stringr,
@@ -64,5 +67,6 @@ Suggests:
     vdiffr,
     testthat (>= 3.0.0),
     covr,
-    spelling
+    spelling,
+    withr
 Config/testthat/edition: 3

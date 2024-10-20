@@ -223,7 +223,7 @@ get_required_packages <- function() {
     stringr::str_remove(stringr::regex("\\(.*\\)", dotall = TRUE)) %>%
     stringr::str_trim() %>%
     # remove the entries for R and packages that are not relevant for the students
-    setdiff(c("R", "testthat", "usethis", "vdiffr", "covr", "spelling"))
+    setdiff(c("R", "testthat", "usethis", "vdiffr", "covr", "spelling", "withr"))
 
 }
 
@@ -314,3 +314,112 @@ get_version_after_to_install <- function(version, dec_version) {
 
   version
 }
+
+
+# nocov start
+
+#' Find Packages Used For Lectures not Installed by ibawds
+#'
+#' ibawds offers the function [install_ibawds()] which installs all the packages
+#' that are required for the course. `check_lecture_packages()` finds all the
+#' packages that are used in the slides and exercise solution inside a directory.
+#' It then checks whether they are all installed by `install_ibawds()` and
+#' returns a tibble of those that are not. This can help to identify, if
+#' additional packages need to be installed by `install_ibawds()`.
+#'
+#' @param path the path to a folder inside the directory with the slides and
+#'  exercise solutions. The function automatically tries to identify the
+#'  top level directory of the course material.
+#'
+#' @return
+#' a tibble with two columns:
+#'
+#' \describe{
+#'   \item{file}{the file where the package is used}
+#'   \item{package}{the name of the package}
+#' }
+#'
+#' @export
+
+
+check_lecture_packages <- function(path = ".") {
+
+  path <- find_lectures_root(path)
+
+  # we must catch all the slides (*.Rmd) and the exercises (*.Rmd or *.R) but
+  # avoid caches (*.RData)
+  r_files <- list.files(path, "\\.R($|md$)", recursive = TRUE, full.names = TRUE) %>%
+    stringr::str_remove(paste0(path, "/?")) %>%
+    # keep only files that belong to lectures. These folders always start with two
+    # digits
+    stringr::str_subset("^\\d{2}_[^/]*/")
+
+  used_packages <- lapply(r_files, get_loaded_packages, path = path) %>%
+    dplyr::bind_rows() %>%
+    tidyr::separate_wider_delim("file",
+                                delim = "/",
+                                names = c("lecture", "type", "file"),
+                                too_many = "merge")
+
+  used_packages %>%
+    dplyr::filter(!.data$package %in% get_ibawds_packages()) %>%
+    dplyr::arrange(.data$package, .data$lecture, .data$type, .data$file)
+
+}
+
+
+# Get the names of all the packages that install_ibawds() will install, i.e.,
+# those directly installed and their dependencies
+get_ibawds_packages <- function() {
+  get_required_packages() %>%
+    tools::package_dependencies() %>%
+    unlist() %>%
+    c(get_required_packages(), "ibawds") %>%
+    unique()
+}
+
+# nocov end
+
+
+# find the root directory of the lectures. It is the directory that contains
+# the folder "01_R_Basics".
+find_lectures_root <- function(path, error_call = rlang::caller_env()) {
+
+  if (!dir.exists(path)) {
+    cli::cli_abort("Directory \"{path}\" does not exist.",
+                   call = error_call)
+  }
+
+  root_cand <- normalizePath(path, mustWork = TRUE)
+
+  is_root <- \(dir) dir.exists(file.path(dir, "01_R_Basics"))
+
+  while (!is_root(root_cand)) {
+    root_cand <- normalizePath(file.path(root_cand, ".."), mustWork = TRUE)
+    if (root_cand == "/") {
+      cli::cli_abort("Directory \"{path}\" is not inside a lectures directory.",
+                   call = error_call)
+    }
+  }
+
+  root_cand
+}
+
+
+# extract packages that are loaded inside an r file.
+# This only spots packages attached with library(), not those
+# used with the ::-notation
+get_loaded_packages <- function(file, path) {
+    pkgs <- file.path(path, file) %>%
+      readr::read_lines() %>%
+      stringr::str_subset("^ *(library|require)\\(") %>%
+      stringr::str_extract("(library|require)\\(([^),]+)", group = 2) %>%
+      # remove quotes
+      stringr::str_remove_all("\"|'") %>%
+      unique()
+    dplyr::tibble(
+      file = file,
+      package = pkgs
+    )
+  }
+
