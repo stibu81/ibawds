@@ -110,13 +110,13 @@ test_that("Test find_lectures_root()", {
                  "Directory.*does not exist")
     subdirs <- "01_R_Basics/slides/pics"
     dir.create(subdirs, recursive = TRUE)
-    expect_equal(find_lectures_root(curr_dir), curr_dir)
+    expect_equal(find_lectures_root(curr_dir), normalizePath(curr_dir))
     expect_equal(find_lectures_root(file.path(curr_dir, subdirs)),
-                 curr_dir)
+                 normalizePath(curr_dir))
     subdirs <- "02_Visualisation/exercises/"
     dir.create(subdirs, recursive = TRUE)
     expect_equal(find_lectures_root(file.path(curr_dir, subdirs)),
-                 curr_dir)
+                 normalizePath(curr_dir))
   })
 })
 
