@@ -395,11 +395,13 @@ find_lectures_root <- function(path, error_call = rlang::caller_env()) {
   is_root <- \(dir) dir.exists(file.path(dir, "01_R_Basics"))
 
   while (!is_root(root_cand)) {
-    root_cand <- normalizePath(file.path(root_cand, ".."), mustWork = TRUE)
-    if (root_cand == "/") {
+    next_cand <- normalizePath(file.path(root_cand, ".."), mustWork = TRUE)
+    # if .. has no effect, we have reached the file system root
+    if (next_cand == root_cand) {
       cli::cli_abort("Directory \"{path}\" is not inside a lectures directory.",
                    call = error_call)
     }
+    root_cand <- next_cand
   }
 
   root_cand

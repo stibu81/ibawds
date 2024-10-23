@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 1.0.0.9001
+Version: 1.0.0.9002
 Authors@R: person(given = "Stefan",
                   family = "Lanz",
                   role = c("aut", "cre"),
