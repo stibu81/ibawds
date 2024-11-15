@@ -4,13 +4,18 @@
 \alias{spell_check_evaluation}
 \title{Check Spelling in the Evaluation of the Papers}
 \usage{
-spell_check_evaluation(path = ".", students = NULL)
+spell_check_evaluation(path = ".", students = NULL, use_wordlist = TRUE)
 }
 \arguments{
 \item{path}{path to the top level directory of the evaluations.}
 
 \item{students}{an optional character vector with student names. If given,
 only the evaluation of these students will be checked.}
+
+\item{use_wordlist}{should a list of words be excluded from the spell
+check? The package contains a list of words that have typically appeared
+in the evaluations of the past. The names of the students will always be
+excluded from spell check, even if \code{use_wordlist} is \code{FALSE}.}
 }
 \description{
 Evaluation of the student papers is done in the form of an Rmd file. This
