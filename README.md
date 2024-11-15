@@ -103,5 +103,16 @@ The function verifies that
 
 The function must be run from RStudio in order to run properly. If
 everything is set up correctly, you will see a message that confirms
-that your system is ready for the course. If not, the function will
-inform you about the steps that are needed to fix the remaining issues.
+that your system is ready for the course similar to this one:
+
+    ℹ Checking the setup for the course ...
+    ℹ Operating system: Ubuntu 22.04.2 LTS
+    ✔ R is up to date: 4.2.2
+    ✔ RStudio is up to date: 2023.6.1.524
+    ✔ All the required packages are installed.
+    ✔ ibawds is up to date: 1.0.0
+    ✔ 🎉 Your system is ready for the course! 🎉
+
+If not, the function will inform you about the steps that are needed to
+fix the remaining issues. Rerun `check_ibawds_setup()` after performing
+those steps to verify that your system is now ready.
