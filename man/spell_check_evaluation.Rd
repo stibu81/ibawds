@@ -2,22 +2,54 @@
 % Please edit documentation in R/spelling.R
 \name{spell_check_evaluation}
 \alias{spell_check_evaluation}
+\alias{spell_check_slides}
 \title{Check Spelling in the Evaluation of the Papers}
 \usage{
 spell_check_evaluation(path = ".", students = NULL, use_wordlist = TRUE)
+
+spell_check_slides(path = ".", use_wordlist = TRUE)
 }
 \arguments{
-\item{path}{path to the top level directory of the evaluations.}
+\item{path}{path to the top level directory of the evaluations for
+\code{spell_check_evaluation()} or the top level of a lecture for
+\code{spell_check_slides()}}
 
 \item{students}{an optional character vector with student names. If given,
-only the evaluation of these students will be checked.}
+only the evaluation for these students will be checked.}
 
 \item{use_wordlist}{should a list of words be excluded from the spell
-check? The package contains a list of words that have typically appeared
-in the evaluations of the past. The names of the students will always be
-excluded from spell check, even if \code{use_wordlist} is \code{FALSE}.}
+check? The package contains separate word lists for evaluations and
+slides/exercises with words that have typically appeared in these documents
+in the past. When spell checking the paper evaluations, the names of the
+students will always be excluded from spell check, even if \code{use_wordlist}
+is \code{FALSE}.}
 }
 \description{
-Evaluation of the student papers is done in the form of an Rmd file. This
-function finds all the evaluations in a directory and checks the spelling.
+Evaluation of the student papers, lecture slides and some exercises are all
+done in the form of Rmd files. These function find all the relevant
+Rmd-files in a directory and check the spelling using the package
+\code{\link[spelling:spell_check_files]{spelling}}.
+}
+\details{
+\code{spell_check_evaluation()} finds Rmd-files with evaluations in subfolders
+starting from the current working directory or the directory given by
+\code{path}. The file names must be of the form "Beurteilung_Student.Rmd", where
+"Student" must be replaced by the student's name. By default, words contained
+in a wordlist that is part of the package as well as all the students' names
+are excluded from the spell check, but this can be turned off by setting
+\code{use_wordlist = FALSE}. (Note that the students' names will still be
+excluded.)
+
+\code{spell_check_slides()} finds Rmd-files with evaluations in subfolders
+starting from the current working directory or the directory given by
+\code{path}. In order to exclude a file from the spell check, make sure it's first
+line contains the term "nospellcheck", typically in the form of an
+html-comment:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{<!-- nospellcheck -->
+}\if{html}{\out{</div>}}
+
+By default, words contained in a wordlist that is part of the package are
+excluded from the spell check, but this can be turned off by setting
+\code{use_wordlist = FALSE}.
 }

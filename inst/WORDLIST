@@ -1,5 +1,6 @@
 Agrarpolitik
 Beifahrer
+Beurteilung
 CMD
 Cerdeira
 Codecov
@@ -37,6 +38,7 @@ im
 internationalen
 knitr
 mtcars
+nospellcheck
 physicochemical
 tibble
 tibbles
