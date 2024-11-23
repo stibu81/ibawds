@@ -102,7 +102,8 @@ spell_check_slides <- function(path = ".",
     # we must normalise the path, because we might be in a subfolder already
     # in which case the filter would not work with the relative path.
     normalizePath() %>%
-    stringr::str_subset("\\d{2}_.*/(exercises|slides)/")
+    # slides are either inside the folder of a lecture or in the global folder
+    stringr::str_subset("(\\d{2}_.*|global)/")
 
   # files that contain "nospellcheck" in the first line must be ignored.
   ignore_files <- is_no_spell_check(rmd_files)
