@@ -355,7 +355,7 @@ check_lecture_packages <- function(path = ".") {
     # digits
     stringr::str_subset("^\\d{2}_[^/]*/")
 
-  used_packages <- lapply(r_files, get_loaded_packages, path = path) %>%
+  used_packages <- lapply(r_files, get_used_packages, path = path) %>%
     dplyr::bind_rows() %>%
     tidyr::separate_wider_delim("file",
                                 delim = "/",
@@ -409,14 +409,15 @@ find_lectures_root <- function(path, error_call = rlang::caller_env()) {
 }
 
 
-# extract packages that are loaded inside an r file.
-# This only spots packages attached with library(), not those
+# extract packages that are loaded or installed inside an r file
+# This only spots packages attached with library() or require(), not those
 # used with the ::-notation
-get_loaded_packages <- function(file, path) {
+get_used_packages <- function(file, path) {
     pkgs <- file.path(path, file) %>%
       readr::read_lines() %>%
-      stringr::str_subset("^ *(library|require)\\(") %>%
-      stringr::str_extract("(library|require)\\(([^),]+)", group = 2) %>%
+      stringr::str_subset("^ *(library|require|install\\.packages)\\(") %>%
+      stringr::str_extract("(library|require|install\\.packages)\\(([^),]+)",
+                           group = 2) %>%
       # remove quotes
       stringr::str_remove_all("\"|'") %>%
       unique()
