@@ -154,3 +154,28 @@ is_no_spell_check <- function(files) {
 }
 
 # nocov end
+
+
+#' Check That an URL Can Be Reached
+#'
+#' Send a request to an URL and return a logical indicating whether the request
+#' was successful.
+#'
+#' @param url the URL to send the request to
+#'
+#' @returns
+#' a logical indicating whether the request was successful.
+#'
+#' @export
+
+check_url <- function(url) {
+
+  response <- try(
+    httr2::request(url) %>%
+      httr2::req_method("HEAD") %>%
+      httr2::req_perform(),
+    silent = TRUE
+  )
+
+  !inherits(response, "try-error")
+}
