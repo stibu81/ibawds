@@ -63,6 +63,7 @@ Suggests:
     waldo,
     rvest,
     clValid,
+    styler,
     usethis,
     vdiffr,
     testthat (>= 3.0.0),

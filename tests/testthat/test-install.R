@@ -15,10 +15,12 @@ test_that("check get_required_packages()", {
             "tidytext", "rvest", "Lahman", "HistData", "titanic",
             "BiocManager", "waldo", "clValid", "ggfortify",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger",
-            "rstudioapi", "remotes", "cli", "gutenbergr")
+            "rstudioapi", "remotes", "cli", "gutenbergr", "styler")
   expect_setequal(pkgs, req_pkgs)
+  not_req_pkgs <- c("R", "testthat", "usethis", "vdiffr", "covr", "spelling",
+                    "httr2")
   expect_false(
-    any(c("R", "testthat", "usethis", "vdiffr", "covr", "spelling") %in% req_pkgs)
+    any(not_req_pkgs %in% req_pkgs)
   )
 })
 
@@ -121,7 +123,7 @@ test_that("Test find_lectures_root()", {
 })
 
 
-test_that("Test get_loaded_packages()", {
+test_that("Test get_used_packages()", {
   with_tempfile("rfile", {
     # write file that loads packages in various ways.
     write_lines(
@@ -136,7 +138,7 @@ test_that("Test get_loaded_packages()", {
         "# library(p13)"),
       rfile
     )
-    expect_equal(get_loaded_packages(basename(rfile), dirname(rfile)),
+    expect_equal(get_used_packages(basename(rfile), dirname(rfile)),
                  tibble(file = basename(rfile), package = paste0("p", 1:12)))
   })
 })
