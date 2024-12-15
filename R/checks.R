@@ -57,7 +57,9 @@ spell_check_evaluation <- function(path = ".",
 
   if (!is.null(students)) {
     eval_files <- eval_files %>%
-      stringr::str_subset(paste0("Beurteilung_", students, ".Rmd", collapse = "|"))
+      stringr::str_subset(
+        paste0("Beurteilung_", students, ".Rmd", collapse = "|")
+      )
   }
 
   # abort, if there are not files to check
@@ -71,12 +73,7 @@ spell_check_evaluation <- function(path = ".",
 
   # add words from the wordlist to the ignore list, if requested
   if (use_wordlist) {
-    ignore_list <- system.file("extdata", "evaluation_wordlist",
-                               package = "ibawds") %>%
-      readLines() %>%
-      # remove comments
-      stringr::str_subset("^#", negate = TRUE) %>%
-      c(ignore_list)
+    ignore_list <- c(read_wordlist("evaluation"), ignore_list)
   }
 
   # run the spell check
@@ -94,34 +91,11 @@ spell_check_slides <- function(path = ".",
 
   rlang::check_installed("spelling")
 
-  # find the Rmd files recursively
-  rmd_files <- list.files(path, "\\.Rmd",
-                          recursive = TRUE,
-                          full.names = TRUE) %>%
-    # make sure that only slides and exercises are included
-    # we must normalise the path, because we might be in a subfolder already
-    # in which case the filter would not work with the relative path.
-    normalizePath() %>%
-    # slides are either inside the folder of a lecture or in the global folder
-    stringr::str_subset("(\\d{2}_.*|global)/")
-
-  # files that contain "nospellcheck" in the first line must be ignored.
-  ignore_files <- is_no_spell_check(rmd_files)
-  rmd_files <- rmd_files[!ignore_files]
-
-  # abort, if there are not files to check
-  if (length(rmd_files) == 0) {
-    cli::cli_abort("No RMarkdown files found.")
-  }
+  rmd_files <- find_rmd_files(path)
 
   # ignore words from the wordlist if requested
   if (use_wordlist) {
-    ignore_list <- system.file("extdata", "slides_wordlist",
-                               package = "ibawds") %>%
-      readLines() %>%
-      # remove comments
-      stringr::str_subset("^#", negate = TRUE) %>%
-      stringr::str_trim()
+    ignore_list <- read_wordlist("slides")
   }
 
   # run the spell check
@@ -130,8 +104,48 @@ spell_check_slides <- function(path = ".",
 
 }
 
-# helper function: check if a file should be ignored in the spell check
 
+# find all the Rmd files in a directory and its subdirectories
+find_rmd_files <- function(path,
+                           ignore_nospellcheck = FALSE,
+                           error_call = rlang::caller_env()) {
+  rmd_files <- list.files(path, "\\.Rmd",
+                            recursive = TRUE,
+                            full.names = TRUE) %>%
+    # make sure that only slides and exercises are included
+    # we must normalise the path, because we might be in a subfolder already
+    # in which case the filter would not work with the relative path.
+    normalizePath() %>%
+    # slides are either inside the folder of a lecture or in the global folder
+    stringr::str_subset("(\\d{2}_.*|global)/")
+
+  # files that contain "nospellcheck" in the first line must be ignored.
+  if (ignore_nospellcheck) {
+    ignore_files <- is_no_spell_check(rmd_files)
+    rmd_files <- rmd_files[!ignore_files]
+  }
+
+  # abort, if there are not files to check
+  if (length(rmd_files) == 0) {
+    cli::cli_abort("No RMarkdown files found.", call = error_call)
+  }
+
+  rmd_files
+}
+
+
+# read the wordlist for the spell checks
+read_wordlist <- function(type = c("slides", "evaluation")) {
+  type <- match.arg(type)
+  system.file("extdata", paste0(type, "_wordlist"),
+              package = "ibawds") %>%
+  readLines() %>%
+  # remove comments
+  stringr::str_subset("^#", negate = TRUE) %>%
+  stringr::str_trim()
+}
+
+# helper function: check if a file should be ignored in the spell check
 is_no_spell_check <- function(files) {
 
   files %>%
