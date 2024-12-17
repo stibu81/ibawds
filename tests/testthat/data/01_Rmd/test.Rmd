@@ -1,0 +1,30 @@
+---
+title: "Test File For ibawds"
+author: "Someone"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Diese Datei ist nützlich für die Tests in ibawds.
+
+Einige URLs:
+
+* https://de.wikipedia.org/wiki/Wikipedia:Hauptseite
+* [GitHub](http://www.github.com)
+* Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film))
+
+Dieser Link existiert nicht:
+
+https://www.doesnotexist.invalid
+
+Das ist ein Schreibfehlr!
+
+Diese Wörter sind in der Wordlist:
+* specificity
+* tidyverse, dplyr, tidyr
+* Voronoi-Diagramm
+* ZGWS
+* RStudio
+* TensorFlow
+* Pipe
+

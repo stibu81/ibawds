@@ -82,6 +82,8 @@ spell_check_evaluation <- function(path = ".",
 
 }
 
+# nocov end
+
 
 #' @rdname spell_check_evaluation
 #' @export
@@ -111,6 +113,7 @@ spell_check_slides <- function(path = ".",
 find_rmd_files <- function(path,
                            ignore_nospellcheck = FALSE,
                            error_call = rlang::caller_env()) {
+
   rmd_files <- list.files(path, "\\.Rmd",
                             recursive = TRUE,
                             full.names = TRUE) %>%
@@ -138,6 +141,7 @@ find_rmd_files <- function(path,
 
 # read the wordlist for the spell checks
 read_wordlist <- function(type = c("slides", "evaluation")) {
+
   type <- match.arg(type)
   system.file("extdata", paste0(type, "_wordlist"),
               package = "ibawds") %>%
@@ -154,8 +158,6 @@ is_no_spell_check <- function(files) {
     vapply(readLines, n = 1, character(1)) %>%
     stringr::str_detect("nospellcheck")
 }
-
-# nocov end
 
 
 #' Check That an URL Can Be Reached

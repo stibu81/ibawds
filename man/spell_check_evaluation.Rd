@@ -3,7 +3,7 @@
 \name{spell_check_evaluation}
 \alias{spell_check_evaluation}
 \alias{spell_check_slides}
-\title{Check Spelling in the Evaluation of the Papers}
+\title{Check Spelling in the Evaluation of the Papers or the Slide Decks}
 \usage{
 spell_check_evaluation(path = ".", students = NULL, use_wordlist = TRUE)
 
