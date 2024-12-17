@@ -1,6 +1,6 @@
 # nocov start
 
-#' Check Spelling in the Evaluation of the Papers
+#' Check Spelling in the Evaluation of the Papers or the Slide Decks
 #'
 #' Evaluation of the student papers, lecture slides and some exercises are all
 #' done in the form of Rmd files. These function find all the relevant
@@ -91,11 +91,13 @@ spell_check_slides <- function(path = ".",
 
   rlang::check_installed("spelling")
 
-  rmd_files <- find_rmd_files(path)
+  rmd_files <- find_rmd_files(path, ignore_nospellcheck = TRUE)
 
   # ignore words from the wordlist if requested
-  if (use_wordlist) {
-    ignore_list <- read_wordlist("slides")
+  ignore_list <- if (use_wordlist) {
+    read_wordlist("slides")
+  } else {
+    character(0)
   }
 
   # run the spell check
