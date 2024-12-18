@@ -211,3 +211,52 @@ check_url <- function(url) {
 
   !inherits(response, "try-error")
 }
+
+
+#' Check All Links in a Text File
+#'
+#' Find and check all http(s) URLs in an text file.
+#' Only links starting with `http://` or `https://` are found and checked.
+#'
+#' @param file the path to the file to be checked.
+#'
+#' @returns
+#' a tibble with two columns:
+#' * `url`: the URL that was found and checked
+#' * `reachable`: whether the URL could be reached
+#'
+#' @export
+
+check_links_in_file <- function(file) {
+
+  urls <- readr::read_lines(file) %>%
+    extract_urls() %>%
+    unique()
+  url_check <- urls %>%
+    vapply(check_url, logical(1), USE.NAMES = FALSE)
+
+  dplyr::tibble(
+    url = urls,
+    reachable = url_check
+  )
+}
+
+
+# helper function to extract all urls from a character vector
+extract_urls <- function(x) {
+
+  urls <- x %>%
+    stringr::str_extract_all("https?://[A-Za-z0-9./_%#?=&()~+:-]+") %>%
+    unlist()
+
+  # since urls may contain parentheses, the pattern also extracts them.
+  # However, if an url is followed by a closing parenthesis that is not part
+  # of the url, it is also extractd. => remove trailing closing parentheses
+  # that have no matching opening parenthesis.
+  n_opening <- stringr::str_count(urls, "\\(")
+  n_closing <- stringr::str_count(urls, "\\)")
+  rm_pattern <- stringr::str_dup("\\)", pmax(n_closing - n_opening, 0))
+
+  stringr::str_remove(urls, paste0(rm_pattern, "$"))
+}
+

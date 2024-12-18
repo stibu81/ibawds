@@ -1,3 +1,5 @@
+library(dplyr, warn.conflicts = FALSE)
+
 test_that("spell_check_slides() works", {
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list("test.Rmd:14", "test.Rmd:20", "test.Rmd:22")
@@ -39,4 +41,57 @@ test_that("check_url() works", {
   expect_false(check_url("https://httpstat.us/500"))
   # an inexistent path on an existing page should be failure
   expect_false(check_url("https://www.github.com/stibu81/thisdoesnotexist"))
+})
+
+
+test_that("check_links_in_file() works", {
+  link_check_ref <- tibble(
+    url = c("https://de.wikipedia.org/wiki/Wikipedia:Hauptseite",
+            "http://www.github.com",
+            "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+            "https://www.doesnotexist.invalid"),
+    reachable = c(TRUE, TRUE, TRUE, FALSE)
+  )
+  expect_equal(
+    check_links_in_file(test_path("data", "01_Rmd", "test.Rmd")),
+    link_check_ref
+  )
+
+  # check a file without links
+  withr::with_tempfile("rmd_file", {
+    writeLines(c("there", "are no", "links"), rmd_file)
+    expect_equal(check_links_in_file(rmd_file),
+                 tibble(url = character(0), reachable = logical(0)))
+    fileext = ".Rmd"
+  })
+})
+
+
+test_that("extract_urls() works", {
+  expect_equal(
+    extract_urls(
+      c("https://www.github.com", "{http://www.github.com}#",
+        "www.github.com, (https://www.github.com)",
+        "no url", "https:/invalid.url",
+        "(https://www.github.com) %4l& [http://www.github.com] ",
+        "abc https://www.ibaw.ch/suche/?q=data+science abc",
+        "(this: https://en.wikipedia.org/wiki/Data_science#Modern_usage)",
+        "Bird: https://en.wikipedia.org/wiki/Bird_(1988_film)",
+        "Lorem ipsum dolor sit amet",
+        "Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film))",
+        "(Bird: (https://en.wikipedia.org/wiki/Bird_((1988_film))))",
+        "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
+        "sfd https://de.wikipedia.org/wiki/Wikipedia:Hauptseite =3")
+    ),
+    c("https://www.github.com", "http://www.github.com",
+      "https://www.github.com",
+      "https://www.github.com", "http://www.github.com",
+      "https://www.ibaw.ch/suche/?q=data+science",
+      "https://en.wikipedia.org/wiki/Data_science#Modern_usage",
+      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
+      "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
+      "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite")
+  )
 })
