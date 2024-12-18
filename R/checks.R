@@ -174,9 +174,37 @@ is_no_spell_check <- function(files) {
 
 check_url <- function(url) {
 
+  rlang::check_installed("httr2")
+
+  # try a HEAD request first, because it's faster. But some servers do not
+  # support it, so we will try a GET afterwards, if this fails.
   response <- try(
     httr2::request(url) %>%
       httr2::req_method("HEAD") %>%
+      # do not throw error when an http error is encountered, because
+      # this should only catch urls that don't exist.
+      httr2::req_error(is_error = \(x) FALSE) %>%
+      httr2::req_perform(),
+    silent = TRUE
+  )
+
+  # a try error implies that the resolution of the URL failed
+  # => return failure
+  if (inherits(response, "try-error")) {
+    return(FALSE)
+  }
+
+  # if we have success, return success
+  if (httr2::resp_status(response) < 300) {
+    return(TRUE)
+  }
+
+  # otherwise, try a GET request and return
+  # this time, we do not catch HTTP errors with httr2::req_error, such that
+  # these also result in a try error.
+  response <- try(
+    httr2::request(url) %>%
+      httr2::req_method("GET") %>%
       httr2::req_perform(),
     silent = TRUE
   )

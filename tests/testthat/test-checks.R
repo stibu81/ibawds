@@ -31,4 +31,12 @@ test_that("is_no_spell_check() works", {
 test_that("check_url() works", {
   expect_true(check_url("https://www.github.com"))
   expect_false(check_url("https://thispagedoesnotexistonthe.internet"))
+  # status code 204 (no content) and 301 (moved permanently) should be success
+  expect_true(check_url("https://httpstat.us/201"))
+  expect_true(check_url("https://httpstat.us/301"))
+  # status codes 403 (forbidden) and 500 (int. server error) should be failure
+  expect_false(check_url("https://httpstat.us/403"))
+  expect_false(check_url("https://httpstat.us/500"))
+  # an inexistent path on an existing page should be failure
+  expect_false(check_url("https://www.github.com/stibu81/thisdoesnotexist"))
 })
