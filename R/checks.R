@@ -255,7 +255,7 @@ extract_urls <- function(x) {
   # that have no matching opening parenthesis.
   n_opening <- stringr::str_count(urls, "\\(")
   n_closing <- stringr::str_count(urls, "\\)")
-  rm_pattern <- stringr::str_dup("\\)", pmax(n_closing - n_opening, 0))
+  rm_pattern <- stringr::str_dup("\\)[^)]*", pmax(n_closing - n_opening, 0))
 
   stringr::str_remove(urls, paste0(rm_pattern, "$"))
 }

@@ -12,6 +12,8 @@ Einige URLs:
 * https://de.wikipedia.org/wiki/Wikipedia:Hauptseite
 * [GitHub](http://www.github.com)
 * Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film))
+* ((https://en.wikipedia.org/wiki/Physics_(Aristotle))&).
+* ((https://en.wikipedia.org/wiki/The_Treachery_of_Images)).-
 
 Dieser Link existiert nicht:
 

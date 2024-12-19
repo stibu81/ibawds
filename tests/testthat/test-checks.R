@@ -2,7 +2,7 @@ library(dplyr, warn.conflicts = FALSE)
 
 test_that("spell_check_slides() works", {
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
-  spell_check_ref$found <- list("test.Rmd:14", "test.Rmd:20", "test.Rmd:22")
+  spell_check_ref$found <- list("test.Rmd:14", "test.Rmd:22", "test.Rmd:24")
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 
   expect_equal(spell_check_slides(test_path("data")), spell_check_ref)
@@ -49,8 +49,10 @@ test_that("check_links_in_file() works", {
     url = c("https://de.wikipedia.org/wiki/Wikipedia:Hauptseite",
             "http://www.github.com",
             "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+            "https://en.wikipedia.org/wiki/Physics_(Aristotle)",
+            "https://en.wikipedia.org/wiki/The_Treachery_of_Images",
             "https://www.doesnotexist.invalid"),
-    reachable = c(TRUE, TRUE, TRUE, FALSE)
+    reachable = c(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE)
   )
   expect_equal(
     check_links_in_file(test_path("data", "01_Rmd", "test.Rmd")),
@@ -80,6 +82,11 @@ test_that("extract_urls() works", {
         "Lorem ipsum dolor sit amet",
         "Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film))",
         "(Bird: (https://en.wikipedia.org/wiki/Bird_((1988_film))))",
+        "Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film)):",
+        "(Bird: (https://en.wikipedia.org/wiki/Bird_((1988_film)))):",
+        "Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film)).",
+        "(Bird: (https://en.wikipedia.org/wiki/Bird_((1988_film)))).",
+        "((https://en.wikipedia.org/wiki/Physics_(Aristotle)#Description_of_the_content):.&):-)",
         "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
         "sfd https://de.wikipedia.org/wiki/Wikipedia:Hauptseite =3")
     ),
@@ -91,6 +98,11 @@ test_that("extract_urls() works", {
       "https://en.wikipedia.org/wiki/Bird_(1988_film)",
       "https://en.wikipedia.org/wiki/Bird_(1988_film)",
       "https://en.wikipedia.org/wiki/Bird_((1988_film))",
+      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
+      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
+      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
+      "https://en.wikipedia.org/wiki/Physics_(Aristotle)#Description_of_the_content",
       "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
       "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite")
   )
