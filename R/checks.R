@@ -246,7 +246,7 @@ check_links_in_file <- function(file) {
 extract_urls <- function(x) {
 
   urls <- x %>%
-    stringr::str_extract_all("https?://[A-Za-z0-9./_%#?=&()~+:-]+") %>%
+    stringr::str_extract_all("https?://[A-Za-z0-9./_%#?!=&$*()~+:;,-]+") %>%
     unlist()
 
   # since urls may contain parentheses, the pattern also extracts them.
@@ -257,6 +257,9 @@ extract_urls <- function(x) {
   n_closing <- stringr::str_count(urls, "\\)")
   rm_pattern <- stringr::str_dup("\\)[^)]*", pmax(n_closing - n_opening, 0))
 
-  stringr::str_remove(urls, paste0(rm_pattern, "$"))
+  urls <- stringr::str_remove(urls, paste0(rm_pattern, "$"))
+
+  # remove punctuation at the end of the urls
+  stringr::str_remove(urls, "[,;.:?!]*$")
 }
 

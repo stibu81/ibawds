@@ -77,6 +77,7 @@ test_that("extract_urls() works", {
         "no url", "https:/invalid.url",
         "(https://www.github.com) %4l& [http://www.github.com] ",
         "abc https://www.ibaw.ch/suche/?q=data+science abc",
+        # check handling of brackets
         "(this: https://en.wikipedia.org/wiki/Data_science#Modern_usage)",
         "Bird: https://en.wikipedia.org/wiki/Bird_(1988_film)",
         "Lorem ipsum dolor sit amet",
@@ -88,7 +89,11 @@ test_that("extract_urls() works", {
         "(Bird: (https://en.wikipedia.org/wiki/Bird_((1988_film)))).",
         "((https://en.wikipedia.org/wiki/Physics_(Aristotle)#Description_of_the_content):.&):-)",
         "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
-        "sfd https://de.wikipedia.org/wiki/Wikipedia:Hauptseite =3")
+        "sfd https://de.wikipedia.org/wiki/Wikipedia:Hauptseite =3",
+        # check urls followed by punctuation
+        "https://www.github.com.", "https://www.github.com:",
+        "https://www.github.com,", "https://www.github.com;",
+        "https://www.github.com?", "https://www.github.com!")
     ),
     c("https://www.github.com", "http://www.github.com",
       "https://www.github.com",
@@ -96,14 +101,13 @@ test_that("extract_urls() works", {
       "https://www.ibaw.ch/suche/?q=data+science",
       "https://en.wikipedia.org/wiki/Data_science#Modern_usage",
       "https://en.wikipedia.org/wiki/Bird_(1988_film)",
-      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
-      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
-      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
-      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
-      "https://en.wikipedia.org/wiki/Bird_(1988_film)",
-      "https://en.wikipedia.org/wiki/Bird_((1988_film))",
+      rep(c("https://en.wikipedia.org/wiki/Bird_(1988_film)",
+            "https://en.wikipedia.org/wiki/Bird_((1988_film))"),
+          times = 3),
       "https://en.wikipedia.org/wiki/Physics_(Aristotle)#Description_of_the_content",
       "https://en.wikipedia.org/w/index.php?search=Bird&title=Special%3ASearch&ns0=1",
-      "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite")
+      "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite",
+      rep("https://www.github.com", times = 6)
+    )
   )
 })
