@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 1.0.0.9009
+Version: 1.0.0.9010
 Authors@R: person(given = "Stefan",
                   family = "Lanz",
                   role = c("aut", "cre"),
@@ -32,6 +32,7 @@ Imports:
   scales,
   dplyr (>= 1.1.0),
   stringr,
+  purrr,
   magrittr,
   cli
 Suggests:

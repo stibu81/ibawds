@@ -13,7 +13,7 @@ test_that("check get_required_packages()", {
             "kableExtra", "tidyverse", "rmarkdown", "caret", "reshape2",
             "lubridate", "ggrepel", "writexl", "cowplot", "DT",
             "tidytext", "rvest", "Lahman", "HistData", "titanic",
-            "BiocManager", "waldo", "clValid", "ggfortify",
+            "BiocManager", "waldo", "clValid", "ggfortify", "purrr",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger",
             "rstudioapi", "remotes", "cli", "gutenbergr", "styler")
   expect_setequal(pkgs, req_pkgs)

@@ -111,3 +111,13 @@ test_that("extract_urls() works", {
     )
   )
 })
+
+
+test_that("check_links_in_slides() workds", {
+  expect_equal(
+    # suppress the progress bar
+    suppressMessages(check_links_in_slides(test_path("data"))),
+    tibble(url = "https://www.doesnotexist.invalid",
+           file = "test.Rmd")
+  )
+})

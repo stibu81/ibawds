@@ -213,6 +213,38 @@ check_url <- function(url) {
 }
 
 
+#' Check All Links in the Slide Deck
+#'
+#' Check links in all files of a slide deck using [check_links_in_file()].
+#'
+#' @param path path to the top level directory of a lecture
+#'
+#' @return
+#' a tibble listing the links that did not work.
+#'
+#' @export
+
+check_links_in_slides <- function(path) {
+
+  rmd_files <- find_rmd_files(path, ignore_nospellcheck = FALSE)
+
+  progress_bar_options <- list(
+    show_after = 0,
+    format = paste("{cli::pb_bar} Processing file",
+                   "{cli::pb_current + 1}/{cli::pb_total} [{cli::pb_elapsed}]")
+  )
+  link_checks <- purrr::map(rmd_files, check_links_in_file,
+                            .progress = progress_bar_options) %>%
+    magrittr::set_names(basename(rmd_files)) %>%
+    dplyr::bind_rows(.id = "file") %>%
+    dplyr::filter(!.data$reachable) %>%
+    dplyr::select(url, file) %>%
+    dplyr::arrange(url, file)
+
+  link_checks
+}
+
+
 #' Check All Links in a Text File
 #'
 #' Find and check all http(s) URLs in an text file.
@@ -229,7 +261,9 @@ check_url <- function(url) {
 
 check_links_in_file <- function(file) {
 
-  urls <- readr::read_lines(file) %>%
+  # the progress bar in read_lines() must be suppressed in order for the
+  # progress bar from purrr::map() in check_links_in_slides() to work properly.
+  urls <- readr::read_lines(file, progress = FALSE) %>%
     extract_urls() %>%
     unique()
   url_check <- urls %>%
