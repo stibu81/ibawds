@@ -1,6 +1,7 @@
 library(dplyr, warn.conflicts = FALSE)
 
 test_that("spell_check_slides() works", {
+  skip_on_os(c("mac", "windows"))
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list("test.Rmd:14", "test.Rmd:22", "test.Rmd:24")
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")

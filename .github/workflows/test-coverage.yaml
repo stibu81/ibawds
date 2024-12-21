@@ -24,6 +24,11 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install hunspell for de_CH
+        if: matrix.config.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install -y hunspell-de-ch-frami
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr, any::xml2
