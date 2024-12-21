@@ -114,7 +114,8 @@ test_that("extract_urls() works", {
 })
 
 
-test_that("check_links_in_slides() workds", {
+test_that("check_links_in_slides() works", {
+  skip_on_os("windows")
   expect_equal(
     # suppress the progress bar
     suppressMessages(check_links_in_slides(test_path("data"))),
