@@ -22,7 +22,7 @@
 #' @export
 
 n_available_packages <- function(cran = getOption("repos")) {
-  get_cran_page(cran, "packages") %>%
+  get_cran_page("packages", cran) %>%
     stringr::str_subset("repository features \\d+ available packages") %>%
     stringr::str_extract("(?<=features )\\d+(?= available)") %>%
     as.integer()
@@ -33,13 +33,15 @@ n_available_packages <- function(cran = getOption("repos")) {
 #' @export
 
 available_r_version <- function(cran = getOption("repos")) {
-  get_cran_page(cran, "main") %>%
+  get_cran_page("main", cran) %>%
     stringr::str_subset("R-[0-9.]+\\.tar\\.gz") %>%
     stringr::str_extract("(?<=R-)[0-9.]+(?=\\.tar\\.gz)")
 }
 
 # helper function to download a page from CRAN
-get_cran_page <- function(cran, type, error_call = rlang::caller_env()) {
+get_cran_page <- function(type,
+                          cran = getOption("repos"),
+                          error_call = rlang::caller_env()) {
 
   # determine the url and download
   url <- if (type == "packages") {
