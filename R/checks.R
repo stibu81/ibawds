@@ -1,5 +1,3 @@
-# nocov start
-
 #' Check Spelling in the Evaluation of the Papers or the Slide Decks
 #'
 #' Evaluation of the student papers, lecture slides and some exercises are all
@@ -81,8 +79,6 @@ spell_check_evaluation <- function(path = ".",
                               ignore = ignore_list)
 
 }
-
-# nocov end
 
 
 #' @rdname spell_check_evaluation

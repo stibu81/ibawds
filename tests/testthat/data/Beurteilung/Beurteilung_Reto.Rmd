@@ -1,0 +1,21 @@
+---
+title: "Rückmeldung Transferarbeit Reto"
+author: "Stefan Lanz"
+date: "`r format(lubridate::today(), '%d.%m.%Y')`"
+output: html_document
+---
+
+Testdatei für die Beurteilung.
+
+Der Name des Studenten ist kein Schreibfehler: Reto
+
+Diese Wörter sind in der Wordlist:
+
+* Regressionsmodell
+* Whisker
+* SE
+* csv-Datei
+* Confounder
+* tibble
+
+Das ist ein Schreibfehlr!

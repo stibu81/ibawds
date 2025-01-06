@@ -31,6 +31,33 @@ test_that("is_no_spell_check() works", {
 })
 
 
+test_that("spell_check_evaluation() works", {
+  skip_on_os(c("mac", "windows"))
+  spell_check_ref <- data.frame(word = c("Schreibfehlr", "Wordlist"))
+  spell_check_ref$found <- list("Beurteilung_Reto.Rmd:21", "Beurteilung_Reto.Rmd:12")
+  class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
+
+  expect_equal(spell_check_evaluation(test_path("data")), spell_check_ref)
+
+  # not using the wordlist leads to more spelling errors
+  expect_gt(
+    nrow(spell_check_evaluation(test_path("data"), use_wordlist = FALSE)),
+    nrow(spell_check_ref)
+  )
+
+  # check with student filter
+  expect_equal(spell_check_evaluation(test_path("data"), students = "Reto"),
+               spell_check_ref)
+  expect_error(spell_check_evaluation(test_path("data"), students = "John"),
+               "No evaluation files found.")
+
+  # check empty directory
+  withr::with_tempdir({
+    expect_error(spell_check_evaluation(), "No evaluation files found.")
+  })
+})
+
+
 test_that("check_url() works", {
   expect_true(check_url("https://www.github.com"))
   expect_false(check_url("https://thispagedoesnotexistonthe.internet"))
