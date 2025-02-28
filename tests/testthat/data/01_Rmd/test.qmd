@@ -1,0 +1,32 @@
+---
+title: "Test File For ibawds"
+author: "Someone"
+date: today
+format: html
+---
+
+Diese Datei ist nützlich für die Tests in ibawds.
+
+Einige URLs:
+
+* https://de.wikipedia.org/wiki/Wikipedia:Hauptseite
+* [GitHub](http://www.github.com)
+* Bird: (https://en.wikipedia.org/wiki/Bird_(1988_film))
+* ((https://en.wikipedia.org/wiki/Physics_(Aristotle))&).
+* ((https://en.wikipedia.org/wiki/The_Treachery_of_Images)).-
+
+Dieser Link existiert nicht:
+
+https://www.doesnotexist.invalid
+
+Das ist ein Schreibfehlr!
+
+Diese Wörter sind in der Wordlist:
+* specificity
+* tidyverse, dplyr, tidyr
+* Voronoi-Diagramm
+* ZGWS
+* RStudio
+* TensorFlow
+* Pipe
+

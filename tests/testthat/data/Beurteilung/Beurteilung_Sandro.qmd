@@ -1,8 +1,8 @@
 ---
-title: "Rückmeldung Transferarbeit Reto"
+title: "Rückmeldung Transferarbeit Sandro"
 author: "Stefan Lanz"
-date: "`r format(lubridate::today(), '%d.%m.%Y')`"
-output: html_document
+date: "2025-02-10"
+format: html
 ---
 
 Testdatei für die Beurteilung.

@@ -347,9 +347,10 @@ check_lecture_packages <- function(path = ".") {
 
   path <- find_lectures_root(path)
 
-  # we must catch all the slides (*.Rmd) and the exercises (*.Rmd or *.R) but
-  # avoid caches (*.RData)
-  r_files <- list.files(path, "\\.R($|md$)", recursive = TRUE, full.names = TRUE) %>%
+  # we must catch all the slides (*.Rmd, *.qmd) and the exercises
+  # (*.Rmd, *.qmd or *.R) but avoid caches (*.RData)
+  r_files <- path %>%
+    list.files("\\.(R|q)($|md$)", recursive = TRUE, full.names = TRUE) %>%
     stringr::str_remove(paste0(path, "/?")) %>%
     # keep only files that belong to lectures. These folders always start with two
     # digits

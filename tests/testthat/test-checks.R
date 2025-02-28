@@ -3,7 +3,11 @@ library(dplyr, warn.conflicts = FALSE)
 test_that("spell_check_slides() works", {
   skip_on_os(c("mac", "windows"))
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
-  spell_check_ref$found <- list("test.Rmd:14", "test.Rmd:22", "test.Rmd:24")
+  spell_check_ref$found <- list(
+    c("test.Rmd:14", "test.qmd:14"),
+    c("test.Rmd:22", "test.qmd:22"),
+    c("test.Rmd:24", "test.qmd:24")
+  )
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 
   expect_equal(spell_check_slides(test_path("data")), spell_check_ref)
@@ -23,10 +27,17 @@ test_that("spell_check_slides() works", {
 
 test_that("is_no_spell_check() works", {
   expect_false(is_no_spell_check(test_path("data", "01_Rmd", "test.Rmd")))
+  expect_false(is_no_spell_check(test_path("data", "01_Rmd", "test.qmd")))
+
   withr::with_tempfile("rmd_file", {
     writeLines(c("<!-- nospellcheck -->", "", "something"), rmd_file)
     expect_true(is_no_spell_check(rmd_file))
     fileext = ".Rmd"
+  })
+  withr::with_tempfile("qmd_file", {
+    writeLines(c("<!-- nospellcheck -->", "", "something"), qmd_file)
+    expect_true(is_no_spell_check(qmd_file))
+    fileext = ".qmd"
   })
 })
 
@@ -34,7 +45,10 @@ test_that("is_no_spell_check() works", {
 test_that("spell_check_evaluation() works", {
   skip_on_os(c("mac", "windows"))
   spell_check_ref <- data.frame(word = c("Schreibfehlr", "Wordlist"))
-  spell_check_ref$found <- list("Beurteilung_Reto.Rmd:21", "Beurteilung_Reto.Rmd:12")
+  spell_check_ref$found <- list(
+    c("Beurteilung_Reto.Rmd:21", "Beurteilung_Sandro.qmd:21"),
+    c("Beurteilung_Reto.Rmd:12", "Beurteilung_Sandro.qmd:12")
+  )
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 
   expect_equal(spell_check_evaluation(test_path("data")), spell_check_ref)
@@ -46,6 +60,11 @@ test_that("spell_check_evaluation() works", {
   )
 
   # check with student filter
+  spell_check_ref <- data.frame(word = c("Sandro", "Schreibfehlr", "Wordlist"))
+  spell_check_ref$found <- list("Beurteilung_Reto.Rmd:10",
+                                "Beurteilung_Reto.Rmd:21",
+                                "Beurteilung_Reto.Rmd:12")
+  class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
   expect_equal(spell_check_evaluation(test_path("data"), students = "Reto"),
                spell_check_ref)
   expect_error(spell_check_evaluation(test_path("data"), students = "John"),
@@ -84,6 +103,10 @@ test_that("check_links_in_file() works", {
   )
   expect_equal(
     check_links_in_file(test_path("data", "01_Rmd", "test.Rmd")),
+    link_check_ref
+  )
+  expect_equal(
+    check_links_in_file(test_path("data", "01_Rmd", "test.qmd")),
     link_check_ref
   )
 
@@ -147,6 +170,6 @@ test_that("check_links_in_slides() works", {
     # suppress the progress bar
     suppressMessages(check_links_in_slides(test_path("data"))),
     tibble(url = "https://www.doesnotexist.invalid",
-           file = "test.Rmd")
+           file = c("test.Rmd", "test.qmd"))
   )
 })

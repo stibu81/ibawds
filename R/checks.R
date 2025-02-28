@@ -48,15 +48,15 @@ spell_check_evaluation <- function(path = ".",
   rlang::check_installed("spelling")
 
   # find the evaluation files recursively, ignore the template
-  eval_files <- list.files(path, "Beurteilung_.*\\.Rmd",
+  eval_files <- list.files(path, "Beurteilung_.*\\.(R|q)md",
                            recursive = TRUE,
                            full.names = TRUE) %>%
-    stringr::str_subset("Beurteilung_Template\\.Rmd", negate = TRUE)
+    stringr::str_subset("Beurteilung_Template\\.(R|q)md", negate = TRUE)
 
   if (!is.null(students)) {
     eval_files <- eval_files %>%
       stringr::str_subset(
-        paste0("Beurteilung_", students, ".Rmd", collapse = "|")
+        paste0("Beurteilung_", students, ".(R|q)md", collapse = "|")
       )
   }
 
@@ -67,7 +67,7 @@ spell_check_evaluation <- function(path = ".",
 
   # extract the names of the students and use them as the ignore list.
   ignore_list <- eval_files %>%
-    stringr::str_extract("Beurteilung_(.*)\\.Rmd", group = 1)
+    stringr::str_extract("Beurteilung_(.*)\\.(R|q)md", group = 1)
 
   # add words from the wordlist to the ignore list, if requested
   if (use_wordlist) {
@@ -105,12 +105,12 @@ spell_check_slides <- function(path = ".",
 }
 
 
-# find all the Rmd files in a directory and its subdirectories
+# find all the Rmd & qmd files in a directory and its subdirectories
 find_rmd_files <- function(path,
                            ignore_nospellcheck = FALSE,
                            error_call = rlang::caller_env()) {
 
-  rmd_files <- list.files(path, "\\.Rmd",
+  rmd_files <- list.files(path, "\\.(R|q)md",
                             recursive = TRUE,
                             full.names = TRUE) %>%
     # make sure that only slides and exercises are included
