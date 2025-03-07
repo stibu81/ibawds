@@ -171,6 +171,7 @@ confusion
 correlations
 csv-Datei
 CV
+Dashboards
 data
 database
 decision
@@ -192,6 +193,7 @@ escape
 escaped
 escaping
 estimation
+Execution-Option
 explained
 expression
 expressions
@@ -257,7 +259,7 @@ machine
 MAE
 mapping
 mappings
-Markdown
+markdown
 markup
 Markup-Sprache
 metric
@@ -267,6 +269,7 @@ Nicht-Linearität
 Niveauparameter
 noise
 numeric
+observable
 one-hot
 options
 OR
@@ -301,6 +304,11 @@ QDA
 quadratic
 Quantilfunktion
 Quantilschätzer
+Quarto
+Quarto-Datei
+Quarto-Dateien
+Quarto-Dokument
+Quarto-Dokumenten
 random
 recall
 Regex
@@ -657,10 +665,12 @@ your
 .png
 .R
 .Rmd
+.qmd
 jpg
 png
 Rmd
 rmd
+qmd
 
 
 # file names (or parts of them) #####
@@ -789,6 +799,8 @@ Yihui
 -fold
 -Gemeinden
 -Gruppe
+-ige
+-iger
 -Konfidenzintervall
 -Konfidenzintervalle
 -Modell
@@ -801,6 +813,7 @@ Yihui
 -Schleife
 -seitigen
 -t
+-te
 -Tab
 -ten
 -Verteilung
