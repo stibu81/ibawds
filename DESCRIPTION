@@ -1,7 +1,7 @@
 Package: ibawds
 Type: Package
 Title: Functions and Datasets for the Data Science Course at IBAW
-Version: 1.0.0.9012
+Version: 1.1.0
 Authors@R: person(given = "Stefan",
                   family = "Lanz",
                   role = c("aut", "cre"),
@@ -17,7 +17,7 @@ Language: en-GB
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Depends: 
-  R (>= 3.6.0),
+  R (>= 4.1.0),
   dslabs
 Imports:
   stats,
