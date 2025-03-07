@@ -2,6 +2,7 @@ library(dplyr, warn.conflicts = FALSE)
 
 test_that("spell_check_slides() works", {
   skip_on_os(c("mac", "windows"))
+  skip_on_cran()
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list(
     c("test.Rmd:14", "test.qmd:14"),
@@ -44,6 +45,7 @@ test_that("is_no_spell_check() works", {
 
 test_that("spell_check_evaluation() works", {
   skip_on_os(c("mac", "windows"))
+  skip_on_cran()
   spell_check_ref <- data.frame(word = c("Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list(
     c("Beurteilung_Reto.Rmd:21", "Beurteilung_Sandro.qmd:21"),
@@ -78,6 +80,7 @@ test_that("spell_check_evaluation() works", {
 
 
 test_that("check_url() works", {
+  skip_on_cran()
   expect_true(check_url("https://www.github.com"))
   expect_false(check_url("https://thispagedoesnotexistonthe.internet"))
   # status code 204 (no content) and 301 (moved permanently) should be success
@@ -92,6 +95,7 @@ test_that("check_url() works", {
 
 
 test_that("check_links_in_file() works", {
+  skip_on_cran()
   link_check_ref <- tibble(
     url = c("https://de.wikipedia.org/wiki/Wikipedia:Hauptseite",
             "http://www.github.com",
@@ -166,6 +170,7 @@ test_that("extract_urls() works", {
 
 test_that("check_links_in_slides() works", {
   skip_on_os("windows")
+  skip_on_cran()
   expect_equal(
     # suppress the progress bar
     suppressMessages(check_links_in_slides(test_path("data"))),
