@@ -302,6 +302,33 @@
 
 "cran_history"
 
+
+#' Simulated Dice Throws
+#'
+#' A list with `r length(dice_data)` numeric vectors containing the result
+#' of a number of simulated throws with a six-sided dice. Not all of the
+#' dice are fair and they are unfair in different ways.
+#'
+#' @format
+#' a list containing `r length(dice_data)` numeric vectors with varying length
+#' between `r min(lengths(dice_data))` and `r max(lengths(dice_data))`. The
+#' elements of the list are named "d1", "d2", etc.
+#'
+#' @examples
+#' # the numeric vectors differ in length
+#' lengths(dice_data)
+#'
+#' # compute the mean for each dice
+#' sapply(dice_data, mean)
+#'
+#' # look at the contingency table for dice 3
+#' table(dice_data$d3)
+#'
+#' @keywords datasets
+
+"dice_data"
+
+
 #' Get Files for File Reading Exercise
 #'
 #' Copy the files for an exercise for reading files to a directory.
