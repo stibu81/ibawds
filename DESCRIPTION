@@ -9,7 +9,7 @@ Authors@R: person(given = "Stefan",
 Description: A collection of useful functions and datasets for the Data Science
   Course at IBAW.
 License: MIT + file LICENSE
-URL: https://stibu81.github.io/ibawds/
+URL: https://stibu81.github.io/ibawds/, https://github.com/stibu81/ibawds
 BugReports: https://github.com/stibu81/ibawds/issues
 Encoding: UTF-8
 LazyData: true
