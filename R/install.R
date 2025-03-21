@@ -60,6 +60,15 @@ check_ibawds_setup <- function() {
 
   cli::cli_alert_info(paste("Operating system:", sw$os))
 
+  # check the ram
+  ram <- memuse::Sys.meminfo()$totalram
+  cli::cli_alert_info("System memory: {ram}")
+  if (as.numeric(ram) < 15 * 2^30) {
+    cli::cli_alert_warning(
+      "The memory might not be sufficient for some tasks in the course."
+    )
+  }
+
   # check the R version: it should be at most 1 year old
   if (Sys.Date() - sw$R$date < 365) {
     cli::cli_alert_success(paste("R is up to date:", sw$R$version))

@@ -15,7 +15,7 @@ test_that("check get_required_packages()", {
             "tidytext", "rvest", "Lahman", "HistData", "titanic",
             "BiocManager", "waldo", "clValid", "ggfortify", "purrr",
             "knitr", "hexbin", "patchwork", "GGally", "party", "RANN", "ranger",
-            "rstudioapi", "remotes", "cli", "gutenbergr", "styler")
+            "rstudioapi", "remotes", "cli", "gutenbergr", "styler", "memuse")
   expect_setequal(pkgs, req_pkgs)
   not_req_pkgs <- c("R", "testthat", "usethis", "vdiffr", "covr", "spelling",
                     "httr2")
@@ -38,8 +38,8 @@ test_that("test install_ibawds()", {
 # downgrade_packages() is only tested for a package that does not exist.
 test_that("test downgrade_packages()", {
   expect_warning(
-    expect_false(downgrade_packages("notoncran!")),
-    "\"notoncran!\" is not installed and cannot be downgraded."
+    expect_false(downgrade_packages("notinstalled!")),
+    "\"notinstalled!\" is not installed and cannot be downgraded."
   )
 })
 
