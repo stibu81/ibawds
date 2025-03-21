@@ -107,6 +107,7 @@ that your system is ready for the course similar to this one:
 
     ℹ Checking the setup for the course ...
     ℹ Operating system: Ubuntu 22.04.2 LTS
+    ℹ System memory: 15.390 GiB
     ✔ R is up to date: 4.2.2
     ✔ RStudio is up to date: 2023.6.1.524
     ✔ All the required packages are installed.
