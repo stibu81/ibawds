@@ -1,6 +1,7 @@
 library(withr)
 library(dplyr, warn.conflicts = FALSE)
 library(readr, warn.conflicts = FALSE)
+library(lubridate, warn.conflicts = FALSE)
 
 # CRAN URL must be set for the tests to work
 options(repos = c(CRAN = "https://cloud.r-project.org"))
@@ -32,15 +33,35 @@ test_that("test install_ibawds()", {
   skip_if_not(suppressMessages(rlang::is_installed(req_pkgs)),
               "not all the required packages are installed.")
   expect_message(install_ibawds(), "All the required packages are installed.")
+
+  # mock rlang::is_installed to pretend that packages are not installed
+  local_mocked_bindings(
+    is_installed = function(...) FALSE,
+    .package = "rlang"
+  )
+  expect_silent(install_ibawds())
 })
 
 
-# downgrade_packages() is only tested for a package that does not exist.
-test_that("test downgrade_packages()", {
+test_that("test downgrade_packages() for a package that does not exist", {
   expect_warning(
     expect_false(downgrade_packages("notinstalled!")),
     "\"notinstalled!\" is not installed and cannot be downgraded."
   )
+})
+
+
+test_that("test downgrade_packages() for a package that is installed", {
+  # avoid the actual downgrade by mocking remotes::install_version()
+  local_mocked_bindings(
+    install_version = function(...) {},
+    .package = "remotes"
+  )
+  dv <- packageVersion("dplyr")
+  expect_true(downgrade_packages("dplyr")) %>%
+    expect_message(paste("installed version of dplyr:", dv)) %>%
+    expect_message(paste("downgrade to version before", dv)) %>%
+    expect_message(paste("installed dplyr version", dv))
 })
 
 
@@ -99,7 +120,20 @@ test_that("test get_software_versions()", {
   expect_s3_class(sw$RStudio$date, "Date")
   expect_true(sw$pkg_installed)
   expect_s3_class(sw$ibawds$installed, "numeric_version")
+  expect_equal(sw$ibawds$installed, packageVersion("ibawds"))
   expect_s3_class(sw$ibawds$current, "numeric_version")
+
+  # mock rstudioapi::versionInfo() to pretend this is running in RStudio
+  local_mocked_bindings(
+    versionInfo = function(...) {
+      list(version = as.numeric_version(paste0(year(today()), ".3.0.385")))
+    },
+    .package = "rstudioapi"
+  )
+  sw <- get_software_versions()
+  expect_s3_class(sw$RStudio$version, "numeric_version")
+  expect_s3_class(sw$RStudio$date, "Date")
+  expect_equal(sw$RStudio$date, as.Date(paste0(year(today()), "-03-01")))
 })
 
 

@@ -32,6 +32,7 @@ test_that("is_no_spell_check() works for unmarked files", {
   expect_false(is_no_spell_check(test_path("data", "01_Rmd", "test.qmd")))
 })
 
+
 test_that("is_no_spell_check() works with marker in the first line", {
   withr::with_tempfile("rmd_file", {
     writeLines(c("<!-- nospellcheck -->", "", "something"), rmd_file)
@@ -62,6 +63,23 @@ test_that("is_no_spell_check() works with marker after yaml header", {
   })
 })
 
+
+test_that("is_no_spell_check() works with an incomplete yaml header", {
+  # since the marker must come after the end of the yaml header, an incomplete
+  # yaml header leads to the file not being ignored.
+  withr::with_tempfile("rmd_file", {
+    writeLines(c("---", "title: test", "",
+                 "<!-- nospellcheck -->", "", "something"),
+               rmd_file)
+    expect_false(is_no_spell_check(rmd_file))
+    fileext = ".Rmd"
+  })
+  withr::with_tempfile("qmd_file", {
+    writeLines(c("---", "title: test", "", "something"), qmd_file)
+    expect_false(is_no_spell_check(qmd_file))
+    fileext = ".qmd"
+  })
+})
 
 test_that("spell_check_evaluation() works", {
   skip_on_os(c("mac", "windows"))
