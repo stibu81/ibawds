@@ -160,7 +160,7 @@ is_no_spell_check <- function(files) {
   # makes not much sense to first read only the first line of every file
   # because this risks that many files need to be read twice.
   first_lines <- files %>%
-    purrr::map(\(x) readLines(x, n = 51))
+    purrr::map(\(x) readLines(x, n = 51, warn = FALSE))
 
   # if the first line is "---", this means that the file contains a yaml header.
   # In this case, the marker to ignore the spell check can also come in the
