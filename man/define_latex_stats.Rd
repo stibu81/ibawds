@@ -12,10 +12,10 @@ are output as a side effect.
 }
 \description{
 Add the definitions for various useful LaTeX
-equation symbols for statistics to an RMarkdown document.
+equation symbols for statistics to an RMarkdown or Quarto document.
 }
 \details{
-Run this function from within a code chunk in a RMarkdown document
+Run this function from within a code chunk in a RMarkdown or Quarto document
 with options \code{results = "asis"} and \code{echo = FALSE} (see "Examples").
 It only works for pdf output.
 
@@ -24,7 +24,7 @@ It defines the following macros: \verb{\\E}, \verb{\\P}, \verb{\\Var}, \verb{\\C
 }
 \examples{
 \dontrun{
-# add this code chunk to a RMarkdown document
+# add this code chunk to a RMarkdown or Quarto document
 ```{r results = "asis", echo = FALSE}
   define_latex_stats()
 ```

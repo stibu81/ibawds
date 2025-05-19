@@ -21,15 +21,18 @@ test_that("spell_check_slides() works", {
 
   # check empty directory
   withr::with_tempdir({
-    expect_error(spell_check_slides(), "No RMarkdown files found.")
+    expect_error(spell_check_slides(),
+                 "No RMarkdown or Quarto files found.")
   })
 })
 
 
-test_that("is_no_spell_check() works", {
+test_that("is_no_spell_check() works for unmarked files", {
   expect_false(is_no_spell_check(test_path("data", "01_Rmd", "test.Rmd")))
   expect_false(is_no_spell_check(test_path("data", "01_Rmd", "test.qmd")))
+})
 
+test_that("is_no_spell_check() works with marker in the first line", {
   withr::with_tempfile("rmd_file", {
     writeLines(c("<!-- nospellcheck -->", "", "something"), rmd_file)
     expect_true(is_no_spell_check(rmd_file))
@@ -37,6 +40,23 @@ test_that("is_no_spell_check() works", {
   })
   withr::with_tempfile("qmd_file", {
     writeLines(c("<!-- nospellcheck -->", "", "something"), qmd_file)
+    expect_true(is_no_spell_check(qmd_file))
+    fileext = ".qmd"
+  })
+})
+
+
+test_that("is_no_spell_check() works with marker after yaml header", {
+  withr::with_tempfile("rmd_file", {
+    writeLines(c("---", "title: test", "---",
+                 "<!-- nospellcheck -->", "", "something"),
+               rmd_file)
+    expect_true(is_no_spell_check(rmd_file))
+    fileext = ".Rmd"
+  })
+  withr::with_tempfile("qmd_file", {
+    writeLines(c("---", "title: test", "---", "",
+                 "<!--nospellcheck  -->", "", "something"), qmd_file)
     expect_true(is_no_spell_check(qmd_file))
     fileext = ".qmd"
   })

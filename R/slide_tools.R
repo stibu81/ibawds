@@ -1,10 +1,10 @@
 #' Define LaTeX commands for statistical symbols
 #'
 #' Add the definitions for various useful LaTeX
-#' equation symbols for statistics to an RMarkdown document.
+#' equation symbols for statistics to an RMarkdown or Quarto document.
 #'
 #' @details
-#' Run this function from within a code chunk in a RMarkdown document
+#' Run this function from within a code chunk in a RMarkdown or Quarto document
 #' with options `results = "asis"` and `echo = FALSE` (see "Examples").
 #' It only works for pdf output.
 #'
@@ -16,7 +16,7 @@
 #' are output as a side effect.
 #'
 #' @examples \dontrun{
-#' # add this code chunk to a RMarkdown document
+#' # add this code chunk to a RMarkdown or Quarto document
 #' ```{r results = "asis", echo = FALSE}
 #'   define_latex_stats()
 #' ```

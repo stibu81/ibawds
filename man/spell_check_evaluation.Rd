@@ -42,12 +42,14 @@ excluded.)
 
 \code{spell_check_slides()} finds Rmd-files with evaluations in subfolders
 starting from the current working directory or the directory given by
-\code{path}. In order to exclude a file from the spell check, make sure it's first
-line contains the term "nospellcheck", typically in the form of an
-html-comment:
+\code{path}. In order to exclude a file from the spell check, it must be marked
+with the html-comment
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{<!-- nospellcheck -->
 }\if{html}{\out{</div>}}
+
+The comment must appear either in the first line of the file or in the
+first two lines after the end of the YAML-header.
 
 By default, words contained in a wordlist that is part of the package are
 excluded from the spell check, but this can be turned off by setting

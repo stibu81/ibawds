@@ -29,12 +29,14 @@
 #'
 #' `spell_check_slides()` finds Rmd-files with evaluations in subfolders
 #' starting from the current working directory or the directory given by
-#' `path`. In order to exclude a file from the spell check, make sure it's first
-#' line contains the term "nospellcheck", typically in the form of an
-#' html-comment:
+#' `path`. In order to exclude a file from the spell check, it must be marked
+#' with the html-comment
 #' ```
 #' <!-- nospellcheck -->
 #' ```
+#' The comment must appear either in the first line of the file or in the
+#' first two lines after the end of the YAML-header.
+#'
 #' By default, words contained in a wordlist that is part of the package are
 #' excluded from the spell check, but this can be turned off by setting
 #' `use_wordlist = FALSE`.
@@ -128,7 +130,7 @@ find_rmd_files <- function(path,
 
   # abort, if there are not files to check
   if (length(rmd_files) == 0) {
-    cli::cli_abort("No RMarkdown files found.", call = error_call)
+    cli::cli_abort("No RMarkdown or Quarto files found.", call = error_call)
   }
 
   rmd_files
@@ -148,11 +150,41 @@ read_wordlist <- function(type = c("slides", "evaluation")) {
 }
 
 # helper function: check if a file should be ignored in the spell check
+# there are two variants: either the marker nospellcheck must be in the first
+# line or it must come after the yaml header (with one empty line allowed)
 is_no_spell_check <- function(files) {
 
-  files %>%
-    vapply(readLines, n = 1, character(1)) %>%
-    stringr::str_detect("nospellcheck")
+  nospellcheck_pattern <- "<!--\\s*nospellcheck\\s*-->"
+
+  # note: reading one line takes 2/3 of the time for reading 51. Therefore, it
+  # makes not much sense to first read only the first line of every file
+  # because this risks that many files need to be read twice.
+  first_lines <- files %>%
+    purrr::map(\(x) readLines(x, n = 51))
+
+  # if the first line is "---", this means that the file contains a yaml header.
+  # In this case, the marker to ignore the spell check can also come in the
+  # first two lines after the end of the yaml header.
+  purrr::map_lgl(
+    first_lines,
+    function(fl) {
+      # if the first line contains the marker, return TRUE
+      if (stringr::str_detect(fl[1], nospellcheck_pattern)) {
+        return(TRUE)
+      }
+      # if the file contains a yaml header, search for nospellcheck after the
+      # yaml header
+      i_yaml_marker <- fl %>%
+        stringr::str_detect("^---") %>%
+        which()
+      if (length(i_yaml_marker) >= 2) {
+        after_yaml <- fl[i_yaml_marker[2] + 1:2]
+        return(any(stringr::str_detect(after_yaml, nospellcheck_pattern)))
+      } else {
+        return(FALSE)
+      }
+    }
+  )
 }
 
 
