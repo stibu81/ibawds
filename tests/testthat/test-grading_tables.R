@@ -5,15 +5,15 @@ library(magrittr, warn.conflicts = FALSE)
 # reference tables
 mrt1_ref <- tibble(
   Anforderung = c("Reproduzierbarkeit", "\u2265 1 Tabellen",
-                  "\u2265 2 Arten Plots", "\u2265 5 Bilder/Tabellen",
+                  "\u2265 3 Arten Plots", "\u2265 5 Plots",
                   "\u2265 2 stat. Auswertungen"),
-  Beurteilung = c("OK", "3 Tabellen", "2 Arten Plots", "8 Bilder/Tabellen",
+  Beurteilung = c("OK", "3 Tabellen", "3 Arten Plots", "5 Plots",
                   "2 stat. Auswertungen"),
   "Erf\u00fcllt" = "Ja"
 )
 mrt2_ref <- mrt1_ref %>%
   mutate(
-    Beurteilung = c("NOK", "2 Tabellen", "3 Arten Plots", "3 Bilder/Tabellen",
+    Beurteilung = c("NOK", "2 Tabellen", "3 Arten Plots", "3 Plots",
                     "0 stat. Auswertungen"),
     "Erf\u00fcllt" = c("Nein", "Ja", "Ja", "Nein", "Nein")
 )
@@ -33,11 +33,11 @@ parse_tab <- . %>%
     extract2(1)
 
 test_that("test create_minreq_table", {
-  mrt1 <- create_minreq_table(TRUE, 3, 2, 5, 2)
+  mrt1 <- create_minreq_table(TRUE, 3, 3, 5, 2)
   expect_s3_class(mrt1, "kableExtra")
   expect_equal(parse_tab(mrt1), mrt1_ref)
 
-  mrt2 <- create_minreq_table(FALSE, 2, 3, 1, 0)
+  mrt2 <- create_minreq_table(FALSE, 2, 3, 3, 0)
   expect_s3_class(mrt2, "kableExtra")
   expect_equal(parse_tab(mrt2), mrt2_ref)
 })

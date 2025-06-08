@@ -22,8 +22,8 @@
 #' `create_minreq_table()` creates a table that checks that the minimal requirements
 #' are satisfied:
 #' * the paper must be reproducible
-#' * there must be at least one table and two kinds of plots
-#' * there must be at least 5 plots and tables
+#' * there must be at least one formatted table
+#' * there must be at least 5 plots of at least three different types
 #' * there must be at least two statistical computations
 #'
 #' The table lists for each of those requirement whether it is satisfied or not.
@@ -58,16 +58,17 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
   }
 
   # vector of minimal requirements
-  min_req <- c(1, 1, 2, 5, 2)
+  min_req <- c(1, 1, 3, 5, 2)
   # titles of the requirements
   req_titles <- c("Reproduzierbarkeit", "Tabellen",
-                  "Arten Plots", "Bilder/Tabellen",
+                  "Arten Plots", "Plots",
                   "stat. Auswertungen")
 
   dplyr::tibble(
-    Anforderung = paste(c("", "\u2265 1", "\u2265 2", "\u2265 5", "\u2265 2"),
-                          req_titles),
-    res = c(repro, n_tab, n_plot_kinds, n_tab + n_plots, n_stat),
+    Anforderung = paste(c("", "\u2265", "\u2265", "\u2265", "\u2265"),
+                        c("", min_req[-1]),
+                        req_titles),
+    res = c(repro, n_tab, n_plot_kinds, n_plots, n_stat),
     Beurteilung = c(nok_ok(.data$res[1]),
                     paste(.data$res[-1], req_titles[-1])),
     # setting the name with umlaut here leadds to a CRAN warning on Windows
