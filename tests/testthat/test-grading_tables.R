@@ -4,9 +4,9 @@ library(magrittr, warn.conflicts = FALSE)
 
 # reference tables
 mrt1_ref <- tibble(
-  Anforderung = c("Reproduzierbarkeit", "$\\geq 1$ Tabellen",
-                  "$\\geq 2$ Arten Plots", "$\\geq 5$ Bilder/Tabellen",
-                  "$\\geq 2$ stat. Auswertungen"),
+  Anforderung = c("Reproduzierbarkeit", "\u2265 1 Tabellen",
+                  "\u2265 2 Arten Plots", "\u2265 5 Bilder/Tabellen",
+                  "\u2265 2 stat. Auswertungen"),
   Beurteilung = c("OK", "3 Tabellen", "2 Arten Plots", "8 Bilder/Tabellen",
                   "2 stat. Auswertungen"),
   "Erf\u00fcllt" = "Ja"

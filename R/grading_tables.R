@@ -65,7 +65,7 @@ create_minreq_table <- function(repro, n_tab, n_plot_kinds, n_plots, n_stat) {
                   "stat. Auswertungen")
 
   dplyr::tibble(
-    Anforderung = paste(c("", "$\\geq 1$", "$\\geq 2$", "$\\geq 5$", "$\\geq 2$"),
+    Anforderung = paste(c("", "\u2265 1", "\u2265 2", "\u2265 5", "\u2265 2"),
                           req_titles),
     res = c(repro, n_tab, n_plot_kinds, n_tab + n_plots, n_stat),
     Beurteilung = c(nok_ok(.data$res[1]),
