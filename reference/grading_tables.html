@@ -9,7 +9,7 @@ of the student's papers."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ibawds</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,9 +41,23 @@ of the student's papers.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_minreq_table</span><span class="op">(</span><span class="va">repro</span>, <span class="va">n_tab</span>, <span class="va">n_plot_kinds</span>, <span class="va">n_plots</span>, <span class="va">n_stat</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_minreq_table</span><span class="op">(</span></span>
+<span>  <span class="va">repro</span>,</span>
+<span>  <span class="va">n_tab</span>,</span>
+<span>  <span class="va">n_plot_kinds</span>,</span>
+<span>  <span class="va">n_plots</span>,</span>
+<span>  <span class="va">n_stat</span>,</span>
+<span>  lang <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"de"</span>, <span class="st">"en"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">create_grading_table</span><span class="op">(</span><span class="va">p_text</span>, <span class="va">p_tab</span>, <span class="va">p_plot</span>, <span class="va">p_code</span>, <span class="va">p_stat</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">create_grading_table</span><span class="op">(</span></span>
+<span>  <span class="va">p_text</span>,</span>
+<span>  <span class="va">p_tab</span>,</span>
+<span>  <span class="va">p_plot</span>,</span>
+<span>  <span class="va">p_code</span>,</span>
+<span>  <span class="va">p_stat</span>,</span>
+<span>  lang <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"de"</span>, <span class="st">"en"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +82,11 @@ of the student's papers.</p>
 
 <dt id="arg-n-stat">n_stat<a class="anchor" aria-label="anchor" href="#arg-n-stat"></a></dt>
 <dd><p>integer, number of statistical computations</p></dd>
+
+
+<dt id="arg-lang">lang<a class="anchor" aria-label="anchor" href="#arg-lang"></a></dt>
+<dd><p>language to use in the tables. Supported languages are
+German (<code>"de"</code>, the default) and English ("<code>en"</code>).</p></dd>
 
 
 <dt id="arg-p-text">p_text<a class="anchor" aria-label="anchor" href="#arg-p-text"></a></dt>
