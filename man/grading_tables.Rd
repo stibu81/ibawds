@@ -6,9 +6,23 @@
 \alias{create_grading_table}
 \title{Tables Used for Grading the Papers}
 \usage{
-create_minreq_table(repro, n_tab, n_plot_kinds, n_plots, n_stat)
+create_minreq_table(
+  repro,
+  n_tab,
+  n_plot_kinds,
+  n_plots,
+  n_stat,
+  lang = c("de", "en")
+)
 
-create_grading_table(p_text, p_tab, p_plot, p_code, p_stat)
+create_grading_table(
+  p_text,
+  p_tab,
+  p_plot,
+  p_code,
+  p_stat,
+  lang = c("de", "en")
+)
 }
 \arguments{
 \item{repro}{logical, is the paper reproducible?}
@@ -20,6 +34,9 @@ create_grading_table(p_text, p_tab, p_plot, p_code, p_stat)
 \item{n_plots}{integer, number of plots}
 
 \item{n_stat}{integer, number of statistical computations}
+
+\item{lang}{language to use in the tables. Supported languages are
+German (\code{"de"}, the default) and English ("\verb{en"}).}
 
 \item{p_text}{numeric between 0 and 3, points given for the text}
 
