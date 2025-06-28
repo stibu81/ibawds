@@ -233,7 +233,7 @@ get_required_packages <- function() {
     stringr::str_trim() %>%
     # remove the entries for R and packages that are not relevant for the students
     setdiff(c("R", "testthat", "usethis", "vdiffr", "covr", "spelling",
-              "withr", "httr2"))
+              "withr", "httr2", "nanoparquet"))
 
 }
 
