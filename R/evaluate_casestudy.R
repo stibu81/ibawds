@@ -36,9 +36,25 @@ evaluate_casestudy <- function(prediction_files, solution_file) {
 
 evaluate_one_prediction <- function(file, solution) {
 
+  pred <- prepare_predictions(file, solution)
+  metrics <- compute_metrics(pred, solution)
+
+  dplyr::tibble(
+    file = file,
+    n_valid = metrics$n_valid,
+    balanced_accuracy = (metrics$sensitivity + metrics$specificity) / 2,
+    accuracy = metrics$accuracy,
+    sensitivity = metrics$sensitivity,
+    specificity = metrics$specificity
+  )
+}
+
+
+prepare_predictions <- function(file, solution) {
+
   pred <- readr::read_csv(file, col_types = "ic")
 
-  # remove all rows that have problems
+  # warn if there are problems
   bad_id <- !pred$id %in% solution$id
   if (any(bad_id)) {
     cli::cli_warn(
@@ -46,46 +62,37 @@ evaluate_one_prediction <- function(file, solution) {
     )
     pred <- pred[!bad_id, ]
   }
-  na_class <- is.na(pred$class)
-  if (any(na_class)) {
+  if (any(is.na(pred$class))) {
     cli::cli_warn(
-      c("x" = "The file {file} contains predictions that are NA. They are removed.")
+      c("x" = "The file {file} contains predictions that are NA.")
     )
-    pred <- pred[!na_class, ]
   }
-  bad_class <- !pred$class %in% unique(solution$class)
-  if (any(bad_class)) {
+  if (any(!pred$class %in% unique(solution$class))) {
     cli::cli_warn(
-      c("x" = "The file {file} contains invalid predictions. They are removed.")
+      c("x" = "The file {file} contains invalid predictions.")
     )
-    pred <- pred[!bad_class, ]
   }
-
-  # check if there are predictions for all ids. Missing predictions must be
-  # set to the wrong value by hand, because missing values are ignored when
-  # evaluating the performance metrics.
-  n_valid_preds <- nrow(pred)
   if (!setequal(solution$id, pred$id)) {
     cli::cli_warn(
-      c("x" = "The file {file} does not contain valid predictions for all ids.")
+      c("x" = "The file {file} does not contain predictions for all ids.")
     )
   }
 
-  # evaluate the relevant metrics
-  comp <- solution %>%
-    dplyr::inner_join(pred, by = "id", suffix = c("_true", "_pred"))
-  accuracy <- sum(comp$class_true == comp$class_pred) / nrow(solution)
-  sensitivity <- sum(comp$class_true == "<=50K" & comp$class_pred == "<=50K") /
-    sum(solution$class == "<=50K")
-  specificity <- sum(comp$class_true == ">50K" & comp$class_pred == ">50K") /
-    sum(solution$class == ">50K")
+  pred
+}
 
-  dplyr::tibble(
-    file = file,
-    n_pred = n_valid_preds,
-    balanced_accuracy = (sensitivity + specificity) / 2,
-    accuracy = accuracy,
-    sensitivity = sensitivity,
-    specificity = specificity
+
+compute_metrics <- function(pred, solution) {
+
+  comp <- solution %>%
+    dplyr::inner_join(pred, by = "id", suffix = c("_true", "_pred")) %>%
+    tidyr::drop_na()
+  list(
+    n_valid = sum(pred$class %in% c("<=50K", ">50K"), na.rm = TRUE),
+    accuracy = sum(comp$class_true == comp$class_pred) / nrow(solution),
+    sensitivity = sum(comp$class_true == "<=50K" & comp$class_pred == "<=50K") /
+      sum(solution$class == "<=50K"),
+    specificity = sum(comp$class_true == ">50K" & comp$class_pred == ">50K") /
+      sum(solution$class == ">50K")
   )
 }

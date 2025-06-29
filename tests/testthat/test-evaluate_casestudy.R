@@ -11,13 +11,13 @@ errors_file <- test_path("data/casestudy/pred_errors.csv")
 ref_all <- tibble(
     rank = 1:3,
     file = c(ok_file, nok_file, errors_file),
-    n_pred = c(50, 40, 32),
+    n_valid = c(50, 40, 32),
     accuracy = c(41, 33, 27) / 50,
     sensitivity = c(22, 17, 15) / 28,
     specificity = c(19, 16, 12) / 22
   ) %>%
   mutate(balanced_accuracy = (sensitivity + specificity) / 2,
-         .after = "n_pred")
+         .after = "n_valid")
 
 
 test_that("evaluate_casestudy() works for a perfect file", {
@@ -33,7 +33,7 @@ test_that("evaluate_casestudy() works for an incomplete file", {
     filter(file == nok_file) %>%
     mutate(rank = 1)
   expect_equal(evaluate_casestudy(nok_file, sol_file), ref) %>%
-    expect_warning(str_glue("{nok_file} does not contain valid predictions"))
+    expect_warning(str_glue("{nok_file} does not contain predictions"))
 })
 
 
@@ -42,7 +42,7 @@ test_that("evaluate_casestudy() works for a file with errors", {
     filter(file == errors_file) %>%
     mutate(rank = 1)
   expect_equal(evaluate_casestudy(errors_file, sol_file), ref) %>%
-    expect_warning(str_glue("{errors_file} does not contain valid")) %>%
+    expect_warning(str_glue("{errors_file} does not contain predictions")) %>%
     expect_warning(str_glue("{errors_file} contains invalid ids")) %>%
     expect_warning(str_glue("{errors_file} contains invalid predictions")) %>%
     expect_warning(str_glue("{errors_file} contains predictions that are NA"))
@@ -56,8 +56,8 @@ test_that("evaluate_casestudy() works with multiple files", {
     ),
     ref_all
   ) %>%
-  expect_warning(str_glue("{nok_file} does not contain valid")) %>%
-  expect_warning(str_glue("{errors_file} does not contain valid")) %>%
+  expect_warning(str_glue("{nok_file} does not contain predictions")) %>%
+  expect_warning(str_glue("{errors_file} does not contain predictions")) %>%
   expect_warning(str_glue("{errors_file} contains invalid ids")) %>%
   expect_warning(str_glue("{errors_file} contains invalid predictions")) %>%
   expect_warning(str_glue("{errors_file} contains predictions that are NA"))
