@@ -9,14 +9,17 @@ library(nanoparquet)
 
 dir <- devtools::package_file("tests/testthat/data/casestudy/")
 
-set.seed(75968)
+set.seed(75969)
 n <- 50
 
 # the ids in the original data have 5 digits, but here I use ids with 4 digits
 # only to avoid any implication that these are a subset of the actual data.
 solution <- tibble(
   id = sample(1000:9999, size = n),
-  class = sample(c("<=50K", ">50K"), size = n, replace = TRUE)
+  class = sample(c("<=50K", ">50K"),
+                 size = n,
+                 replace = TRUE,
+                 prob = c(0.7, 0.3))
 )
 write_parquet(solution, file.path(dir, "solution.parquet"))
 
@@ -36,4 +39,4 @@ pred_errors <- pred_nok
 pred_errors$id[c(12, 34)] <- sample(setdiff(1000:9999, solution$class), 2)
 pred_errors$class[c(7, 18, 37)] <- NA_character_
 pred_errors$class[c(5, 15, 35)] <- "bad"
-write_csv(pred_errors, file.path(dir, "pred_erros.csv"))
+write_csv(pred_errors, file.path(dir, "pred_errors.csv"))
