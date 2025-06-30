@@ -34,6 +34,7 @@ Imports:
   stringr,
   purrr,
   magrittr,
+  nanoparquet,
   cli,
   memuse
 Suggests:

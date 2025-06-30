@@ -1,4 +1,11 @@
 library(dplyr, warn.conflicts = FALSE)
+library(httr2, warn.conflicts = FALSE)
+
+# function to create a mocking function that returns a given status code
+mock_status <- function(status) {
+  function(req) response(status_code = status)
+}
+
 
 test_that("spell_check_slides() works", {
   skip_on_os(c("mac", "windows"))
@@ -122,11 +129,23 @@ test_that("check_url() works", {
   expect_true(check_url("https://www.github.com"))
   expect_false(check_url("https://thispagedoesnotexistonthe.internet"))
   # status code 204 (no content) and 301 (moved permanently) should be success
-  expect_true(check_url("https://httpstat.us/201"))
-  expect_true(check_url("https://httpstat.us/301"))
+  with_mocked_responses(
+    mock_status(204),
+    expect_true(check_url("https://204.com"))
+  )
+  with_mocked_responses(
+    mock_status(301),
+    expect_true(check_url("https://301.com"))
+  )
   # status codes 403 (forbidden) and 500 (int. server error) should be failure
-  expect_false(check_url("https://httpstat.us/403"))
-  expect_false(check_url("https://httpstat.us/500"))
+  with_mocked_responses(
+    mock_status(403),
+    expect_false(check_url("https://403.com"))
+  )
+  with_mocked_responses(
+    mock_status(500),
+    expect_false(check_url("https://500.com"))
+  )
   # an inexistent path on an existing page should be failure
   expect_false(check_url("https://www.github.com/stibu81/thisdoesnotexist"))
 })
