@@ -5,6 +5,36 @@
 #' @param solution_file path to the parquet file containing the correct
 #'    solutions.
 #'
+#' @details
+#' The prediction files must be csv-files (comma separated) with two columns:
+#'
+#' \describe{
+#'   \item{id}{a five-digit integer giving the ID of the person.}
+#'   \item{class}{the predicted income class, one of `"<=50K"` and `">50K"`.}
+#' }
+#'
+#' Missing IDs and any class that is not one of the accepted values count as
+#' failed predictions. The performance metrics are always computed on the
+#' full data set, not just on the available predictions.
+#'
+#' @return
+#' a tibble with one row for each file given in `prediction_files` and the
+#' following columns:
+#'
+#' \describe{
+#'   \item{rank}{the rank of the prediction among all predictions in the tibble
+#'     The tibble is sorted according to rank and ranking occurs first by
+#'     `balanced_accuracy` and then `accuracy`.}
+#'   \item{file}{the name of the file that contained the prediction.}
+#'   \item{n_valid}{the number of valid predictions in the file.}
+#'   \item{balanced_accuracy}{the mean of sensitivity and specificity.}
+#'   \item{accuracy}{accuracy of the prediction.}
+#'   \item{sensitivity}{sensitivity, i.e., the rate of correct predictions for
+#'     the "positive" class `"<=50K"`.}
+#'   \item{specificity}{specificity, i.e., the rate of correct predictions for
+#'     the "negative" class `">50K"`.}
+#' }
+#'
 #' @export
 
 evaluate_casestudy <- function(prediction_files, solution_file) {
