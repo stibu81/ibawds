@@ -53,7 +53,7 @@ spell_check_evaluation <- function(path = ".",
   eval_files <- list.files(path, "Beurteilung_.*\\.(R|q)md",
                            recursive = TRUE,
                            full.names = TRUE) %>%
-    stringr::str_subset("Beurteilung_Template\\.(R|q)md", negate = TRUE)
+    stringr::str_subset("Beurteilung_Template.*\\.(R|q)md", negate = TRUE)
 
   if (!is.null(students)) {
     eval_files <- eval_files %>%
