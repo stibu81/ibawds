@@ -12,9 +12,9 @@ test_that("spell_check_slides() works", {
   skip_on_cran()
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list(
-    c("test.Rmd:14", "test.qmd:14"),
-    c("test.Rmd:22", "test.qmd:22"),
-    c("test.Rmd:24", "test.qmd:24")
+    c("test.Rmd:15", "test.qmd:15"),
+    c("test.Rmd:23", "test.qmd:23"),
+    c("test.Rmd:25", "test.qmd:25")
   )
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 

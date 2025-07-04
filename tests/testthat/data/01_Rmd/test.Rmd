@@ -2,6 +2,7 @@
 title: "Test File For ibawds"
 author: "Someone"
 date: "`r Sys.Date()`"
+lang: de-CH
 output: html_document
 ---
 
