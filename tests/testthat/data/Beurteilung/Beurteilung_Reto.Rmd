@@ -1,21 +1,24 @@
 ---
-title: "Rückmeldung Transferarbeit Reto"
+title: "Feedback Transfer Project Reto"
 author: "Stefan Lanz"
 date: "`r format(lubridate::today(), '%d.%m.%Y')`"
+lang: en-GB
 output: html_document
 ---
 
-Testdatei für die Beurteilung.
+test file for evaluation
 
-Die Namen aller Studierenden sind keine Schreibfehler: Reto, Sandro
+The names of the students are no spelling errors: Reto, Sandro
 
-Diese Wörter sind in der Wordlist:
+These words are in the word list:
 
 * Regressionsmodell
 * Whisker
 * SE
-* csv-Datei
+* Dichteschätzer
 * Confounder
 * tibble
 
-Das ist ein Schreibfehlr!
+This is a speling mistake!
+
+This mistake is in both documents: bonjour

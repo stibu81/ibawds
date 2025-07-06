@@ -12,9 +12,9 @@ test_that("spell_check_slides() works", {
   skip_on_cran()
   spell_check_ref <- data.frame(word = c("Bird", "Schreibfehlr", "Wordlist"))
   spell_check_ref$found <- list(
-    c("test.Rmd:14", "test.qmd:14"),
-    c("test.Rmd:22", "test.qmd:22"),
-    c("test.Rmd:24", "test.qmd:24")
+    c("test.Rmd:15", "test.qmd:15"),
+    c("test.Rmd:23", "test.qmd:23"),
+    c("test.Rmd:25", "test.qmd:25")
   )
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 
@@ -91,11 +91,15 @@ test_that("is_no_spell_check() works with an incomplete yaml header", {
 test_that("spell_check_evaluation() works", {
   skip_on_os(c("mac", "windows"))
   skip_on_cran()
-  spell_check_ref <- data.frame(word = c("Schreibfehlr", "Wordlist"))
-  spell_check_ref$found <- list(
-    c("Beurteilung_Reto.Rmd:21", "Beurteilung_Sandro.qmd:21"),
-    c("Beurteilung_Reto.Rmd:12", "Beurteilung_Sandro.qmd:12")
+  spell_check_ref <- data.frame(
+    word = c("bonjour", "Schreibfehlr", "speling", "Wordlist")
   )
+  spell_check_ref$found <- list(
+    c("Beurteilung_Reto.Rmd:24", "Beurteilung_Sandro.qmd:24"),
+      "Beurteilung_Sandro.qmd:22",
+      "Beurteilung_Reto.Rmd:22",
+      "Beurteilung_Sandro.qmd:13"
+    )
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
 
   expect_equal(spell_check_evaluation(test_path("data")), spell_check_ref)
@@ -107,12 +111,15 @@ test_that("spell_check_evaluation() works", {
   )
 
   # check with student filter
-  spell_check_ref <- data.frame(word = c("Sandro", "Schreibfehlr", "Wordlist"))
-  spell_check_ref$found <- list("Beurteilung_Reto.Rmd:10",
-                                "Beurteilung_Reto.Rmd:21",
-                                "Beurteilung_Reto.Rmd:12")
+  spell_check_ref <- data.frame(
+    word = c("bonjour", "Reto", "Schreibfehlr", "Wordlist")
+  )
+  spell_check_ref$found <- list("Beurteilung_Sandro.qmd:24",
+                                "Beurteilung_Sandro.qmd:11",
+                                "Beurteilung_Sandro.qmd:22",
+                                "Beurteilung_Sandro.qmd:13")
   class(spell_check_ref) <- c("summary_spellcheck", "data.frame")
-  expect_equal(spell_check_evaluation(test_path("data"), students = "Reto"),
+  expect_equal(spell_check_evaluation(test_path("data"), students = "Sandro"),
                spell_check_ref)
   expect_error(spell_check_evaluation(test_path("data"), students = "John"),
                "No evaluation files found.")
@@ -234,4 +241,34 @@ test_that("check_links_in_slides() works", {
     tibble(url = "https://www.doesnotexist.invalid",
            file = c("test.Rmd", "test.qmd"))
   )
+})
+
+
+test_that("get_gmd_language() works for files lang field", {
+  files <- test_path("data", "Beurteilung",
+                     paste0("Beurteilung_", c("Sandro.qmd", "Reto.Rmd")))
+  expect_identical(get_qmd_languages(files), c("de_CH", "en_GB"))
+})
+
+
+test_that("get_gmd_language() works for files without lang field", {
+  withr::with_tempfile("rmd_file", {
+    writeLines(c("---", "title: 'something'", "---"), rmd_file)
+    expect_identical(get_qmd_languages(rmd_file), "de_CH")
+    fileext = ".Rmd"
+  })
+  withr::with_tempfile("qmd_file", {
+    writeLines(c("x <- 3", "x + 4"), qmd_file)
+    expect_identical(get_qmd_languages(qmd_file), "de_CH")
+    fileext = ".qmd"
+  })
+})
+
+
+test_that("get_gmd_language() works for files with invalid lang field", {
+  withr::with_tempfile("qmd_file", {
+    writeLines(c("---", "lang: invalid", "---"), qmd_file)
+    expect_identical(get_qmd_languages(qmd_file), "de_CH")
+    fileext = ".qmd"
+  })
 })

@@ -76,10 +76,19 @@ spell_check_evaluation <- function(path = ".",
     ignore_list <- c(read_wordlist("evaluation"), ignore_list)
   }
 
-  # run the spell check
-  spelling::spell_check_files(eval_files, lang = "de_CH",
-                              ignore = ignore_list)
+  # determine the language used in the files
+  langs <- get_qmd_languages(eval_files)
 
+  # run the spell check by language
+  purrr::map(
+      unique(langs),
+      function(lang) {
+        spelling::spell_check_files(eval_files[langs == lang],
+                                    lang = lang,
+                                    ignore = ignore_list)
+      }
+    ) %>%
+    combine_spell_checks()
 }
 
 
@@ -325,3 +334,45 @@ extract_urls <- function(x) {
   stringr::str_remove(urls, "[,;.:?!]*$")
 }
 
+
+# Determine the language used in a qmd_file
+get_qmd_languages <- function(files) {
+
+  # return de_CH if the language cannot be determined.
+  default_lang <- "de_CH"
+
+  first_lines <- files %>%
+    purrr::map(\(x) readLines(x, n = 51, warn = FALSE))
+
+  purrr::map_chr(
+    first_lines,
+    function(fl) {
+      # extract the yaml header and find the language within
+      i_yaml <- which(stringr::str_detect(fl, "^---"))
+      if (length(i_yaml) < 2) return(default_lang)
+      lang_line <- fl[i_yaml[1]:i_yaml[2]] %>%
+        stringr::str_subset("lang:")
+      if (length(lang_line) == 0) return(default_lang)
+      lang <- lang_line[1] %>%
+        stringr::str_extract("lang: *([a-z]{2}-[A-Z]{2})", group = 1) %>%
+        stringr::str_replace("-", "_")
+      if (is.na(lang)) return(default_lang)
+      lang
+    }
+  )
+}
+
+
+# combine multiple results from spell checks into one
+combine_spell_checks <- function(spellchecks) {
+  combined <- spellchecks %>%
+    purrr::map(as.data.frame) %>%
+    dplyr::bind_rows() %>%
+    dplyr::summarise(
+      found = list(unlist(.data$found)),
+      .by = "word"
+    ) %>%
+    dplyr::arrange(.data$word, .locale = "en")
+  class(combined) <- class(spellchecks[[1]])
+  combined
+}

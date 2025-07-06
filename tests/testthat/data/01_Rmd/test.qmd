@@ -2,6 +2,7 @@
 title: "Test File For ibawds"
 author: "Someone"
 date: today
+lang: de-CH
 format: html
 ---
 
