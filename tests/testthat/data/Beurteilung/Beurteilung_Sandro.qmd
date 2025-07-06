@@ -2,6 +2,7 @@
 title: "Rückmeldung Transferarbeit Sandro"
 author: "Stefan Lanz"
 date: "2025-02-10"
+lang: de-CH
 format: html
 ---
 
@@ -14,8 +15,10 @@ Diese Wörter sind in der Wordlist:
 * Regressionsmodell
 * Whisker
 * SE
-* csv-Datei
+* Dichteschätzer
 * Confounder
 * tibble
 
 Das ist ein Schreibfehlr!
+
+Dieser Fehler ist in beiden Dokumenten: bonjour
