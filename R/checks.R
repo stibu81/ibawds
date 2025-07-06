@@ -360,7 +360,6 @@ get_qmd_languages <- function(files) {
       lang
     }
   )
-
 }
 
 
@@ -370,7 +369,7 @@ combine_spell_checks <- function(spellchecks) {
     purrr::map(as.data.frame) %>%
     dplyr::bind_rows() %>%
     dplyr::summarise(
-      found = list(unlist(found)),
+      found = list(unlist(.data$found)),
       .by = "word"
     ) %>%
     dplyr::arrange(.data$word, .locale = "en")
