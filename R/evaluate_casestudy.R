@@ -39,7 +39,7 @@
 
 evaluate_casestudy <- function(prediction_files, solution_file) {
 
-  rlang::check_installed("caret")
+  rlang::check_installed("nanoparquet")
 
   solution <- nanoparquet::read_parquet(solution_file) %>%
     dplyr::select("id", "class") %>%
