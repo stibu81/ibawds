@@ -118,7 +118,7 @@ test_that("test get_software_versions()", {
     expect_type(sw$RStudio$version, "character")
   }
   expect_s3_class(sw$RStudio$date, "Date")
-  expect_true(sw$pkg_installed)
+  expect_in(sw$pkg_installed, c(TRUE, FALSE))
   expect_s3_class(sw$ibawds$installed, "numeric_version")
   expect_equal(sw$ibawds$installed, packageVersion("ibawds"))
   expect_s3_class(sw$ibawds$current, "numeric_version")

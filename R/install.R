@@ -220,6 +220,9 @@ get_software_versions <- function() {
 }
 
 
+# return a vector of packages that are required for the course. These are all
+# the dependencies of ibawds plus some additional packages.
+
 get_required_packages <- function() {
 
   system.file("DESCRIPTION", package = "ibawds") %>%
@@ -233,8 +236,12 @@ get_required_packages <- function() {
     stringr::str_trim() %>%
     # remove the entries for R and packages that are not relevant for the students
     setdiff(c("R", "testthat", "usethis", "vdiffr", "covr", "spelling",
-              "withr", "httr2", "nanoparquet"))
-
+              "withr", "httr2", "nanoparquet")) %>%
+    # add additional relevant packages
+    c("BiocManager", "caret", "clValid", "cowplot", "DT", "GGally",
+      "ggfortify", "ggrepel", "gutenbergr", "hexbin", "HistData", "Lahman",
+      "party", "patchwork", "ranger", "RANN", "reshape2", "styler",
+      "tidytext", "tidyverse", "titanic", "waldo", "writexl")
 }
 
 
