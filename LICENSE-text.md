@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2020-2024
+    COPYRIGHT HOLDER: Stefan Lanz
