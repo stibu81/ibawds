@@ -9,10 +9,12 @@ test_that("check that define_latex_stats() creates output", {
   expect_null(out)
 })
 
-# test knitting with define_latex_stats()
-commands <- paste0("\\",
-                   c("E", "P", "Var", "Cov", "Cor", "SD", "SE", "Xb", "Yb"))
-txt <- paste("---
+
+test_that("check that define_latex_stats() defines all the expected commands", {
+  # prepare the test rmd file
+  commands <- paste0("\\",
+                    c("E", "P", "Var", "Cov", "Cor", "SD", "SE", "Xb", "Yb"))
+  txt <- paste("---
 output:
   pdf_document: default
 ---
@@ -21,11 +23,9 @@ output:
   ibawds::define_latex_stats()
 ```
 $$", paste(commands, collapse = " "), "$$")
-res <- knitr::knit(text = txt, quiet = TRUE)
-
-
-test_that("check that define_latex_stats() defines all the expected commands", {
-  # check output when knitting
+  
+  # check knitting a character
+  res <- knitr::knit(text = txt, quiet = TRUE)
   expect_type(res, "character")
   expect_equal(
     str_detect(res, paste0("\\\\(re)?newcommand\\{\\", commands, "\\}\\{.*\\}")),
@@ -39,7 +39,7 @@ test_that("check that define_latex_stats() defines all the expected commands", {
   pdf_file <- str_replace(rmd_file, "Rmd", "pdf")
   on.exit(unlink(c(rmd_file, pdf_file)))
   writeLines(txt, rmd_file)
-  expect_silent(render(rmd_file, quiet = TRUE))
+  expect_no_error(suppressWarnings(render(rmd_file, quiet = TRUE)))
   expect_true(file.exists(pdf_file))
 })
 

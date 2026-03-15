@@ -60,7 +60,7 @@ test_that("test density_plot() for discrete distributions", {
                  title = "Poisson", var = "g")
   )
   # this should give the same image as the one above
-  expect_doppelganger("density_plot poisson",
+  expect_doppelganger("density_plot poisson2",
     density_plot(dpois, c(-1.2, 10.3), lambda = 3, points = c(1.8, 7:10),
                  title = "Poisson", var = "g")
   )
