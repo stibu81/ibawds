@@ -11,7 +11,7 @@ cran_history
 
 ## Format
 
-A data frame with 74 rows and 4 variables.
+A data frame with 76 rows and 4 variables.
 
 - date:
 
