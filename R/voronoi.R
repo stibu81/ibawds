@@ -46,8 +46,6 @@ voronoi_diagram <- function(cluster, x, y, data = NULL,
                             point_size = 2,
                             linewidth = 0.7) {
 
-  rlang::check_installed("deldir")
-
   # check that cluster contains the required fields
   if (any(!c("cluster", "centers") %in% names(cluster))) {
     cli::cli_abort("cluster must contain the fields 'cluster' and 'centers'.")

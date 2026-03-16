@@ -34,7 +34,7 @@ values.
 Set options for ggplot plots and tibble outputs for IBAW slides.
 }
 \details{
-The function uses \code{\link[ggplot2:theme_get]{ggplot2::theme_update()}} to modify the default theme
+The function uses \code{\link[ggplot2:get_theme]{ggplot2::theme_update()}} to modify the default theme
 for ggplot and \code{\link[=options]{options()}} to set base R options that influence the printing
 of tibbles.
 
