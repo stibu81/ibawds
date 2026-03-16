@@ -1,3 +1,6 @@
+skip_if_not_installed("rvest")
+skip_if_not_installed("kableExtra")
+
 library(rvest)
 library(dplyr, warn.conflicts = FALSE)
 library(magrittr, warn.conflicts = FALSE)

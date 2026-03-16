@@ -1,3 +1,6 @@
+skip_if_not_installed("httr2")
+skip_if_not_installed("spelling")
+
 library(dplyr, warn.conflicts = FALSE)
 library(httr2, warn.conflicts = FALSE)
 

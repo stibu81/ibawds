@@ -1,3 +1,6 @@
+skip_if_not_installed("knitr")
+skip_if_not_installed("rmarkdown")
+
 library(ggplot2)
 library(knitr)
 library(stringr)

@@ -1,7 +1,6 @@
 library(withr)
 library(dplyr, warn.conflicts = FALSE)
 library(readr, warn.conflicts = FALSE)
-library(lubridate, warn.conflicts = FALSE)
 
 # CRAN URL must be set for the tests to work
 options(repos = c(CRAN = "https://cloud.r-project.org"))
@@ -124,16 +123,17 @@ test_that("test get_software_versions()", {
   expect_s3_class(sw$ibawds$current, "numeric_version")
 
   # mock rstudioapi::versionInfo() to pretend this is running in RStudio
+  this_year <- format(Sys.Date(), "%Y")
   local_mocked_bindings(
     versionInfo = function(...) {
-      list(version = as.numeric_version(paste0(year(today()), ".3.0.385")))
+      list(version = as.numeric_version(paste0(this_year, ".3.0.385")))
     },
     .package = "rstudioapi"
   )
   sw <- get_software_versions()
   expect_s3_class(sw$RStudio$version, "numeric_version")
   expect_s3_class(sw$RStudio$date, "Date")
-  expect_equal(sw$RStudio$date, as.Date(paste0(year(today()), "-03-01")))
+  expect_equal(sw$RStudio$date, as.Date(paste0(this_year, "-03-01")))
 })
 
 
