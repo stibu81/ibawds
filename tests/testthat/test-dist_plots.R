@@ -1,3 +1,5 @@
+skip_if_not_installed("vdiffr")
+
 library(vdiffr)
 
 test_that("test is_discrete_distribution() with densities", {
