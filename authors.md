@@ -10,13 +10,13 @@ Source:
 [`DESCRIPTION`](https://github.com/stibu81/ibawds/blob/main/DESCRIPTION)
 
 Lanz S (2026). *ibawds: Functions and Datasets for the Data Science
-Course at IBAW*. R package version 1.2.0.9000,
+Course at IBAW*. R package version 1.2.1,
 <https://stibu81.github.io/ibawds/>.
 
     @Manual{,
       title = {ibawds: Functions and Datasets for the Data Science Course at IBAW},
       author = {Stefan Lanz},
       year = {2026},
-      note = {R package version 1.2.0.9000},
+      note = {R package version 1.2.1},
       url = {https://stibu81.github.io/ibawds/},
     }
