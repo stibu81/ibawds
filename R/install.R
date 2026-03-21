@@ -173,27 +173,23 @@ get_software_versions <- function() {
       as.Date()
   )
 
-
   # get RStudio version and release date
-  RStudio <- list(
-    version = tryCatch(
-        rstudioapi::versionInfo()$version,
-        error = function(e) {
-          # NA as version number is not supported for R < 4.4.0
-          if (getRversion() >= "4.4.0") {
+  RStudio <- if (is_rstudio()) {
+    verinf <- rstudioapi::versionInfo()
+    list(
+      version = verinf$version,
+      date = paste0(verinf$version[1, 1], "-", verinf$version[1, 2], "-01") %>%
+        as.Date()
+    )
+  } else {
+    list(
+      version = if (getRversion() >= "4.4.0") {
             as.numeric_version(NA_character_)
           } else {
             NA_character_
-          }
-        }
-      ),
-    date = as.Date(NA_character_)
-  )
-  if (!is.na(RStudio$version)) {
-    RStudio$date <- paste0(
-        RStudio$version[1, 1], "-", RStudio$version[1, 2], "-01"
-      ) %>%
-      as.Date()
+          },
+      date = as.Date(NA_character_)
+    )
   }
 
   # check that all packages are installed
@@ -219,6 +215,14 @@ get_software_versions <- function() {
 
 }
 
+
+# check if running from RStudio
+is_rstudio <- function() {
+  # rstudioapi::isAvailable() is used by rstudioapi::versionInfo() to
+  # ensure that RStudio is running, but it is also TRUE for Positron.
+  # => Check .Platform$GUI instead
+  identical(.Platform$GUI, "RStudio")
+}
 
 # return a vector of packages that are required for the course. These are all
 # the dependencies of ibawds plus some additional packages.

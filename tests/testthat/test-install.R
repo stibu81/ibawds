@@ -130,6 +130,9 @@ test_that("test get_software_versions()", {
     },
     .package = "rstudioapi"
   )
+  local_mocked_bindings(
+    is_rstudio = function() TRUE
+  )
   sw <- get_software_versions()
   expect_s3_class(sw$RStudio$version, "numeric_version")
   expect_s3_class(sw$RStudio$date, "Date")
