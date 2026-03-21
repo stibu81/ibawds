@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/stibu81/ibawds/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/stibu81/ibawds/blob/v1.2.1/DESCRIPTION)
 
 Lanz S (2026). *ibawds: Functions and Datasets for the Data Science
 Course at IBAW*. R package version 1.2.1,
